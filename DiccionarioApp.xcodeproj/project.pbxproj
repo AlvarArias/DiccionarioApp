@@ -20,6 +20,8 @@
 		62388CF729C4B4F0006F4005 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CF629C4B4F0006F4005 /* DetailView.swift */; };
 		62388CFF29C4B9D2006F4005 /* DiccionarioAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CFE29C4B9D2006F4005 /* DiccionarioAppUITests.swift */; };
 		62388D0129C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388D0029C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift */; };
+		623AD02729C852DB00216D99 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02629C852DB00216D99 /* ButtonView.swift */; };
+		623AD02B29C853D500216D99 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02A29C853D500216D99 /* PlaySound.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		62388CFC29C4B9D2006F4005 /* DiccionarioAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiccionarioAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		62388CFE29C4B9D2006F4005 /* DiccionarioAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppUITests.swift; sourceTree = "<group>"; };
 		62388D0029C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		623AD02629C852DB00216D99 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		623AD02A29C853D500216D99 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,16 +119,15 @@
 		62388CDB29C44CB3006F4005 /* DiccionarioApp */ = {
 			isa = PBXGroup;
 			children = (
+				623AD02829C8537B00216D99 /* View Model */,
 				62388CF529C45A50006F4005 /* Info.plist */,
 				62388CEA29C44D0C006F4005 /* Notes App.rtf */,
 				62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */,
 				62388CDE29C44CB3006F4005 /* ContentView.swift */,
+				623AD02929C8539A00216D99 /* Views */,
 				62388CE029C44CB4006F4005 /* Assets.xcassets */,
 				62388CE229C44CB4006F4005 /* Preview Content */,
 				62388CF229C455B6006F4005 /* Test View Model */,
-				62388CF029C45545006F4005 /* WordViewModel.swift */,
-				62388CF329C4576C006F4005 /* WordView.swift */,
-				62388CF629C4B4F0006F4005 /* DetailView.swift */,
 			);
 			path = DiccionarioApp;
 			sourceTree = "<group>";
@@ -153,6 +156,25 @@
 				62388D0029C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift */,
 			);
 			path = DiccionarioAppUITests;
+			sourceTree = "<group>";
+		};
+		623AD02829C8537B00216D99 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				62388CF029C45545006F4005 /* WordViewModel.swift */,
+				623AD02A29C853D500216D99 /* PlaySound.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		623AD02929C8539A00216D99 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				62388CF329C4576C006F4005 /* WordView.swift */,
+				62388CF629C4B4F0006F4005 /* DetailView.swift */,
+				623AD02629C852DB00216D99 /* ButtonView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,7 +317,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				62388CEF29C453FC006F4005 /* PostListView.swift in Sources */,
+				623AD02B29C853D500216D99 /* PlaySound.swift in Sources */,
 				62388CF129C45545006F4005 /* WordViewModel.swift in Sources */,
+				623AD02729C852DB00216D99 /* ButtonView.swift in Sources */,
 				62388CF429C4576C006F4005 /* WordView.swift in Sources */,
 				62388CF729C4B4F0006F4005 /* DetailView.swift in Sources */,
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,

@@ -28,7 +28,7 @@ final class DiccionarioAppTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Fetching posts from API")
         let word = "katt"
         let dir = "to"
-        let url = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON")!
+        _ = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON")!
 
         viewModel.$results
             .dropFirst()

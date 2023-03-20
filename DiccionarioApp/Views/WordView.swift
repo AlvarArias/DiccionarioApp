@@ -27,20 +27,22 @@ struct WordView: View {
                         .tint(.orange).opacity(0.7)
                     
                     Text(enableLang == true ? "swe_spa" : "spa_swe")
+                        .listRowSeparator(.hidden)
                     
                     Text("\(errorMessage)")
+                        .listRowSeparator(.hidden)
                         .onReceive(myviewModelWord.errorPublisher) { errorMessage in
                             self.errorMessage = errorMessage
-                
-                }
+                        }
                 }
                 
                 
                 HStack {
                     TextField("Search", text: $text)
                         .padding(.horizontal, 10)
-                        .foregroundColor(Color(UIColor.gray))
+                        .accentColor(.orange)
                         .accessibilityIdentifier("Search")
+                       
                     Button {
                         print("Search")
                         if text != "" {
@@ -56,8 +58,9 @@ struct WordView: View {
                     
                 }
                 .padding(.vertical, 10)
-                .background(Color(UIColor.orange).opacity(0.4))
+                //.background(Color(UIColor.orange).opacity(0.4))
                 .cornerRadius(10)
+                
                 
                 if errorMessage == "OK" {
                 
