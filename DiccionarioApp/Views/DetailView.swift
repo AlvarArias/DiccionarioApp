@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct DetailView: View {
-    
+
+    @ObservedObject var player = PlayerWord()
+
     let result : Result
     let fixURL = "https://www.thesprucepets.com/thmb/XMb-I4hzef2SyFGabzAPi0WnUJ0=/3000x0/filters:no_upscale():strip_icc()/smartest-cat-breeds-4589754-hero-e192f849d9f1442481c47c932cd36aa8.jpg"
 
     @State private var isPlaying : Bool = false
     
-    var player = PlayerWord()
     
     @StateObject private var wordListViewModel = WordListViewModel()
     @State private var newWord: String = ""
@@ -67,18 +68,25 @@ struct DetailView: View {
                     Button {
                         isPlaying.toggle()
                         print("isPlaying \(isPlaying)")
-                        player.Play(url: result.baseLang?.phonetic?.file ?? "Not file", state: isPlaying)
+                      
+                        player.play(url: result.baseLang?.phonetic?.file ?? "Not file", state: isPlaying)
 
                     } label: {
                         
                         isPlaying == true ? Image(systemName: "pause.fill") : Image(systemName: "play.fill")
                         
                     }.foregroundColor(Color.orange)
+                     .onChange(of: player.playerStopped) { stopped in
+                            if stopped {
+                                print("stop")
+                                isPlaying = false
+                            }
+                        }
                     
                     
                     }
             
-                
+    
             }
             .padding()
             .scrollContentBackground(.hidden)
@@ -94,8 +102,8 @@ struct DetailView: View {
                     endPoint: .bottomTrailing
                 )
             )
-        
-     
+            
+
     }
     
       
@@ -103,33 +111,11 @@ struct DetailView: View {
 
 
 
-    
-
-
-
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(result: .init(variantID: "variantID", value: "value", type: "type", baseLang: BaseLang(phonetic: Phonetic(file: "file", content: "content"), inflection: [Inflection(content: "content")], meaning: "meaning", illustration: [Illustration(type: "type", value: "value")], comment: "comment"), targetLang: TargetLang(translation: "translation", synonym: ["synonym"], comment: "comment")))
+        DetailView(player: PlayerWord(), result: .init(variantID: "variantID", value: "value", type: "type", baseLang: BaseLang(phonetic: Phonetic(file: "file", content: "content"), inflection: [Inflection(content: "content")], meaning: "meaning", illustration: [Illustration(type: "type", value: "value")], comment: "comment"), targetLang: TargetLang(translation: "translation", synonym: ["synonym"], comment: "comment")))
     }
 }
 
 
 
-
-/*
-Text(result.baseLang?.illustration?[0].type ?? "Type")
-Text(result.baseLang?.illustration?[0].value ?? "Value")
-
-    AsyncImage(url: URL(string: result.baseLang?.illustration?[0].value ?? fixURL))
-        .frame(width: 200, height: 200)
-        .background(Color.orange)
-
-    */
-     
-/*
-List (result.baseLang?.illustration ?? [Illustration(type: "type", value: "value")], id: \.self) { ilust in
-    Text(ilust.value ?? "Value")
-    //Text(ilust.type ?? "Type")
-
-}
- */
