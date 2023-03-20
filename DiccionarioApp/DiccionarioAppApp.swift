@@ -11,9 +11,8 @@ import SwiftUI
 struct DiccionarioAppApp: App {
     var body: some Scene {
         WindowGroup {
-            //ContentView()
-            //PostListView()
             WordView()
+            
         }
     }
 }

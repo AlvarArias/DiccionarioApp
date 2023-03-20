@@ -12,12 +12,11 @@ struct WordView: View {
     @ObservedObject var myviewModelWord = WordViewModel()
     @State private var text = ""
     @State private var enableLang = true
+    @State private var showFavorite = false
     
     @State private var errorMessage: String = ""
     
     var body: some View {
-        
-        
         
         NavigationView {
             
@@ -42,7 +41,7 @@ struct WordView: View {
                         .padding(.horizontal, 10)
                         .accentColor(.orange)
                         .accessibilityIdentifier("Search")
-                       
+                    
                     Button {
                         print("Search")
                         if text != "" {
@@ -63,34 +62,34 @@ struct WordView: View {
                 
                 
                 if errorMessage == "OK" {
-                
+                    
                     List( myviewModelWord.results, id: \.self) { resul in
                         
-                    NavigationLink(destination: DetailView(result: resul)) {
-                                           
-                        VStack(alignment: .leading) {
+                        NavigationLink(destination: DetailView(result: resul)) {
                             
-                            HStack {
-                                Text(resul.value ?? "No value")
-                                    .font(.headline)
-                                Spacer()
+                            VStack(alignment: .leading) {
                                 
-                                Text(resul.type ?? "No type")
-                                    .font(.subheadline)
+                                HStack {
+                                    Text(resul.value ?? "No value")
+                                        .font(.headline)
+                                    Spacer()
+                                    
+                                    Text(resul.type ?? "No type")
+                                        .font(.subheadline)
+                                    
+                                }
                                 
+                                Text(resul.baseLang?.meaning ?? "No meaning")
+                                Text(resul.targetLang?.translation ?? "no translation")
                             }
-                            
-                            Text(resul.baseLang?.meaning ?? "No meaning")
-                            Text(resul.targetLang?.translation ?? "no translation")
+                            .accessibilityIdentifier("link")
                         }
-                        .accessibilityIdentifier("link")
-                        }
-                    
+                        
                         
                     }
                     
                 }
-                    
+                
             }
             .navigationTitle("Diccionary")
             .navigationBarTitleDisplayMode(.inline)
@@ -99,8 +98,8 @@ struct WordView: View {
                 LinearGradient(
                     gradient: Gradient(
                         colors: [
-                            Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 1.00)),
-                            Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 1.00))
+                            Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
+                            Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
                         ]
                     ),
                     startPoint: .topLeading,
@@ -109,7 +108,21 @@ struct WordView: View {
             )
             
         }
-        
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                
+                
+                Button { showFavorite.toggle()
+                } label: {
+                    Image(systemName: "star")
+                        .foregroundColor(Color.orange)
+                }
+                .sheet(isPresented: $showFavorite) {
+                    
+                    FavoriteView()
+                }
+            }
+        }
     }
 }
 

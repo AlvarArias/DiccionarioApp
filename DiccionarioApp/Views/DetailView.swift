@@ -16,42 +16,54 @@ struct DetailView: View {
     
     var player = PlayerWord()
     
+    @StateObject private var wordListViewModel = WordListViewModel()
+    @State private var newWord: String = ""
+    
     var body: some View {
 
             
-            //VStack (alignment: .leading){
             Form {
             
                 HStack {
                     Text(result.value ?? "No value")
                         .font(.headline)
-                        
-                       
-                
+                        .listRowSeparator(.hidden)
+                    
+                    Text("(\(result.type ?? "No type"))")
+                        .font(.subheadline)
+                    
                     Spacer(minLength: 10)
                     
-                    Text(result.type ?? "No type")
-                        .font(.subheadline)
+                    Button(action: {
+                        newWord = result.value ?? "No value"
+                        wordListViewModel.addWord(newWord)
+                      
+                    }) {
+                        Image(systemName: "plus")
+                    }
                         
-                    /*
-                     .overlay(
-                     RoundedRectangle(cornerRadius: 10)
-                     .fill(Color.blue.opacity(0.15))
-                     .frame(width: 80, height: 30)
-                     .padding()
-                     )
-                     */
-                    
                 }
+                
+             
+
                 HStack {
-                    Text("Traducción: ")
+           
                     Text(result.targetLang?.translation ?? "no translation")
-                        .padding()
+                       
                 }
                 
                 HStack {
-                Text("Sonido: ")
-                //Text(result.baseLang?.phonetic?.file ?? "Not file")
+             
+                    Text(result.targetLang?.synonym?.first ?? "")
+                      
+                }
+                
+                HStack {
+                    
+                    Text(result.baseLang?.phonetic?.content ?? "Not file")
+                       
+                    Spacer(minLength: 10)
+                    
                     Button {
                         isPlaying.toggle()
                         print("isPlaying \(isPlaying)")
@@ -62,18 +74,10 @@ struct DetailView: View {
                         isPlaying == true ? Image(systemName: "pause.fill") : Image(systemName: "play.fill")
                         
                     }.foregroundColor(Color.orange)
-                Spacer(minLength: 10)
-                Text("Phonetic: ")
-                Text(result.baseLang?.phonetic?.content ?? "Not file")
-                    .padding()
-                }
-                HStack {
-                    Text("Sinonimo: ")
-                    Text(result.targetLang?.synonym?.first ?? "Not file")
-                        .padding()
-                }
-               
-                
+                    
+                    
+                    }
+            
                 
             }
             .padding()
