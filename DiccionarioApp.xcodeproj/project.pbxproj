@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		622A12F929C6248A0079F179 /* DiccionarioAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A12F829C6248A0079F179 /* DiccionarioAppTests.swift */; };
 		62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */; };
 		62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CDE29C44CB3006F4005 /* ContentView.swift */; };
 		62388CE129C44CB4006F4005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62388CE029C44CB4006F4005 /* Assets.xcassets */; };
@@ -16,9 +17,31 @@
 		62388CEF29C453FC006F4005 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CEE29C453FC006F4005 /* PostListView.swift */; };
 		62388CF129C45545006F4005 /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CF029C45545006F4005 /* WordViewModel.swift */; };
 		62388CF429C4576C006F4005 /* WordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CF329C4576C006F4005 /* WordView.swift */; };
+		62388CF729C4B4F0006F4005 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CF629C4B4F0006F4005 /* DetailView.swift */; };
+		62388CFF29C4B9D2006F4005 /* DiccionarioAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CFE29C4B9D2006F4005 /* DiccionarioAppUITests.swift */; };
+		62388D0129C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388D0029C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		622A12FA29C6248A0079F179 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62388CD129C44CB3006F4005 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62388CD829C44CB3006F4005;
+			remoteInfo = DiccionarioApp;
+		};
+		62388D0229C4B9D2006F4005 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62388CD129C44CB3006F4005 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62388CD829C44CB3006F4005;
+			remoteInfo = DiccionarioApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		622A12F629C6248A0079F179 /* DiccionarioAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiccionarioAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		622A12F829C6248A0079F179 /* DiccionarioAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppTests.swift; sourceTree = "<group>"; };
 		62388CD929C44CB3006F4005 /* DiccionarioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiccionarioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppApp.swift; sourceTree = "<group>"; };
 		62388CDE29C44CB3006F4005 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -30,10 +53,28 @@
 		62388CF029C45545006F4005 /* WordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModel.swift; sourceTree = "<group>"; };
 		62388CF329C4576C006F4005 /* WordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordView.swift; sourceTree = "<group>"; };
 		62388CF529C45A50006F4005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		62388CF629C4B4F0006F4005 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		62388CFC29C4B9D2006F4005 /* DiccionarioAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiccionarioAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		62388CFE29C4B9D2006F4005 /* DiccionarioAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppUITests.swift; sourceTree = "<group>"; };
+		62388D0029C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		622A12F329C6248A0079F179 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		62388CD629C44CB3006F4005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62388CF929C4B9D2006F4005 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,10 +84,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		622A12F729C6248A0079F179 /* DiccionarioAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				622A12F829C6248A0079F179 /* DiccionarioAppTests.swift */,
+			);
+			path = DiccionarioAppTests;
+			sourceTree = "<group>";
+		};
 		62388CD029C44CB3006F4005 = {
 			isa = PBXGroup;
 			children = (
 				62388CDB29C44CB3006F4005 /* DiccionarioApp */,
+				62388CFD29C4B9D2006F4005 /* DiccionarioAppUITests */,
+				622A12F729C6248A0079F179 /* DiccionarioAppTests */,
 				62388CDA29C44CB3006F4005 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				62388CD929C44CB3006F4005 /* DiccionarioApp.app */,
+				62388CFC29C4B9D2006F4005 /* DiccionarioAppUITests.xctest */,
+				622A12F629C6248A0079F179 /* DiccionarioAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,6 +124,7 @@
 				62388CF229C455B6006F4005 /* Test View Model */,
 				62388CF029C45545006F4005 /* WordViewModel.swift */,
 				62388CF329C4576C006F4005 /* WordView.swift */,
+				62388CF629C4B4F0006F4005 /* DetailView.swift */,
 			);
 			path = DiccionarioApp;
 			sourceTree = "<group>";
@@ -92,9 +146,36 @@
 			path = "Test View Model";
 			sourceTree = "<group>";
 		};
+		62388CFD29C4B9D2006F4005 /* DiccionarioAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				62388CFE29C4B9D2006F4005 /* DiccionarioAppUITests.swift */,
+				62388D0029C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift */,
+			);
+			path = DiccionarioAppUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		622A12F529C6248A0079F179 /* DiccionarioAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 622A12FE29C6248A0079F179 /* Build configuration list for PBXNativeTarget "DiccionarioAppTests" */;
+			buildPhases = (
+				622A12F229C6248A0079F179 /* Sources */,
+				622A12F329C6248A0079F179 /* Frameworks */,
+				622A12F429C6248A0079F179 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				622A12FB29C6248A0079F179 /* PBXTargetDependency */,
+			);
+			name = DiccionarioAppTests;
+			productName = DiccionarioAppTests;
+			productReference = 622A12F629C6248A0079F179 /* DiccionarioAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		62388CD829C44CB3006F4005 /* DiccionarioApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62388CE729C44CB4006F4005 /* Build configuration list for PBXNativeTarget "DiccionarioApp" */;
@@ -112,6 +193,24 @@
 			productReference = 62388CD929C44CB3006F4005 /* DiccionarioApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		62388CFB29C4B9D2006F4005 /* DiccionarioAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62388D0429C4B9D2006F4005 /* Build configuration list for PBXNativeTarget "DiccionarioAppUITests" */;
+			buildPhases = (
+				62388CF829C4B9D2006F4005 /* Sources */,
+				62388CF929C4B9D2006F4005 /* Frameworks */,
+				62388CFA29C4B9D2006F4005 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				62388D0329C4B9D2006F4005 /* PBXTargetDependency */,
+			);
+			name = DiccionarioAppUITests;
+			productName = DiccionarioAppUITests;
+			productReference = 62388CFC29C4B9D2006F4005 /* DiccionarioAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -122,8 +221,16 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					622A12F529C6248A0079F179 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 62388CD829C44CB3006F4005;
+					};
 					62388CD829C44CB3006F4005 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					62388CFB29C4B9D2006F4005 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 62388CD829C44CB3006F4005;
 					};
 				};
 			};
@@ -141,11 +248,20 @@
 			projectRoot = "";
 			targets = (
 				62388CD829C44CB3006F4005 /* DiccionarioApp */,
+				62388CFB29C4B9D2006F4005 /* DiccionarioAppUITests */,
+				622A12F529C6248A0079F179 /* DiccionarioAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		622A12F429C6248A0079F179 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		62388CD729C44CB3006F4005 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -156,9 +272,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		62388CFA29C4B9D2006F4005 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		622A12F229C6248A0079F179 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				622A12F929C6248A0079F179 /* DiccionarioAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		62388CD529C44CB3006F4005 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,15 +297,74 @@
 				62388CEF29C453FC006F4005 /* PostListView.swift in Sources */,
 				62388CF129C45545006F4005 /* WordViewModel.swift in Sources */,
 				62388CF429C4576C006F4005 /* WordView.swift in Sources */,
+				62388CF729C4B4F0006F4005 /* DetailView.swift in Sources */,
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		62388CF829C4B9D2006F4005 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62388CFF29C4B9D2006F4005 /* DiccionarioAppUITests.swift in Sources */,
+				62388D0129C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		622A12FB29C6248A0079F179 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62388CD829C44CB3006F4005 /* DiccionarioApp */;
+			targetProxy = 622A12FA29C6248A0079F179 /* PBXContainerItemProxy */;
+		};
+		62388D0329C4B9D2006F4005 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62388CD829C44CB3006F4005 /* DiccionarioApp */;
+			targetProxy = 62388D0229C4B9D2006F4005 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		622A12FC29C6248A0079F179 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8D7GNS96P8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = se.alvararias.DiccionarioAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiccionarioApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DiccionarioApp";
+			};
+			name = Debug;
+		};
+		622A12FD29C6248A0079F179 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8D7GNS96P8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = se.alvararias.DiccionarioAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiccionarioApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DiccionarioApp";
+			};
+			name = Release;
+		};
 		62388CE529C44CB4006F4005 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -347,9 +537,52 @@
 			};
 			name = Release;
 		};
+		62388D0529C4B9D2006F4005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8D7GNS96P8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = se.alvararias.DiccionarioAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DiccionarioApp;
+			};
+			name = Debug;
+		};
+		62388D0629C4B9D2006F4005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8D7GNS96P8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = se.alvararias.DiccionarioAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DiccionarioApp;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		622A12FE29C6248A0079F179 /* Build configuration list for PBXNativeTarget "DiccionarioAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				622A12FC29C6248A0079F179 /* Debug */,
+				622A12FD29C6248A0079F179 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		62388CD429C44CB3006F4005 /* Build configuration list for PBXProject "DiccionarioApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -364,6 +597,15 @@
 			buildConfigurations = (
 				62388CE829C44CB4006F4005 /* Debug */,
 				62388CE929C44CB4006F4005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		62388D0429C4B9D2006F4005 /* Build configuration list for PBXNativeTarget "DiccionarioAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62388D0529C4B9D2006F4005 /* Debug */,
+				62388D0629C4B9D2006F4005 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

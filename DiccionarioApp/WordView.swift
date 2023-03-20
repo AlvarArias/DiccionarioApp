@@ -17,19 +17,17 @@ struct WordView: View {
     
     var body: some View {
         
+        
+        
         NavigationView {
             
             Form {
                 Section {
                     Toggle("Select Language", isOn: $enableLang)
+                        .tint(.orange).opacity(0.7)
                     
                     Text(enableLang == true ? "swe_spa" : "spa_swe")
                     
-                    /*
-                    Text(myviewModelWord.mje)
-                        .font(.caption)
-                        .foregroundColor(Color.gray)
-                   */
                     Text("\(errorMessage)")
                         .onReceive(myviewModelWord.errorPublisher) { errorMessage in
                             self.errorMessage = errorMessage
@@ -41,6 +39,8 @@ struct WordView: View {
                 HStack {
                     TextField("Search", text: $text)
                         .padding(.horizontal, 10)
+                        .foregroundColor(Color(UIColor.gray))
+                        .accessibilityIdentifier("Search")
                     Button {
                         print("Search")
                         if text != "" {
@@ -50,19 +50,22 @@ struct WordView: View {
                         
                     } label: {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.secondary)
+                            .foregroundColor(Color(UIColor.gray))
                     }
+                    .accessibilityIdentifier("Button Search")
                     
                 }
                 .padding(.vertical, 10)
-                .background(Color(.secondarySystemBackground))
+                .background(Color(UIColor.orange).opacity(0.4))
                 .cornerRadius(10)
                 
                 if errorMessage == "OK" {
                 
                     List( myviewModelWord.results, id: \.self) { resul in
+                        
+                    NavigationLink(destination: DetailView(result: resul)) {
+                                           
                         VStack(alignment: .leading) {
-                            
                             
                             HStack {
                                 Text(resul.value ?? "No value")
@@ -71,20 +74,38 @@ struct WordView: View {
                                 
                                 Text(resul.type ?? "No type")
                                     .font(.subheadline)
+                                
                             }
                             
                             Text(resul.baseLang?.meaning ?? "No meaning")
                             Text(resul.targetLang?.translation ?? "no translation")
                         }
+                        .accessibilityIdentifier("link")
+                        }
+                    
                         
                     }
                     
                 }
+                    
             }
             .navigationTitle("Diccionary")
             .navigationBarTitleDisplayMode(.inline)
+            .scrollContentBackground(.hidden)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [
+                            Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 1.00)),
+                            Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 1.00))
+                        ]
+                    ),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            
         }
-       
         
     }
 }

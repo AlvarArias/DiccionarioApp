@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-// MARK: - Welcome
+// MARK: - Words
 struct Words: Codable {
     
     let status, wordbase: String
@@ -120,35 +120,48 @@ class WordViewModel: ObservableObject {
         }
         
     @Published var results = [Result]()
-
     
+    /// Fetches posts from a remote server.
+    ///
+    /// - Parameters:
+    ///   - word: The word to search for.
+    ///   - dir: The language direction to search in.
+    ///
+    /// - Note: The search direction should be specified as a comma-separated list of language codes in the format `source_lang-target_lang`.
+    ///
+    /// - Throws: An error if the URL is invalid or the server response is not valid JSON.
+    ///
+    /// - Returns: An array of `Result` objects representing the search results.
     func fetchPosts(word: String, dir: String) {
-        guard let url = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON") else {
-            errorMje(mje: "Invalid URL")
-            fatalError("Invalid URL")
+
+            guard let url = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON") else {
+                errorMje(mje: "Invalid URL")
+                fatalError("Invalid URL")
+
         }
-        
+        // Send a data task to the API to fetch the data
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
+                // If there is an error during the data task, emit an error message
                 print("Error fetching results: \(error.localizedDescription)")
                 print(String(describing: error))
                 errorMje(mje: "URL session error")
                 
                 return
             }
-            
+            // Check if the response is vali
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200,
                   let data = data else {
+                // If the response is not valid, emit an error message
                 print("Invalid response")
-                
                 errorMje(mje: "Invalid response")
                 
                 return
             }
             
             do {
-               
+                // Parse the fetched data using a JSONDecoder and update the results
                 let myresults = try JSONDecoder().decode(Words.self, from: data)
                 DispatchQueue.main.async {
                     self.results = myresults.result
@@ -160,6 +173,7 @@ class WordViewModel: ObservableObject {
                 
                 
             } catch {
+                // If there is an error during parsing, emit an error message
                 print("Error decoding results: \(error.localizedDescription)")
                 print(String(describing: error))
             
@@ -169,6 +183,11 @@ class WordViewModel: ObservableObject {
             }
         }.resume()
         
+        /**
+            Emits an error message on the errorSubject.
+            
+            - Parameter mje: A `String` that represents the error message to be emitted.
+        */
         func errorMje(mje: String) {
             
             DispatchQueue.main.async {
@@ -178,4 +197,39 @@ class WordViewModel: ObservableObject {
         }
         
     }
+    
+   /*
+    enum FetchError: Error {
+        case invalidURL
+        case urlSessionError
+        case invalidResponse
+        case decodingError
+        case noWordMatch
+        
+        var errorMessage: String {
+            switch self {
+            case .invalidURL:
+                return "Invalid URL"
+            case .urlSessionError:
+                return "URL session error"
+            case .invalidResponse:
+                return "Invalid response"
+            case .decodingError:
+                return "Error decoding results"
+            case .noWordMatch:
+                return "No word match"
+            }
+        }
+    }
+    
+    func errorMje(error: FetchError) {
+        print("Error message: \(error.errorMessage)")
+    }
+    
+    errorMje(error: .noWordMatch)
+    
+    
+    */
 }
+
+
