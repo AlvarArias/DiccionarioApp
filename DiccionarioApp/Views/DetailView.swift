@@ -54,6 +54,12 @@ struct DetailView: View {
                 }
                 
                 HStack {
+           
+                    Text(result.baseLang?.meaning ?? "no translation")
+                       
+                }
+                
+                HStack {
              
                     Text(result.targetLang?.synonym?.first ?? "")
                       
