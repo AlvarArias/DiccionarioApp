@@ -79,8 +79,16 @@ struct WordView: View {
                                     
                                 }
                                 
-                                Text(resul.baseLang?.meaning ?? "No meaning")
-                                Text(resul.targetLang?.translation ?? "no translation")
+                                if enableLang {
+                                    
+                                    Text(resul.targetLang?.translation ?? "no translation")
+                                    
+                                } else {
+
+                                    Text(resul.baseLang?.meaning ?? "No meaning")
+                                }
+                                
+                  
                             }
                             .accessibilityIdentifier("link")
                         }
