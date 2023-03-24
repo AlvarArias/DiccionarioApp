@@ -150,7 +150,9 @@ struct WordView: View {
                     
                     FavoriteView( searchWors: $searchWords)
                         
+                        
                 }
+                .frame(maxHeight: 300)
                 
                 Spacer()
                 

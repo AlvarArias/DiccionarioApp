@@ -11,6 +11,7 @@ struct FavoriteView: View {
     
     //MARK: Env
     @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     
     @StateObject private var wordListViewModel = WordListViewModel()
 
@@ -18,8 +19,8 @@ struct FavoriteView: View {
     
     var body: some View {
         
-        NavigationView {
-    
+           NavigationView {
+                
                 VStack {
                     
                     List {
@@ -59,11 +60,10 @@ struct FavoriteView: View {
                         endPoint: .bottomTrailing
                     )
                 )
-                
+               
             }
-            
+       
         }
-
     }
 
 struct FavoriteView_Previews: PreviewProvider {
