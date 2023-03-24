@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavoriteView: View {
     
+    //MARK: Env
     @Environment(\.dismiss) var dismiss
     
     @StateObject private var wordListViewModel = WordListViewModel()
@@ -16,49 +17,53 @@ struct FavoriteView: View {
     @Binding var searchWors: [String]
     
     var body: some View {
+        
         NavigationView {
-                    VStack {
-          
-                        List {
-                            ForEach(searchWors, id: \.self) { word in
-                                
-                                    Text(word)
-                              
-                            }
+    
+                VStack {
+                    
+                    List {
+                        ForEach(searchWors, id: \.self) { word in
+                            
+                            Text(word)
                             
                         }
-                        .listStyle(PlainListStyle())
-                        .scrollContentBackground(.hidden)
+                        
                         
                     }
+                    .listStyle(PlainListStyle())
                     .scrollContentBackground(.hidden)
-                    .navigationTitle("History Words")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .bottomBar) {
-                            Button { dismiss() } label: {
-                                       Image(systemName: "arrow.down")
-                                    .foregroundColor(Color.orange)
-                            }
-
-                        }
-                   }
-                    .background(
-                        LinearGradient(
-                            gradient: Gradient(
-                                colors: [
-                                    Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
-                                    Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
-                                ]
-                            ),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
                     
+                }
+                .scrollContentBackground(.hidden)
+                .navigationTitle("History Words")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button { dismiss() } label: {
+                            Image(systemName: "arrow.down")
+                                .foregroundColor(Color.orange)
+                        }
+                        
+                    }
+                }
+                .background(
+                    LinearGradient(
+                        gradient: Gradient(
+                            colors: [
+                                Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
+                                Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
+                            ]
+                        ),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                
             }
             
         }
+
     }
 
 struct FavoriteView_Previews: PreviewProvider {

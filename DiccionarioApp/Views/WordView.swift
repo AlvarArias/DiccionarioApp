@@ -149,8 +149,10 @@ struct WordView: View {
                 .sheet(isPresented: $showHistory) {
                     
                     FavoriteView( searchWors: $searchWords)
-                    
+                        
                 }
+                
+                Spacer()
                 
                 Button { showQuiz.toggle()
                 } label: {
@@ -160,7 +162,10 @@ struct WordView: View {
                 .sheet(isPresented: $showQuiz) {
                     
                     QuizView()
+                    
                 }
+                
+                Spacer()
                 
                 Button { showSavedWord.toggle()
                 } label: {
@@ -170,7 +175,9 @@ struct WordView: View {
                 .sheet(isPresented: $showSavedWord) {
                     
                     SavedWordView()
+                        
                 }
+                
                 
                 
             }
