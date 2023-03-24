@@ -33,7 +33,7 @@ struct WordView: View {
                     Toggle("Select Language", isOn: $selectedLang)
                         .tint(.orange).opacity(0.7)
                     
-                    Text(selectedLang == true ? "swe_spa" : "spa_swe")
+                    Text(selectedLang == true ? "SWE -> SPA" : "SPA -> SWE")
                         .listRowSeparator(.hidden)
                     
                     Text("\(errorMessage)")
@@ -43,7 +43,8 @@ struct WordView: View {
                         }
                 }
                 
-        
+                
+                Section {
                     
                 HStack {
                     TextField("Search", text: $text)
@@ -56,10 +57,10 @@ struct WordView: View {
                         if text != "" {
                             print(text)
                             myviewModelWord.fetchPosts(word: text, dir: selectedLang == true ? "to" : "from")
-                        
+                            
                             newWord = text
                             searchWords.append(newWord)
-    
+                            
                         }
                         
                         
@@ -75,6 +76,9 @@ struct WordView: View {
                 .background(Color(UIColor.orange).opacity(0.4))
                 .cornerRadius(10)
                 
+            }
+                
+               
       
                 
                 if errorMessage == "OK" {
