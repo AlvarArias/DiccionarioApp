@@ -20,7 +20,7 @@ struct WordView: View {
     @State private var errorMessage: String = ""
     
     @State private var newWord: String = ""
-    @State var searchWords: [String] = [""]
+    @State var searchWords: [String] = [String]()
     @State var uniqueValues: Set<String> = []
     
     var body: some View {

@@ -12,8 +12,7 @@ struct FavoriteView: View {
     @Environment(\.dismiss) var dismiss
     
     @StateObject private var wordListViewModel = WordListViewModel()
-    
-    
+
     @Binding var searchWors: [String]
     
     var body: some View {
