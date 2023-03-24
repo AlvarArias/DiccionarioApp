@@ -135,9 +135,9 @@ class WordViewModel: ObservableObject {
     func fetchPosts(word: String, dir: String) {
 
             guard let url = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON") else {
-                errorMje(mje: "Invalid URL")
-                fatalError("Invalid URL")
-
+                errorMje(mje: "Word not find it")
+                //fatalError("Invalid URL")
+                return
         }
         // Send a data task to the API to fetch the data
         URLSession.shared.dataTask(with: url) { data, response, error in

@@ -15,10 +15,13 @@ struct WordView: View {
     // MARK: State
     @State private var text = ""
     @State private var selectedLang = true
-    @State private var showFavorite = false
+    @State private var showHistory = false
     @State private var showSavedWord = false
     @State private var errorMessage: String = ""
     
+    @State private var newWord: String = ""
+    @State var searchWords: [String] = [""]
+    @State var uniqueValues: Set<String> = []
     
     var body: some View {
         
@@ -52,7 +55,12 @@ struct WordView: View {
                         if text != "" {
                             print(text)
                             myviewModelWord.fetchPosts(word: text, dir: selectedLang == true ? "to" : "from")
+                        
+                            newWord = text
+                            searchWords.append(newWord)
+    
                         }
+                        
                         
                     } label: {
                         Image(systemName: "magnifyingglass")
@@ -85,6 +93,7 @@ struct WordView: View {
                                         .font(.subheadline)
                                     
                                 }
+                                
                                 
                                 if selectedLang {
                                     
@@ -127,19 +136,22 @@ struct WordView: View {
             ToolbarItemGroup(placement: .bottomBar) {
                 
                 
-                Button { showFavorite.toggle()
+                Button { showHistory.toggle()
                 } label: {
-                    Image(systemName: "star")
+                    Image(systemName: "list.bullet")
                         .foregroundColor(Color.orange)
                 }
-                .sheet(isPresented: $showFavorite) {
+                .sheet(isPresented: $showHistory) {
                     
-                    FavoriteView()
+                    FavoriteView( searchWors: $searchWords)
+                    
                 }
+                
+                 
                 
                 Button { showSavedWord.toggle()
                 } label: {
-                    Image(systemName: "square.and.pencil")
+                    Image(systemName: "checklist.checked")
                         .foregroundColor(Color.orange)
                 }
                 .sheet(isPresented: $showSavedWord) {

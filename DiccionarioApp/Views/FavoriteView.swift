@@ -12,28 +12,30 @@ struct FavoriteView: View {
     @Environment(\.dismiss) var dismiss
     
     @StateObject private var wordListViewModel = WordListViewModel()
-
+    
+    
+    @Binding var searchWors: [String]
     
     var body: some View {
         NavigationView {
                     VStack {
-                 
+          
                         List {
-                            ForEach(wordListViewModel.favoriteWords, id: \.self) { word in
+                            ForEach(searchWors, id: \.self) { word in
                                 
                                     Text(word)
                               
                             }
-                            .onDelete(perform: wordListViewModel.removeWord)
+                            
                         }
                         .listStyle(PlainListStyle())
                         .scrollContentBackground(.hidden)
+                        
         
                     }
                     .scrollContentBackground(.hidden)
-                    .navigationTitle("Favorite Words")
+                    .navigationTitle("History Words")
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarItems(trailing: EditButton())
                     .toolbar {
                         ToolbarItemGroup(placement: .bottomBar) {
                             Button { dismiss() } label: {
@@ -63,6 +65,6 @@ struct FavoriteView: View {
 
 struct FavoriteView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteView()
+        FavoriteView( searchWors: .constant([""]))
     }
 }

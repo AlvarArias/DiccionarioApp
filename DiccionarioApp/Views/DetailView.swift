@@ -17,8 +17,7 @@ struct DetailView: View {
 
     // MARK: State
     @State private var isPlaying : Bool = false
-    @StateObject private var wordListViewModel = WordListViewModel()
-    @State private var newWord: String = ""
+
     
     @Binding var selectedLang: Bool
     
@@ -40,9 +39,7 @@ struct DetailView: View {
                     Spacer(minLength: 10)
                     
                     Button(action: {
-                        newWord = result.value ?? "No value"
-                        wordListViewModel.addWord(newWord)
-                        
+                      
                         // Save to core data
                         saveWordToCoreData()
                       

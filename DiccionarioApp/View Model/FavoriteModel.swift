@@ -30,26 +30,4 @@ class WordListViewModel: ObservableObject {
 }
 
 
-/*
-class WordListViewModel: ObservableObject {
-    @Published var favoriteWords: [String: String] {
-        didSet {
-            UserDefaults.standard.setValue(favoriteWords, forKey: "FavoriteWords")
-        }
-    }
-    
-    init() {
-        self.favoriteWords = UserDefaults.standard.dictionary(forKey: "FavoriteWords") as? [String: String] ?? [:]
-    }
-    
-    func addWord(key: String, value: String) {
-        favoriteWords[key] = value
-    }
-    
-    func removeWord(forKey key: String) {
-        favoriteWords.removeValue(forKey: key)
-    }
-}
-
-*/
 
