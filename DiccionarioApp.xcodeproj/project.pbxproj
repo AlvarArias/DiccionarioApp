@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		622A12F929C6248A0079F179 /* DiccionarioAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A12F829C6248A0079F179 /* DiccionarioAppTests.swift */; };
+		622EC00129CD9C3700BED9F4 /* WordModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 622EBFFF29CD9C3700BED9F4 /* WordModel.xcdatamodeld */; };
+		622EC00329CD9DDD00BED9F4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00229CD9DDC00BED9F4 /* DataController.swift */; };
+		622EC00529CDA3F800BED9F4 /* SavedWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00429CDA3F800BED9F4 /* SavedWordView.swift */; };
 		62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */; };
 		62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CDE29C44CB3006F4005 /* ContentView.swift */; };
 		62388CE129C44CB4006F4005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62388CE029C44CB4006F4005 /* Assets.xcassets */; };
@@ -46,6 +49,9 @@
 /* Begin PBXFileReference section */
 		622A12F629C6248A0079F179 /* DiccionarioAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiccionarioAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		622A12F829C6248A0079F179 /* DiccionarioAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppTests.swift; sourceTree = "<group>"; };
+		622EC00029CD9C3700BED9F4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		622EC00229CD9DDC00BED9F4 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		622EC00429CDA3F800BED9F4 /* SavedWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWordView.swift; sourceTree = "<group>"; };
 		62388CD929C44CB3006F4005 /* DiccionarioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiccionarioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppApp.swift; sourceTree = "<group>"; };
 		62388CDE29C44CB3006F4005 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -165,9 +171,11 @@
 		623AD02829C8537B00216D99 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				622EBFFF29CD9C3700BED9F4 /* WordModel.xcdatamodeld */,
 				62388CF029C45545006F4005 /* WordViewModel.swift */,
 				623AD02A29C853D500216D99 /* PlaySound.swift */,
 				623AD02C29C86C2700216D99 /* FavoriteModel.swift */,
+				622EC00229CD9DDC00BED9F4 /* DataController.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -179,6 +187,7 @@
 				62388CF629C4B4F0006F4005 /* DetailView.swift */,
 				623AD02629C852DB00216D99 /* ButtonView.swift */,
 				623AD02E29C86C6000216D99 /* FavoriteView.swift */,
+				622EC00429CDA3F800BED9F4 /* SavedWordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -324,6 +333,7 @@
 			files = (
 				62388CEF29C453FC006F4005 /* PostListView.swift in Sources */,
 				623AD02D29C86C2700216D99 /* FavoriteModel.swift in Sources */,
+				622EC00529CDA3F800BED9F4 /* SavedWordView.swift in Sources */,
 				623AD02B29C853D500216D99 /* PlaySound.swift in Sources */,
 				62388CF129C45545006F4005 /* WordViewModel.swift in Sources */,
 				623AD02729C852DB00216D99 /* ButtonView.swift in Sources */,
@@ -333,6 +343,8 @@
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */,
+				622EC00329CD9DDD00BED9F4 /* DataController.swift in Sources */,
+				622EC00129CD9C3700BED9F4 /* WordModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +655,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		622EBFFF29CD9C3700BED9F4 /* WordModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				622EC00029CD9C3700BED9F4 /* Model.xcdatamodel */,
+			);
+			currentVersion = 622EC00029CD9C3700BED9F4 /* Model.xcdatamodel */;
+			path = WordModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 62388CD129C44CB3006F4005 /* Project object */;
 }

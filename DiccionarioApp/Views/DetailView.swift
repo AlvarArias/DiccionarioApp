@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct DetailView: View {
-
+    
+    // MARK: ObsObjects
     @ObservedObject var player = PlayerWord()
+    
+    // MARK: Core Data
+    @Environment(\.managedObjectContext) var myNewWord
 
-    let result : Result
-    let fixURL = "https://www.thesprucepets.com/thmb/XMb-I4hzef2SyFGabzAPi0WnUJ0=/3000x0/filters:no_upscale():strip_icc()/smartest-cat-breeds-4589754-hero-e192f849d9f1442481c47c932cd36aa8.jpg"
-
+    // MARK: State
     @State private var isPlaying : Bool = false
-    
-    
     @StateObject private var wordListViewModel = WordListViewModel()
     @State private var newWord: String = ""
+    
+    @Binding var selectedLang: Bool
+    
+    let result : Result
     
     var body: some View {
 
@@ -38,6 +42,9 @@ struct DetailView: View {
                     Button(action: {
                         newWord = result.value ?? "No value"
                         wordListViewModel.addWord(newWord)
+                        
+                        // Save to core data
+                        saveWordToCoreData()
                       
                     }) {
                         Image(systemName: "plus")
@@ -45,25 +52,41 @@ struct DetailView: View {
                         
                 }
                 
-             
-
-                HStack {
-           
-                    Text(result.targetLang?.translation ?? "no translation")
+                if selectedLang {
+ 
+                    HStack {
+                        
+                        Text(result.targetLang?.translation ?? "no translation")
+                    }
+                    
+                    HStack {
+                 
+                        Text(result.targetLang?.synonym?.first ?? "")
+                          
+                    }
                        
-                }
-                
-                HStack {
-           
-                    Text(result.baseLang?.meaning ?? "no translation")
-                       
-                }
-                
-                HStack {
-             
-                    Text(result.targetLang?.synonym?.first ?? "")
-                      
-                }
+                } else {
+                        
+                    HStack {
+                            
+                            Text(result.baseLang?.meaning ?? "no translation")
+                            
+                        }
+                    
+                    HStack {
+                 
+                        Text(result.baseLang?.inflection?[0].content ?? "")
+                        
+                        Spacer(minLength: 5)
+                        
+                        Text(result.baseLang?.inflection?[1].content ?? "")
+                          
+                    }
+                    
+                    
+                    }
+                        
+               
                 
                 HStack {
                     
@@ -112,14 +135,40 @@ struct DetailView: View {
 
     }
     
-      
+    func saveWordToCoreData() {
+         
+         // Try to save in Core Data
+            let theSelectedWord = myWord(context: myNewWord)
+            // Fix values
+        theSelectedWord.value = result.value ?? "No value"
+        theSelectedWord.type = result.type ?? "No type"
+        
+        theSelectedWord.phonetic = result.baseLang?.phonetic?.content ?? ""
+        theSelectedWord.file = result.baseLang?.phonetic?.file ?? ""
+           
+            // Selected language
+            if selectedLang {
+                
+                theSelectedWord.translation = result.targetLang?.translation ?? "No translation"
+                theSelectedWord.synonym = result.targetLang?.synonym?.first ?? ""
+                
+            } else {
+                
+                theSelectedWord.meaning = result.baseLang?.meaning ?? "No meaning"
+                    
+            }
+
+            try? myNewWord.save()
+  
+        }
+    
 }
 
 
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(player: PlayerWord(), result: .init(variantID: "variantID", value: "value", type: "type", baseLang: BaseLang(phonetic: Phonetic(file: "file", content: "content"), inflection: [Inflection(content: "content")], meaning: "meaning", illustration: [Illustration(type: "type", value: "value")], comment: "comment"), targetLang: TargetLang(translation: "translation", synonym: ["synonym"], comment: "comment")))
+        DetailView(player: PlayerWord(), selectedLang: .constant(false), result: .init(variantID: "variantID", value: "value", type: "type", baseLang: BaseLang(phonetic: Phonetic(file: "file", content: "content"), inflection: [Inflection(content: "content")], meaning: "meaning", illustration: [Illustration(type: "type", value: "value")], comment: "comment"), targetLang: TargetLang(translation: "translation", synonym: ["synonym"], comment: "comment")))
     }
 }
 

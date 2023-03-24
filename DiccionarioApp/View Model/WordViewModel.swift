@@ -165,7 +165,7 @@ class WordViewModel: ObservableObject {
                 let myresults = try JSONDecoder().decode(Words.self, from: data)
                 DispatchQueue.main.async {
                     self.results = myresults.result
-                    print(myresults)
+                    //print(myresults)
                     
                     errorMje(mje: "OK")
                     

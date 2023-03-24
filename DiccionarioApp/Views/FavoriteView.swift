@@ -17,6 +17,7 @@ struct FavoriteView: View {
     var body: some View {
         NavigationView {
                     VStack {
+                 
                         List {
                             ForEach(wordListViewModel.favoriteWords, id: \.self) { word in
                                 
@@ -27,7 +28,7 @@ struct FavoriteView: View {
                         }
                         .listStyle(PlainListStyle())
                         .scrollContentBackground(.hidden)
-                        
+        
                     }
                     .scrollContentBackground(.hidden)
                     .navigationTitle("Favorite Words")

@@ -9,12 +9,16 @@ import SwiftUI
 
 struct WordView: View {
     
+    // MARK: ObsObjects
     @ObservedObject var myviewModelWord = WordViewModel()
-    @State private var text = ""
-    @State private var enableLang = true
-    @State private var showFavorite = false
     
+    // MARK: State
+    @State private var text = ""
+    @State private var selectedLang = true
+    @State private var showFavorite = false
+    @State private var showSavedWord = false
     @State private var errorMessage: String = ""
+    
     
     var body: some View {
         
@@ -22,10 +26,10 @@ struct WordView: View {
             
             Form {
                 Section {
-                    Toggle("Select Language", isOn: $enableLang)
+                    Toggle("Select Language", isOn: $selectedLang)
                         .tint(.orange).opacity(0.7)
                     
-                    Text(enableLang == true ? "swe_spa" : "spa_swe")
+                    Text(selectedLang == true ? "swe_spa" : "spa_swe")
                         .listRowSeparator(.hidden)
                     
                     Text("\(errorMessage)")
@@ -35,7 +39,8 @@ struct WordView: View {
                         }
                 }
                 
-                
+        
+                    
                 HStack {
                     TextField("Search", text: $text)
                         .padding(.horizontal, 10)
@@ -46,7 +51,7 @@ struct WordView: View {
                         print("Search")
                         if text != "" {
                             print(text)
-                            myviewModelWord.fetchPosts(word: text, dir: enableLang == true ? "to" : "from")
+                            myviewModelWord.fetchPosts(word: text, dir: selectedLang == true ? "to" : "from")
                         }
                         
                     } label: {
@@ -55,17 +60,19 @@ struct WordView: View {
                     }
                     .accessibilityIdentifier("Button Search")
                     
+                    
                 }
-                .padding(.vertical, 10)
-                //.background(Color(UIColor.orange).opacity(0.4))
+                .padding(15)
+                .background(Color(UIColor.orange).opacity(0.4))
                 .cornerRadius(10)
                 
+      
                 
                 if errorMessage == "OK" {
                     
                     List( myviewModelWord.results, id: \.self) { resul in
                         
-                        NavigationLink(destination: DetailView(result: resul)) {
+                        NavigationLink(destination: DetailView(selectedLang: $selectedLang, result: resul)) {
                             
                             VStack(alignment: .leading) {
                                 
@@ -79,7 +86,7 @@ struct WordView: View {
                                     
                                 }
                                 
-                                if enableLang {
+                                if selectedLang {
                                     
                                     Text(resul.targetLang?.translation ?? "no translation")
                                     
@@ -129,6 +136,18 @@ struct WordView: View {
                     
                     FavoriteView()
                 }
+                
+                Button { showSavedWord.toggle()
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                        .foregroundColor(Color.orange)
+                }
+                .sheet(isPresented: $showSavedWord) {
+                    
+                    SavedWordView()
+                }
+                
+                
             }
         }
     }
