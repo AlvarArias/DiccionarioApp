@@ -83,11 +83,13 @@ struct SavedWordView: View {
             .scrollContentBackground(.hidden)
             .navigationTitle("Saved Words")
             .navigationBarTitleDisplayMode(.inline)
+            /*
             .toolbar {
                 Button(action: undeleteLastItem) {
                     Image(systemName: "arrow.uturn.left")
                 }
             }
+            */
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button { dismiss() } label: {

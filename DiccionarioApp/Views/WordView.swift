@@ -17,11 +17,12 @@ struct WordView: View {
     @State private var selectedLang = true
     @State private var showHistory = false
     @State private var showSavedWord = false
+    @State private var showQuiz = false
     @State private var errorMessage: String = ""
     
     @State private var newWord: String = ""
     @State var searchWords: [String] = [String]()
-    @State var uniqueValues: Set<String> = []
+    
     
     var body: some View {
         
@@ -147,7 +148,15 @@ struct WordView: View {
                     
                 }
                 
-                 
+                Button { showQuiz.toggle()
+                } label: {
+                    Image(systemName: "star")
+                        .foregroundColor(Color.orange)
+                }
+                .sheet(isPresented: $showQuiz) {
+                    
+                    QuizView()
+                }
                 
                 Button { showSavedWord.toggle()
                 } label: {

@@ -12,6 +12,7 @@
 		622EC00329CD9DDD00BED9F4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00229CD9DDC00BED9F4 /* DataController.swift */; };
 		622EC00529CDA3F800BED9F4 /* SavedWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00429CDA3F800BED9F4 /* SavedWordView.swift */; };
 		622EC00729CDB3F800BED9F4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00629CDB3F800BED9F4 /* SettingsView.swift */; };
+		622EC00929CDC7A700BED9F4 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00829CDC7A700BED9F4 /* QuizView.swift */; };
 		62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */; };
 		62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CDE29C44CB3006F4005 /* ContentView.swift */; };
 		62388CE129C44CB4006F4005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62388CE029C44CB4006F4005 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		622EC00229CD9DDC00BED9F4 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		622EC00429CDA3F800BED9F4 /* SavedWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWordView.swift; sourceTree = "<group>"; };
 		622EC00629CDB3F800BED9F4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		622EC00829CDC7A700BED9F4 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		62388CD929C44CB3006F4005 /* DiccionarioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiccionarioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppApp.swift; sourceTree = "<group>"; };
 		62388CDE29C44CB3006F4005 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				623AD02E29C86C6000216D99 /* FavoriteView.swift */,
 				622EC00429CDA3F800BED9F4 /* SavedWordView.swift */,
 				622EC00629CDB3F800BED9F4 /* SettingsView.swift */,
+				622EC00829CDC7A700BED9F4 /* QuizView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */,
+				622EC00929CDC7A700BED9F4 /* QuizView.swift in Sources */,
 				622EC00329CD9DDD00BED9F4 /* DataController.swift in Sources */,
 				622EC00129CD9C3700BED9F4 /* WordModel.xcdatamodeld in Sources */,
 			);

@@ -30,7 +30,6 @@ struct FavoriteView: View {
                         .listStyle(PlainListStyle())
                         .scrollContentBackground(.hidden)
                         
-        
                     }
                     .scrollContentBackground(.hidden)
                     .navigationTitle("History Words")
