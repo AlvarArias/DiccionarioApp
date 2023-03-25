@@ -8,24 +8,61 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @EnvironmentObject var appEnvironment: AppEnvironment
+    
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        Form {
-            Section(header: Text("User Settings")) {
-                
-              Text("User language")
-             //TextField("Name", text: $userLanguage)
+        NavigationView {
+            Form {
+                VStack {
+                    Picker(LocalizedStringKey("language"), selection: $appEnvironment.currentLanguage) {
+                        Text(LocalizedStringKey("english")).tag("en")
+                        Text(LocalizedStringKey("swedish")).tag("sv")
+                        Text(LocalizedStringKey("spanish")).tag("es")
+                    }
+                    .pickerStyle(MenuPickerStyle())
+                    .padding()
+                }
+                Text(LocalizedStringKey("about"))
+                    
+                Text(LocalizedStringKey("developer")) + Text ("  Alvar Arias" )
+                   
+                Text(LocalizedStringKey("lexin"))
+                   
                 
             }
+            .scrollContentBackground(.hidden)
+            .navigationTitle(LocalizedStringKey("usersettings"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button { dismiss() } label: {
+                        Image(systemName: "arrow.down")
+                            .foregroundColor(Color.orange)
+                    }
+                }
+            }
+            .background(
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [
+                            Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
+                            Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
+                        ]
+                    ),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
         }
+        .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
+       
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
-}
+
 
 /*
  7. Settings: The app may include a settings screen where users can customize setting:

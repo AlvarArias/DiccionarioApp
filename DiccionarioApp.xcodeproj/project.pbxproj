@@ -13,7 +13,6 @@
 		622EC00529CDA3F800BED9F4 /* SavedWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00429CDA3F800BED9F4 /* SavedWordView.swift */; };
 		622EC00729CDB3F800BED9F4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00629CDB3F800BED9F4 /* SettingsView.swift */; };
 		622EC00929CDC7A700BED9F4 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00829CDC7A700BED9F4 /* QuizView.swift */; };
-		622EC00B29CDFAA900BED9F4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 622EC00A29CDFAA900BED9F4 /* Localizable.strings */; };
 		62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */; };
 		62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CDE29C44CB3006F4005 /* ContentView.swift */; };
 		62388CE129C44CB4006F4005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62388CE029C44CB4006F4005 /* Assets.xcassets */; };
@@ -33,6 +32,8 @@
 		625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091729CF174F0006BAEE /* LanguageSelectionView.swift */; };
 		625B091A29CF1ACA0006BAEE /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091929CF1ACA0006BAEE /* SearchBarView.swift */; };
 		625B091C29CF1DD40006BAEE /* ResultListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091B29CF1DD40006BAEE /* ResultListView.swift */; };
+		625B091D29CF3DFC0006BAEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 625B091F29CF3DFC0006BAEE /* Localizable.strings */; };
+		625B092429CF42610006BAEE /* AppEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092329CF42610006BAEE /* AppEnv.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +61,6 @@
 		622EC00429CDA3F800BED9F4 /* SavedWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWordView.swift; sourceTree = "<group>"; };
 		622EC00629CDB3F800BED9F4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		622EC00829CDC7A700BED9F4 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
-		622EC00A29CDFAA900BED9F4 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		62388CD929C44CB3006F4005 /* DiccionarioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiccionarioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppApp.swift; sourceTree = "<group>"; };
 		62388CDE29C44CB3006F4005 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +83,11 @@
 		625B091729CF174F0006BAEE /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
 		625B091929CF1ACA0006BAEE /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		625B091B29CF1DD40006BAEE /* ResultListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultListView.swift; sourceTree = "<group>"; };
+		625B091E29CF3DFC0006BAEE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		625B092029CF3E0B0006BAEE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		625B092129CF3E130006BAEE /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		625B092229CF3E150006BAEE /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		625B092329CF42610006BAEE /* AppEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnv.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,8 +188,9 @@
 		623AD02829C8537B00216D99 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				622EC00A29CDFAA900BED9F4 /* Localizable.strings */,
+				625B091F29CF3DFC0006BAEE /* Localizable.strings */,
 				622EBFFF29CD9C3700BED9F4 /* WordModel.xcdatamodeld */,
+				625B092329CF42610006BAEE /* AppEnv.swift */,
 				62388CF029C45545006F4005 /* WordViewModel.swift */,
 				623AD02A29C853D500216D99 /* PlaySound.swift */,
 				623AD02C29C86C2700216D99 /* FavoriteModel.swift */,
@@ -306,7 +312,6 @@
 				"es-419",
 				sv,
 				es,
-				Base,
 			);
 			mainGroup = 62388CD029C44CB3006F4005;
 			productRefGroup = 62388CDA29C44CB3006F4005 /* Products */;
@@ -333,7 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62388CE429C44CB4006F4005 /* Preview Assets.xcassets in Resources */,
-				622EC00B29CDFAA900BED9F4 /* Localizable.strings in Resources */,
+				625B091D29CF3DFC0006BAEE /* Localizable.strings in Resources */,
 				62388CE129C44CB4006F4005 /* Assets.xcassets in Resources */,
 				62388CEB29C44D0C006F4005 /* Notes App.rtf in Resources */,
 			);
@@ -374,6 +379,7 @@
 				62388CF729C4B4F0006F4005 /* DetailView.swift in Sources */,
 				625B091A29CF1ACA0006BAEE /* SearchBarView.swift in Sources */,
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,
+				625B092429CF42610006BAEE /* AppEnv.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */,
 				62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */,
@@ -406,6 +412,20 @@
 			targetProxy = 62388D0229C4B9D2006F4005 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		625B091F29CF3DFC0006BAEE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				625B091E29CF3DFC0006BAEE /* en */,
+				625B092029CF3E0B0006BAEE /* es */,
+				625B092129CF3E130006BAEE /* es-419 */,
+				625B092229CF3E150006BAEE /* sv */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		622A12FC29C6248A0079F179 /* Debug */ = {

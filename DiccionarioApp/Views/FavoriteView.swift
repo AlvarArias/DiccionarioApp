@@ -10,6 +10,7 @@ import SwiftUI
 struct FavoriteView: View {
     
     //MARK: Env
+    @EnvironmentObject var appEnvironment: AppEnvironment
     @Environment(\.dismiss) var dismiss
     @Environment(\.presentationMode) var presentationMode
     
@@ -37,7 +38,7 @@ struct FavoriteView: View {
                     
                 }
                 .scrollContentBackground(.hidden)
-                .navigationTitle("History Words")
+                .navigationTitle(LocalizedStringKey("searchhistory"))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItemGroup(placement: .bottomBar) {
@@ -62,6 +63,7 @@ struct FavoriteView: View {
                 )
                
             }
+            .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
         }
     }
 

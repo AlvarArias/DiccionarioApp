@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  DiccionarioApp
+
+  Created by Alvar Arias on 2023-03-24.
+  
+*/
+"language" = "Språk";
+"english" = "Engelska";
+"swedish" = "Svenska";
+"spanish" = "Spanska";
+"greeting" = "Hej";
+"home" = "Hem";
+"usersettings" = "Användarinställningar";
+"savedwords" = "Sparade ord";
+"quiz" = "Frågesport";
+"searchhistory" = "Sökhistorik";
+"search" = "Söker";
+"selectlanguage" = "Välj språk";
+"lexin" = "API fröm Lexin på nätet det är ett samarbete mellan Institutet för språk och folkminnen, och Kungliga Tekniska högskolan.";
+"developer" = "utvecklare";
+"about" = "Om appen";

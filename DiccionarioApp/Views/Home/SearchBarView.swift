@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SearchBarView: View {
+    
+    //MARK: Env
+    @EnvironmentObject var appEnvironment: AppEnvironment
+    
     @Binding var text: String
     @Binding var searchWords: [String]
     @Binding var showProgressBar: Bool
@@ -16,7 +20,7 @@ struct SearchBarView: View {
 
     var body: some View {
         HStack {
-            TextField("Search", text: $text)
+            TextField(LocalizedStringKey("search"), text: $text)
                 .padding(.horizontal, 10)
                 .accentColor(.blue)
                 .accessibilityIdentifier("Search")
@@ -45,5 +49,6 @@ struct SearchBarView: View {
         .cornerRadius(10)
         .padding(.horizontal)
         .shadow(color: .orange, radius: 0.5, x: 0.5, y: -0.5)
+        .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
 }

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct WordView: View {
 
+    //MARK: Env
+    @EnvironmentObject var appEnvironment: AppEnvironment
+    
     // MARK: ObsObjects
     @ObservedObject var myviewModelWord = WordViewModel()
     
@@ -21,6 +24,7 @@ struct WordView: View {
     @State private var showHistory = false
     @State private var showSavedWord = false
     @State private var showQuiz = false
+    @State private var showSettings = false
     
     @State private var isVStackVisible = false
     
@@ -28,11 +32,6 @@ struct WordView: View {
     @State private var newWord: String = ""
     @State var searchWords: [String] = [String]()
     
-    /*
-    @State private var selectedLang = true
-    @State private var errorMessage = ""
-    @State private var showProgressBar = false
-    */
     
     var body: some View {
         
@@ -69,7 +68,7 @@ struct WordView: View {
                 
             }
 
-            .navigationTitle("Diccionary")
+            .navigationTitle(LocalizedStringKey("home"))
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
             .background(
@@ -87,66 +86,20 @@ struct WordView: View {
             
         }
         
-        /*
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
-                
-                
-                Button { showHistory.toggle()
-                } label: {
-                    Image(systemName: "list.bullet")
-                        .foregroundColor(Color.orange)
-                }
-                .sheet(isPresented: $showHistory) {
-                    
-                    FavoriteView( searchWors: $searchWords)
-                        
-                        
-                }
-                .frame(maxHeight: 300)
-                
-            // MARK: Quiz View
-                
+                settingsButton()
+                //Spacer()
+                //quizButton()
                 Spacer()
-            
-                Button { showQuiz.toggle()
-                } label: {
-                    Image(systemName: "star")
-                        .foregroundColor(Color.orange)
-                }
-                .sheet(isPresented: $showQuiz) {
-                    
-                    QuizView()
-                    
-                }
-            
-                
-                Spacer()
-                
-                Button { showSavedWord.toggle()
-                } label: {
-                    Image(systemName: "checklist.checked")
-                        .foregroundColor(Color.orange)
-                }
-                .sheet(isPresented: $showSavedWord) {
-                    
-                    SavedWordView()
-                        
-                }
-                
-  
-            }
-        }
-        */
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
                 historyButton()
-                Spacer()
-                quizButton()
                 Spacer()
                 savedWordButton()
             }
         }
+        
+        .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
+          
     }
     
     private func historyButton() -> some View {
@@ -166,6 +119,16 @@ struct WordView: View {
         }
         .sheet(isPresented: $showQuiz) {
             QuizView()
+        }
+    }
+    
+    private func settingsButton() -> some View {
+        Button(action: { showSettings.toggle() }) {
+            Image(systemName: "gear")
+                .foregroundColor(Color.orange)
+        }
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
         }
     }
 

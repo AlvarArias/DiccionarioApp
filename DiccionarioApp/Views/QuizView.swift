@@ -11,6 +11,7 @@ import CoreData
 struct QuizView: View {
     
     //MARK: Env
+    @EnvironmentObject var appEnvironment: AppEnvironment
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -55,7 +56,7 @@ struct QuizView: View {
                     .padding()
                 }
                 .scrollContentBackground(.hidden)
-                .navigationTitle("Saved Words")
+                .navigationTitle(LocalizedStringKey("quiz"))
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear(perform: updateRandomIndex)
                 .toolbar {
@@ -83,7 +84,7 @@ struct QuizView: View {
             }
         }
         
-       
+        .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
 }
 

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SavedWordView: View {
     
+    //MARK: Env
+    @EnvironmentObject var appEnvironment: AppEnvironment
+    
     // MARK: CORE DATA
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) var dismiss
@@ -81,7 +84,7 @@ struct SavedWordView: View {
                 .onDelete(perform: deleteItems)
             }
             .scrollContentBackground(.hidden)
-            .navigationTitle("Saved Words")
+            .navigationTitle(LocalizedStringKey("savedwords"))
             .navigationBarTitleDisplayMode(.inline)
             /*
             .toolbar {
@@ -113,6 +116,7 @@ struct SavedWordView: View {
             )
             
         }
+        .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
 }
 

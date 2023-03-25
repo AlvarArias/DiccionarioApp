@@ -12,12 +12,15 @@ import SwiftUI
 @main
 struct DiccionarioAppApp: App {
     
+    @StateObject private var appEnvironment = AppEnvironment()
+    
     @StateObject private var dataController = DataController()
     
     var body: some Scene {
         WindowGroup {
             WordView()
             .environment(\.managedObjectContext, dataController.container.viewContext)
+            .environmentObject(appEnvironment)
         }
     }
 }

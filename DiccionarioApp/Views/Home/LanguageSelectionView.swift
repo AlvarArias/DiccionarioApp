@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LanguageSelectionView: View {
     
+    @EnvironmentObject var appEnvironment: AppEnvironment
+    
     @Binding var selectedLang: Bool
     @Binding var errorMessage: String
     @Binding var showProgressBar: Bool
@@ -19,7 +21,7 @@ struct LanguageSelectionView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Toggle("Select Language", isOn: $selectedLang)
+            Toggle(LocalizedStringKey("selectlanguage"), isOn: $selectedLang)
                 .tint(.orange).opacity(0.7)
                 .font(.subheadline)
 
@@ -62,6 +64,7 @@ struct LanguageSelectionView: View {
                         }
                     }
                 )
+        .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
 }
 

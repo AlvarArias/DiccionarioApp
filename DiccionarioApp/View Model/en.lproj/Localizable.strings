@@ -1,0 +1,25 @@
+/* 
+  Localizable.strings
+  DiccionarioApp
+
+  Created by Alvar Arias on 2023-03-24.
+  
+*/
+
+"language" = "Language";
+"english" = "English";
+"swedish" = "Swedish";
+"spanish" = "Spanish";
+"greeting" = "Hello";
+"search" = "Search";
+"home" = "Home";
+"usersettings" = "User Settings";
+"savedwords" = "Saved Words";
+"quiz" = "Quiz";
+"searchhistory" = "Search History";
+"selectlanguage" = "Select the language";
+"lexin" = "API from:  Lexin på net is a collaboration between the Institute for Language and Folklore, and the Royal Institute of Technology of Sweden.";
+"developer" = "developer";
+"about" = "About the app";
+
+
