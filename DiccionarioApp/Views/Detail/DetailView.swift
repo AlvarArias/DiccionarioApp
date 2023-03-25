@@ -28,6 +28,7 @@ struct DetailView: View {
             
             Form {
             
+                
                 HStack {
                     Text(result.value ?? "No value")
                         .font(.headline)
@@ -50,6 +51,8 @@ struct DetailView: View {
                         
                 }
                 .listRowSeparator(.hidden)
+                
+                
                 
                 if selectedLang {
  
@@ -85,36 +88,10 @@ struct DetailView: View {
                     
                     
                     }
-                        
+                 
                
-                
-                HStack {
-                    
-                    Text(result.baseLang?.phonetic?.content ?? "Not file")
-                       
-                    Spacer(minLength: 10)
-                    
-                    Button {
-                        isPlaying.toggle()
-                        print("isPlaying \(isPlaying)")
-                      
-                        player.play(url: result.baseLang?.phonetic?.file ?? "Not file", state: isPlaying)
+                AudioPlaybackView(player: player, phonetic: result.baseLang?.phonetic)
 
-                    } label: {
-                        
-                        isPlaying == true ? Image(systemName: "pause.fill") : Image(systemName: "play.fill")
-                        
-                    }.foregroundColor(Color.orange)
-                     .onChange(of: player.playerStopped) { stopped in
-                            if stopped {
-                                print("stop")
-                                isPlaying = false
-                            }
-                        }
-                    
-                    
-                }.listRowSeparator(.hidden)
-            
     
             }
             .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)

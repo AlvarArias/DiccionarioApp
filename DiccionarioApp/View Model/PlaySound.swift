@@ -9,14 +9,11 @@ import Foundation
 import AVKit
 import Combine
 
+
 class PlayerWord: ObservableObject {
     // Player variables
     var player = AVPlayer()
-    @Published var isPlaying: Bool = false
     var volume: Float = 0
-    
-    @Published var playerStopped: Bool = false
-
     
     private var playerStatusObserver: AnyCancellable?
     
@@ -25,40 +22,28 @@ class PlayerWord: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { status in
                 switch status {
-                case .paused:
-                    self.isPlaying = false
-                    print("Player stopped")
-                    self.playerStopped = true
-                case .playing:
-                    self.isPlaying = true
-                    self.playerStopped = false
+                case .paused, .waitingToPlayAtSpecifiedRate:
+                    NotificationCenter.default.post(name: .playerStopped, object: nil)
                 default:
                     break
                 }
             }
-
     }
     
     func play(url: String, state: Bool) {
         do {
             try AVAudioSession.sharedInstance()
                 .setCategory(AVAudioSession.Category.playback)
-            print("AVAudioSession Category Playback OK")
             
             do {
                 try AVAudioSession.sharedInstance().setActive(true)
-                print("AVAudioSession is Active")
                 
                 player = AVPlayer(url: URL(string: url)!)
                 
                 if state {
-                    print("player.play()")
                     player.play()
-                    
                 } else {
-                    print("player.pause()")
                     player.pause()
-                    
                 }
                 
             } catch let error as NSError {
@@ -67,6 +52,11 @@ class PlayerWord: ObservableObject {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
+    }
+    
+    func togglePlayingState(url: String) {
+        let currentState = player.timeControlStatus != .playing
+        play(url: url, state: currentState)
     }
 }
 
@@ -83,65 +73,8 @@ extension NotificationCenter {
     static let playerStopped = Notification.Name("playerStopped")
 }
 
-
-
-
-/*
-class PlayerWord {
-    
-    // Player variables
-    var player = AVPlayer()
-    var isPlaying : Bool = false
-    var volum : Float = 0
-   
-    
-    func Play(url: String, state: Bool) {
-        
-        do {
-            try AVAudioSession.sharedInstance()
-                .setCategory(AVAudioSession.Category.playback)
-            print("AVAudioSession Category Playback OK")
-            
-            do {
-                try AVAudioSession.sharedInstance().setActive(true)
-                print("AVAudioSession is Active")
-                
-                player = AVPlayer(url: URL(string: url)!)
-  
-                    if state {
-                        print("player.play()")
-                        player.play()
-                        
-                    } else {
-                        print("player.pause()")
-                        player.pause()
-                        
-                    }
-
-                
-                
-       
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-        } catch let error as NSError {
-            print(error.localizedDescription)
-            
-        }
-        
-       
-    }
-  
+extension NSNotification.Name {
+    static let playerStopped = NSNotification.Name("playerStopped")
 }
 
-extension AVPlayer {
-var isPlaying: Bool {
-if (self.rate != 0 && self.error == nil) {
-return true
-        } else {
-return false
-        }
-    }
-}
 
-*/

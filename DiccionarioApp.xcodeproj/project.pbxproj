@@ -34,6 +34,7 @@
 		625B091C29CF1DD40006BAEE /* ResultListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091B29CF1DD40006BAEE /* ResultListView.swift */; };
 		625B091D29CF3DFC0006BAEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 625B091F29CF3DFC0006BAEE /* Localizable.strings */; };
 		625B092429CF42610006BAEE /* AppEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092329CF42610006BAEE /* AppEnv.swift */; };
+		625B092729CF5CFE0006BAEE /* AudioPlaybackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		625B092129CF3E130006BAEE /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		625B092229CF3E150006BAEE /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		625B092329CF42610006BAEE /* AppEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnv.swift; sourceTree = "<group>"; };
+		625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlaybackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,8 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				625B091429CF11910006BAEE /* Home */,
-				62388CF629C4B4F0006F4005 /* DetailView.swift */,
-				623AD02629C852DB00216D99 /* ButtonView.swift */,
+				625B092529CF5CC30006BAEE /* Detail */,
 				623AD02E29C86C6000216D99 /* FavoriteView.swift */,
 				622EC00429CDA3F800BED9F4 /* SavedWordView.swift */,
 				622EC00629CDB3F800BED9F4 /* SettingsView.swift */,
@@ -222,6 +223,16 @@
 				625B091B29CF1DD40006BAEE /* ResultListView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		625B092529CF5CC30006BAEE /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				623AD02629C852DB00216D99 /* ButtonView.swift */,
+				62388CF629C4B4F0006F4005 /* DetailView.swift */,
+				625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +395,7 @@
 				625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */,
 				62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */,
 				622EC00929CDC7A700BED9F4 /* QuizView.swift in Sources */,
+				625B092729CF5CFE0006BAEE /* AudioPlaybackView.swift in Sources */,
 				622EC00329CD9DDD00BED9F4 /* DataController.swift in Sources */,
 				622EC00129CD9C3700BED9F4 /* WordModel.xcdatamodeld in Sources */,
 			);
