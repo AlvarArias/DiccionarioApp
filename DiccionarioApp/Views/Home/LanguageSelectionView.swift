@@ -39,13 +39,16 @@ struct LanguageSelectionView: View {
                         if !errorMessage.isEmpty {
                             showProgressBar = false
                             
-                            showNotification = true
-                                                        
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                withAnimation {
-                                    showNotification = false
+                            if errorMessage != "OK" {
+                                showNotification = true
+                                                            
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    withAnimation {
+                                        showNotification = false
+                                    }
                                 }
                             }
+                            
                         } 
                         
                     }
@@ -77,7 +80,7 @@ struct NotificationView: View {
                 .foregroundColor(.white)
                 .padding()
         }
-        .frame(maxWidth: 100)
+        .frame(minWidth: 100)
         .background(Color.orange.opacity(0.35))
         .cornerRadius(8)
         .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 10)
