@@ -21,16 +21,20 @@ struct LanguageSelectionView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Toggle(LocalizedStringKey("selectlanguage"), isOn: $selectedLang)
-                .tint(.orange).opacity(0.7)
-                .font(.subheadline)
-
+            
             HStack {
-                Text(selectedLang == true ? "SWE -> SPA" : "SPA -> SWE")
+                
+                Text(selectedLang == true ? LocalizedStringKey("leng1") : LocalizedStringKey("leng2"))
                     .listRowSeparator(.hidden)
                     .font(.subheadline)
-
-                //Text("\(errorMessage)")
+                
+                Toggle(LocalizedStringKey(""), isOn: $selectedLang)
+                    .tint(.orange).opacity(0.7)
+                    .font(.subheadline)
+                
+            }
+            HStack {
+            
                 Text("")
                     .listRowSeparator(.hidden)
                     .onReceive(myviewModelWord.errorPublisher) { errorMessage in
