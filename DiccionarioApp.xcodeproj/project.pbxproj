@@ -210,10 +210,7 @@
 			children = (
 				625B091429CF11910006BAEE /* Home */,
 				625B092529CF5CC30006BAEE /* Detail */,
-				623AD02E29C86C6000216D99 /* FavoriteView.swift */,
-				622EC00429CDA3F800BED9F4 /* SavedWordView.swift */,
-				622EC00629CDB3F800BED9F4 /* SettingsView.swift */,
-				622EC00829CDC7A700BED9F4 /* QuizView.swift */,
+				625B092C29CF70050006BAEE /* Tool Bar Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -239,6 +236,17 @@
 				625B092A29CF6A180006BAEE /* LanguageInfoView.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		625B092C29CF70050006BAEE /* Tool Bar Views */ = {
+			isa = PBXGroup;
+			children = (
+				623AD02E29C86C6000216D99 /* FavoriteView.swift */,
+				622EC00429CDA3F800BED9F4 /* SavedWordView.swift */,
+				622EC00629CDB3F800BED9F4 /* SettingsView.swift */,
+				622EC00829CDC7A700BED9F4 /* QuizView.swift */,
+			);
+			path = "Tool Bar Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
