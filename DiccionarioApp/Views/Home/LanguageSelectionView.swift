@@ -15,6 +15,8 @@ struct LanguageSelectionView: View {
     
     var myviewModelWord: WordViewModel
 
+    @State private var showNotification = false
+
     var body: some View {
         VStack(alignment: .leading) {
             Toggle("Select Language", isOn: $selectedLang)
@@ -26,21 +28,56 @@ struct LanguageSelectionView: View {
                     .listRowSeparator(.hidden)
                     .font(.subheadline)
 
-                Text("\(errorMessage)")
+                //Text("\(errorMessage)")
+                Text("")
                     .listRowSeparator(.hidden)
                     .onReceive(myviewModelWord.errorPublisher) { errorMessage in
                         self.errorMessage = errorMessage
 
                         if !errorMessage.isEmpty {
                             showProgressBar = false
+                            
+                            showNotification = true
+                                                        
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation {
+                                    showNotification = false
+                                }
+                            }
                         } 
                         
                     }
                     .font(.caption)
+
             }
         }
         .padding(10)
         .cornerRadius(10)
         .padding()
+        .overlay(
+                    Group {
+                        if showNotification {
+                            NotificationView(text: errorMessage)
+                                .transition(.move(edge: .top))
+                        }
+                    }
+                )
     }
 }
+
+struct NotificationView: View {
+    let text: String
+
+    var body: some View {
+        HStack {
+            Text(text)
+                .foregroundColor(.white)
+                .padding()
+        }
+        .frame(maxWidth: 100)
+        .background(Color.orange.opacity(0.35))
+        .cornerRadius(8)
+        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 10)
+    }
+}
+
