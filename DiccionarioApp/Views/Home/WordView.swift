@@ -15,90 +15,36 @@ struct WordView: View {
     // MARK: State
     @State private var text = ""
     @State private var selectedLang = true
+    @State private var errorMessage: String = ""
+    @State private var showProgressBarr = false
+    
     @State private var showHistory = false
     @State private var showSavedWord = false
     @State private var showQuiz = false
-    @State private var errorMessage: String = ""
+    
     @State private var isVStackVisible = false
-    @State private var showProgressBarr = false
+    
     
     @State private var newWord: String = ""
     @State var searchWords: [String] = [String]()
     
-
+    /*
+    @State private var selectedLang = true
+    @State private var errorMessage = ""
+    @State private var showProgressBar = false
+    */
+    
     var body: some View {
         
         NavigationView {
             
             VStack {
-                // Setting Language Card
-                VStack (alignment: .leading) {
-                    Toggle("Select Language", isOn: $selectedLang)
-                        .tint(.orange).opacity(0.7)
-                        .font(.subheadline)
-                    
-                    
-                    // Select Text and Mje
-                    HStack {
-                        Text(selectedLang == true ? "SWE -> SPA" : "SPA -> SWE")
-                            .listRowSeparator(.hidden)
-                            .font(.subheadline)
-                        
-                        Text("\(errorMessage)")
-                            .listRowSeparator(.hidden)
-                            .onReceive(myviewModelWord.errorPublisher) { errorMessage in
-                                self.errorMessage = errorMessage
-                                
-                                if errorMessage == "OK" {
-                                    showProgressBarr = false
-                                }
-                                
-                                
-                            }
-                            .font(.caption)
-                    }
-                    
-                    
-                }
-                .padding(10)
-                .cornerRadius(10)
-                .padding()
                 
+                // Selection Lang View
+                LanguageSelectionView(selectedLang: $selectedLang, errorMessage: $errorMessage, showProgressBar: $showProgressBarr, myviewModelWord: myviewModelWord)
                 
                 // Search Bar
-                HStack {
-                    TextField("Search", text: $text)
-                        .padding(.horizontal, 10)
-                        .accentColor(.blue)
-                        .accessibilityIdentifier("Search")
-                    
-                    Button {
-                        print("Search")
-                        if text != "" {
-                            print(text)
-                            myviewModelWord.fetchPosts(word: text, dir: selectedLang == true ? "to" : "from")
-                            
-                            newWord = text
-                            searchWords.append(newWord)
-                            
-                            showProgressBarr = true
-                            
-                        }
-                        
-                        
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color(UIColor.gray))
-                    }
-                    .accessibilityIdentifier("Button Search")
-                    
-                    
-                }
-                .padding(15)
-                .background(Color(UIColor.orange).opacity(0.4))
-                .cornerRadius(10)
-                .padding(.horizontal)
-                .shadow(color: .orange, radius: 0.5, x: 0.5, y: -0.5)
+                SearchBarView(text: $text, searchWords: $searchWords, showProgressBar: $showProgressBarr, myviewModelWord: myviewModelWord, selectedLang: selectedLang)
                 
                 // New List Search
                 ScrollView {
@@ -208,7 +154,7 @@ struct WordView: View {
                 .frame(maxHeight: 300)
                 
             // MARK: Quiz View
-                /*
+                
                 Spacer()
             
                 Button { showQuiz.toggle()
@@ -221,7 +167,7 @@ struct WordView: View {
                     QuizView()
                     
                 }
-                */
+            
                 
                 Spacer()
                 
@@ -236,8 +182,7 @@ struct WordView: View {
                         
                 }
                 
-                
-                
+  
             }
         }
     }
@@ -248,24 +193,3 @@ struct WordView_Previews: PreviewProvider {
         WordView()
     }
 }
-
-struct SearchBar: View {
-    @Binding var text: String
-    
-    var body: some View {
-        HStack {
-            TextField("Search", text: $text)
-                .padding(.horizontal, 10)
-            Button {
-            } label: {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.secondary)
-            }
-            
-        }
-        .padding(.vertical, 10)
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(10)
-    }
-}
-
