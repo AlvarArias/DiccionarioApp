@@ -28,67 +28,11 @@ struct DetailView: View {
             
             Form {
             
-                
-                HStack {
-                    Text(result.value ?? "No value")
-                        .font(.headline)
-                        .listRowSeparator(.hidden)
-                    
-                    Text("(\(result.type ?? "No type"))")
-                        .font(.subheadline)
-                        
-                    
-                    Spacer(minLength: 10)
-                    
-                    Button(action: {
-                      
-                        // Save to core data
-                        saveWordToCoreData()
-                      
-                    }) {
-                        Image(systemName: "plus")
-                    }
-                        
-                }
-                .listRowSeparator(.hidden)
-                
-                
-                
-                if selectedLang {
- 
-                    HStack {
-                        
-                        Text(result.targetLang?.translation ?? "no translation")
-                    }
-                    .listRowSeparator(.hidden)
-                    
-                    HStack {
-                 
-                        Text(result.targetLang?.synonym?.first ?? "")
-                          
-                    }.listRowSeparator(.hidden)
-                       
-                } else {
-                        
-                    HStack {
-                            
-                            Text(result.baseLang?.meaning ?? "no translation")
-                            
-                    }.listRowSeparator(.hidden)
-                    
-                    HStack {
-                 
-                        Text(result.baseLang?.inflection?[0].content ?? "")
-                        
-                        Spacer(minLength: 5)
-                        
-                        Text(result.baseLang?.inflection?[1].content ?? "")
-                          
-                    }.listRowSeparator(.hidden)
-                    
-                    
-                    }
-                 
+                WordInfoView(result: result, saveWordToCoreData: {
+                    saveWordToCoreData()
+                })
+
+                LanguageInfoView(result: result, selectedLang: selectedLang)
                
                 AudioPlaybackView(player: player, phonetic: result.baseLang?.phonetic)
 

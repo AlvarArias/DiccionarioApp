@@ -35,6 +35,8 @@
 		625B091D29CF3DFC0006BAEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 625B091F29CF3DFC0006BAEE /* Localizable.strings */; };
 		625B092429CF42610006BAEE /* AppEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092329CF42610006BAEE /* AppEnv.swift */; };
 		625B092729CF5CFE0006BAEE /* AudioPlaybackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */; };
+		625B092929CF69530006BAEE /* WordInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092829CF69530006BAEE /* WordInfoView.swift */; };
+		625B092B29CF6A180006BAEE /* LanguageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092A29CF6A180006BAEE /* LanguageInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,8 @@
 		625B092229CF3E150006BAEE /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		625B092329CF42610006BAEE /* AppEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnv.swift; sourceTree = "<group>"; };
 		625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlaybackView.swift; sourceTree = "<group>"; };
+		625B092829CF69530006BAEE /* WordInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordInfoView.swift; sourceTree = "<group>"; };
+		625B092A29CF6A180006BAEE /* LanguageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,9 +232,11 @@
 		625B092529CF5CC30006BAEE /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				623AD02629C852DB00216D99 /* ButtonView.swift */,
 				62388CF629C4B4F0006F4005 /* DetailView.swift */,
+				623AD02629C852DB00216D99 /* ButtonView.swift */,
 				625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */,
+				625B092829CF69530006BAEE /* WordInfoView.swift */,
+				625B092A29CF6A180006BAEE /* LanguageInfoView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -389,12 +395,14 @@
 				62388CF429C4576C006F4005 /* WordView.swift in Sources */,
 				62388CF729C4B4F0006F4005 /* DetailView.swift in Sources */,
 				625B091A29CF1ACA0006BAEE /* SearchBarView.swift in Sources */,
+				625B092929CF69530006BAEE /* WordInfoView.swift in Sources */,
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,
 				625B092429CF42610006BAEE /* AppEnv.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */,
 				62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */,
 				622EC00929CDC7A700BED9F4 /* QuizView.swift in Sources */,
+				625B092B29CF6A180006BAEE /* LanguageInfoView.swift in Sources */,
 				625B092729CF5CFE0006BAEE /* AudioPlaybackView.swift in Sources */,
 				622EC00329CD9DDD00BED9F4 /* DataController.swift in Sources */,
 				622EC00129CD9C3700BED9F4 /* WordModel.xcdatamodeld in Sources */,
