@@ -33,31 +33,36 @@ struct WordView: View {
                 VStack (alignment: .leading) {
                     Toggle("Select Language", isOn: $selectedLang)
                         .tint(.orange).opacity(0.7)
+                        .font(.subheadline)
+                        
                     
                     // Select Text and Mje
                     HStack {
                         Text(selectedLang == true ? "SWE -> SPA" : "SPA -> SWE")
                             .listRowSeparator(.hidden)
+                            .font(.subheadline)
                         
                         Text("\(errorMessage)")
                             .listRowSeparator(.hidden)
                             .onReceive(myviewModelWord.errorPublisher) { errorMessage in
                                 self.errorMessage = errorMessage
                             }
+                            .font(.caption)
                     }
                     
                     
                 }
                 .padding(10)
-                .background(Color.blue.opacity(0.30))
+                //.background(Color.blue.opacity(0.80))
                 .cornerRadius(10)
                 .padding()
+                //.shadow(color: .gray, radius: 0.2, x: 1, y: -1)
                     
                 // Search Bar
                 HStack {
                     TextField("Search", text: $text)
                         .padding(.horizontal, 10)
-                        .accentColor(.orange)
+                        .accentColor(.blue)
                         .accessibilityIdentifier("Search")
                     
                     Button {
@@ -84,9 +89,61 @@ struct WordView: View {
                 .background(Color(UIColor.orange).opacity(0.4))
                 .cornerRadius(10)
                 .padding(.horizontal)
+                .shadow(color: .orange, radius: 0.5, x: 0.5, y: -0.5)
                 
+                    // New List Search
+                    ScrollView {
+                        
+                        if errorMessage == "OK" {
+                        
+                                VStack(alignment: .leading) {
+                                    ForEach(myviewModelWord.results, id: \.self) { result in
+                                        NavigationLink(destination: DetailView(selectedLang: $selectedLang, result: result)) {
+                                            
+                                            
+                                            VStack (alignment: .leading) {
+                                                HStack {
+                                                    Text(result.value ?? "No value")
+                                                        .font(.headline)
+                                                    Spacer()
+
+                                                    Text(result.type ?? "No type")
+                                                        .font(.subheadline)
+                                                }
+                                                .padding(5)
+                                                
+                                                if selectedLang {
+                                                    
+                                                    VStack {
+                                                        Text(result.targetLang?.translation ?? "no translation").font(.caption)
+                                                            
+                                                    }
+                                                   
+                                                    
+                                                } else {
+                                                    VStack {
+                                                        Text(result.baseLang?.meaning ?? "No meaning").font(.caption)
+                                                    }
+                                                }
+                                                
+                                                
+                                            }
+                                            .padding(15)
+                                            .background(Color(UIColor.white).opacity(0.9))
+                                            .cornerRadius(10)
+                                            .padding(.horizontal)
+                                            .foregroundColor(Color.black)
+                                            .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
+                                            
+                                        }
+                                    }
+                                }
+                           }
+                    
+                }
                 
                 // List Search
+                /*
                 Form {
                     
     
@@ -130,6 +187,8 @@ struct WordView: View {
                     
                 }
                 
+                */
+                
             }
 
             .navigationTitle("Diccionary")
@@ -166,8 +225,10 @@ struct WordView: View {
                 }
                 .frame(maxHeight: 300)
                 
+            // MARK: Quiz View 
+                /*
                 Spacer()
-                
+            
                 Button { showQuiz.toggle()
                 } label: {
                     Image(systemName: "star")
@@ -178,6 +239,7 @@ struct WordView: View {
                     QuizView()
                     
                 }
+                */
                 
                 Spacer()
                 

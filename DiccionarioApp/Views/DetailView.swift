@@ -35,6 +35,7 @@ struct DetailView: View {
                     
                     Text("(\(result.type ?? "No type"))")
                         .font(.subheadline)
+                        
                     
                     Spacer(minLength: 10)
                     
@@ -48,6 +49,7 @@ struct DetailView: View {
                     }
                         
                 }
+                .listRowSeparator(.hidden)
                 
                 if selectedLang {
  
@@ -55,12 +57,13 @@ struct DetailView: View {
                         
                         Text(result.targetLang?.translation ?? "no translation")
                     }
+                    .listRowSeparator(.hidden)
                     
                     HStack {
                  
                         Text(result.targetLang?.synonym?.first ?? "")
                           
-                    }
+                    }.listRowSeparator(.hidden)
                        
                 } else {
                         
@@ -68,7 +71,7 @@ struct DetailView: View {
                             
                             Text(result.baseLang?.meaning ?? "no translation")
                             
-                        }
+                    }.listRowSeparator(.hidden)
                     
                     HStack {
                  
@@ -78,7 +81,7 @@ struct DetailView: View {
                         
                         Text(result.baseLang?.inflection?[1].content ?? "")
                           
-                    }
+                    }.listRowSeparator(.hidden)
                     
                     
                     }
@@ -110,10 +113,11 @@ struct DetailView: View {
                         }
                     
                     
-                    }
+                }.listRowSeparator(.hidden)
             
     
             }
+            .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
             .padding()
             .scrollContentBackground(.hidden)
             .background(
