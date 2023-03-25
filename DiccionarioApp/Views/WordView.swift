@@ -19,6 +19,8 @@ struct WordView: View {
     @State private var showSavedWord = false
     @State private var showQuiz = false
     @State private var errorMessage: String = ""
+    @State private var isVStackVisible = false
+    @State private var showProgressBarr = false
     
     @State private var newWord: String = ""
     @State var searchWords: [String] = [String]()
@@ -34,7 +36,7 @@ struct WordView: View {
                     Toggle("Select Language", isOn: $selectedLang)
                         .tint(.orange).opacity(0.7)
                         .font(.subheadline)
-                        
+                    
                     
                     // Select Text and Mje
                     HStack {
@@ -46,6 +48,12 @@ struct WordView: View {
                             .listRowSeparator(.hidden)
                             .onReceive(myviewModelWord.errorPublisher) { errorMessage in
                                 self.errorMessage = errorMessage
+                                /*
+                                if errorMessage == "OK" {
+                                    showProgressBarr = true
+                                }
+                                */
+                                
                             }
                             .font(.caption)
                     }
@@ -57,7 +65,7 @@ struct WordView: View {
                 .cornerRadius(10)
                 .padding()
                 //.shadow(color: .gray, radius: 0.2, x: 1, y: -1)
-                    
+                
                 // Search Bar
                 HStack {
                     TextField("Search", text: $text)
@@ -74,6 +82,8 @@ struct WordView: View {
                             newWord = text
                             searchWords.append(newWord)
                             
+                            showProgressBarr = true
+                            
                         }
                         
                         
@@ -82,7 +92,7 @@ struct WordView: View {
                             .foregroundColor(Color(UIColor.gray))
                     }
                     .accessibilityIdentifier("Button Search")
-                
+                    
                     
                 }
                 .padding(15)
@@ -91,56 +101,77 @@ struct WordView: View {
                 .padding(.horizontal)
                 .shadow(color: .orange, radius: 0.5, x: 0.5, y: -0.5)
                 
-                    // New List Search
-                    ScrollView {
+                // New List Search
+                ScrollView {
+                    
+                    if showProgressBarr {
                         
-                        if errorMessage == "OK" {
-                        
-                                VStack(alignment: .leading) {
-                                    ForEach(myviewModelWord.results, id: \.self) { result in
-                                        NavigationLink(destination: DetailView(selectedLang: $selectedLang, result: result)) {
-                                            
-                                            
-                                            VStack (alignment: .leading) {
-                                                HStack {
-                                                    Text(result.value ?? "No value")
-                                                        .font(.headline)
-                                                    Spacer()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .scaleEffect(1.5)
+                            .padding()
+                            
+                    }
+                    
 
-                                                    Text(result.type ?? "No type")
-                                                        .font(.subheadline)
-                                                }
-                                                .padding(5)
-                                                
-                                                if selectedLang {
-                                                    
-                                                    VStack {
-                                                        Text(result.targetLang?.translation ?? "no translation").font(.caption)
-                                                            
-                                                    }
-                                                   
-                                                    
-                                                } else {
-                                                    VStack {
-                                                        Text(result.baseLang?.meaning ?? "No meaning").font(.caption)
-                                                    }
-                                                }
-                                                
+                    
+                    if errorMessage == "OK" {
+                        
+        
+                        VStack(alignment: .leading) {
+                            ForEach(myviewModelWord.results, id: \.self) { result in
+                                NavigationLink(destination: DetailView(selectedLang: $selectedLang, result: result)) {
+                                    
+                                    
+                                    VStack (alignment: .leading) {
+                                        HStack {
+                                            Text(result.value ?? "No value")
+                                                .font(.headline)
+                                            Spacer()
+                                            
+                                            Text(result.type ?? "No type")
+                                                .font(.subheadline)
+                                        }
+                                        .padding(5)
+                                        
+                                        if selectedLang {
+                                            
+                                            VStack {
+                                                Text(result.targetLang?.translation ?? "no translation").font(.caption)
                                                 
                                             }
-                                            .padding(15)
-                                            .background(Color(UIColor.white).opacity(0.9))
-                                            .cornerRadius(10)
-                                            .padding(.horizontal)
-                                            .foregroundColor(Color.black)
-                                            .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
                                             
+                                            
+                                        } else {
+                                            VStack {
+                                                Text(result.baseLang?.meaning ?? "No meaning").font(.caption)
+                                            }
                                         }
+                                        
+                                        
                                     }
+                                    .padding(15)
+                                    .background(Color(UIColor.white).opacity(0.9))
+                                    .cornerRadius(10)
+                                    .padding(.horizontal)
+                                    .foregroundColor(Color.black)
+                                    .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
+                                    
                                 }
-                           }
-                    
+                            }
+                        }
+                        .opacity(isVStackVisible ? 1.0 : 0.0)  // Set opacity based
+                        .animation(.easeIn(duration: 1.0), value: isVStackVisible) // Add animation based on isVStackVisible state
+                        .onAppear {
+                            withAnimation {
+                                isVStackVisible = true
+                            }
+                            showProgressBarr = false
+                        }
+                    }
+                   
                 }
+                
                 
                 // List Search
                 /*
@@ -225,7 +256,7 @@ struct WordView: View {
                 }
                 .frame(maxHeight: 300)
                 
-            // MARK: Quiz View 
+            // MARK: Quiz View
                 /*
                 Spacer()
             
