@@ -190,7 +190,7 @@
 		623AD02929C8539A00216D99 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62388CF329C4576C006F4005 /* WordView.swift */,
+				625B091429CF11910006BAEE /* Home */,
 				62388CF629C4B4F0006F4005 /* DetailView.swift */,
 				623AD02629C852DB00216D99 /* ButtonView.swift */,
 				623AD02E29C86C6000216D99 /* FavoriteView.swift */,
@@ -199,6 +199,14 @@
 				622EC00829CDC7A700BED9F4 /* QuizView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		625B091429CF11910006BAEE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				62388CF329C4576C006F4005 /* WordView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

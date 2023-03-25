@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WordView: View {
-    
+
     // MARK: ObsObjects
     @ObservedObject var myviewModelWord = WordViewModel()
     
@@ -25,7 +25,7 @@ struct WordView: View {
     @State private var newWord: String = ""
     @State var searchWords: [String] = [String]()
     
-    
+
     var body: some View {
         
         NavigationView {
@@ -48,11 +48,11 @@ struct WordView: View {
                             .listRowSeparator(.hidden)
                             .onReceive(myviewModelWord.errorPublisher) { errorMessage in
                                 self.errorMessage = errorMessage
-                                /*
+                                
                                 if errorMessage == "OK" {
-                                    showProgressBarr = true
+                                    showProgressBarr = false
                                 }
-                                */
+                                
                                 
                             }
                             .font(.caption)
@@ -61,10 +61,9 @@ struct WordView: View {
                     
                 }
                 .padding(10)
-                //.background(Color.blue.opacity(0.80))
                 .cornerRadius(10)
                 .padding()
-                //.shadow(color: .gray, radius: 0.2, x: 1, y: -1)
+                
                 
                 // Search Bar
                 HStack {
@@ -171,54 +170,6 @@ struct WordView: View {
                     }
                    
                 }
-                
-                
-                // List Search
-                /*
-                Form {
-                    
-    
-                    if errorMessage == "OK" {
-                        
-                        List( myviewModelWord.results, id: \.self) { resul in
-                            
-                            NavigationLink(destination: DetailView(selectedLang: $selectedLang, result: resul)) {
-                                
-                                VStack(alignment: .leading) {
-                                    
-                                    HStack {
-                                        Text(resul.value ?? "No value")
-                                            .font(.headline)
-                                        Spacer()
-                                        
-                                        Text(resul.type ?? "No type")
-                                            .font(.subheadline)
-                                        
-                                    }
-                                    
-                                    
-                                    if selectedLang {
-                                        
-                                        Text(resul.targetLang?.translation ?? "no translation")
-                                        
-                                    } else {
-
-                                        Text(resul.baseLang?.meaning ?? "No meaning")
-                                    }
-                                    
-                      
-                                }
-                                .accessibilityIdentifier("link")
-                            }
-                            
-                            
-                        }
-                        
-                    }
-                    
-                }
-                
-                */
                 
             }
 
