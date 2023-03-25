@@ -28,24 +28,32 @@ struct WordView: View {
         
         NavigationView {
             
-            Form {
-                Section {
+            VStack {
+                // Setting Language Card
+                VStack (alignment: .leading) {
                     Toggle("Select Language", isOn: $selectedLang)
                         .tint(.orange).opacity(0.7)
                     
-                    Text(selectedLang == true ? "SWE -> SPA" : "SPA -> SWE")
-                        .listRowSeparator(.hidden)
+                    // Select Text and Mje
+                    HStack {
+                        Text(selectedLang == true ? "SWE -> SPA" : "SPA -> SWE")
+                            .listRowSeparator(.hidden)
+                        
+                        Text("\(errorMessage)")
+                            .listRowSeparator(.hidden)
+                            .onReceive(myviewModelWord.errorPublisher) { errorMessage in
+                                self.errorMessage = errorMessage
+                            }
+                    }
                     
-                    Text("\(errorMessage)")
-                        .listRowSeparator(.hidden)
-                        .onReceive(myviewModelWord.errorPublisher) { errorMessage in
-                            self.errorMessage = errorMessage
-                        }
+                    
                 }
-                
-                
-                Section {
+                .padding(10)
+                .background(Color.blue.opacity(0.30))
+                .cornerRadius(10)
+                .padding()
                     
+                // Search Bar
                 HStack {
                     TextField("Search", text: $text)
                         .padding(.horizontal, 10)
@@ -69,57 +77,61 @@ struct WordView: View {
                             .foregroundColor(Color(UIColor.gray))
                     }
                     .accessibilityIdentifier("Button Search")
-                    
+                
                     
                 }
                 .padding(15)
                 .background(Color(UIColor.orange).opacity(0.4))
                 .cornerRadius(10)
+                .padding(.horizontal)
                 
-            }
                 
-               
-      
-                
-                if errorMessage == "OK" {
+                // List Search
+                Form {
                     
-                    List( myviewModelWord.results, id: \.self) { resul in
+    
+                    if errorMessage == "OK" {
                         
-                        NavigationLink(destination: DetailView(selectedLang: $selectedLang, result: resul)) {
+                        List( myviewModelWord.results, id: \.self) { resul in
                             
-                            VStack(alignment: .leading) {
+                            NavigationLink(destination: DetailView(selectedLang: $selectedLang, result: resul)) {
                                 
-                                HStack {
-                                    Text(resul.value ?? "No value")
-                                        .font(.headline)
-                                    Spacer()
+                                VStack(alignment: .leading) {
                                     
-                                    Text(resul.type ?? "No type")
-                                        .font(.subheadline)
+                                    HStack {
+                                        Text(resul.value ?? "No value")
+                                            .font(.headline)
+                                        Spacer()
+                                        
+                                        Text(resul.type ?? "No type")
+                                            .font(.subheadline)
+                                        
+                                    }
                                     
-                                }
-                                
-                                
-                                if selectedLang {
                                     
-                                    Text(resul.targetLang?.translation ?? "no translation")
-                                    
-                                } else {
+                                    if selectedLang {
+                                        
+                                        Text(resul.targetLang?.translation ?? "no translation")
+                                        
+                                    } else {
 
-                                    Text(resul.baseLang?.meaning ?? "No meaning")
+                                        Text(resul.baseLang?.meaning ?? "No meaning")
+                                    }
+                                    
+                      
                                 }
-                                
-                  
+                                .accessibilityIdentifier("link")
                             }
-                            .accessibilityIdentifier("link")
+                            
+                            
                         }
-                        
                         
                     }
                     
                 }
                 
             }
+
             .navigationTitle("Diccionary")
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)

@@ -18,8 +18,8 @@ struct FavoriteView: View {
     @Binding var searchWors: [String]
     
     var body: some View {
-        
-           NavigationView {
+      
+            NavigationView {
                 
                 VStack {
                     
@@ -62,7 +62,6 @@ struct FavoriteView: View {
                 )
                
             }
-       
         }
     }
 
