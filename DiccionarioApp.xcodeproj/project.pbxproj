@@ -37,6 +37,7 @@
 		625B092729CF5CFE0006BAEE /* AudioPlaybackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */; };
 		625B092929CF69530006BAEE /* WordInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092829CF69530006BAEE /* WordInfoView.swift */; };
 		625B092B29CF6A180006BAEE /* LanguageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092A29CF6A180006BAEE /* LanguageInfoView.swift */; };
+		625B092E29CF7C690006BAEE /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092D29CF7C690006BAEE /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlaybackView.swift; sourceTree = "<group>"; };
 		625B092829CF69530006BAEE /* WordInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordInfoView.swift; sourceTree = "<group>"; };
 		625B092A29CF6A180006BAEE /* LanguageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageInfoView.swift; sourceTree = "<group>"; };
+		625B092D29CF7C690006BAEE /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 		623AD02929C8539A00216D99 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				625B092D29CF7C690006BAEE /* SplashView.swift */,
 				625B091429CF11910006BAEE /* Home */,
 				625B092529CF5CC30006BAEE /* Detail */,
 				625B092C29CF70050006BAEE /* Tool Bar Views */,
@@ -408,6 +411,7 @@
 				625B092429CF42610006BAEE /* AppEnv.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */,
+				625B092E29CF7C690006BAEE /* SplashView.swift in Sources */,
 				62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */,
 				622EC00929CDC7A700BED9F4 /* QuizView.swift in Sources */,
 				625B092B29CF6A180006BAEE /* LanguageInfoView.swift in Sources */,
