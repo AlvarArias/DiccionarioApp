@@ -22,7 +22,7 @@ struct SearchBarView: View {
                 .accessibilityIdentifier("Search")
 
             Button {
-                print("Search")
+             
                 if text != "" {
                     print(text)
                     myviewModelWord.fetchPosts(word: text, dir: selectedLang == true ? "to" : "from")
@@ -31,6 +31,8 @@ struct SearchBarView: View {
                     searchWords.append(newWord)
 
                     showProgressBar = true
+                    
+                    text = ""
                 }
             } label: {
                 Image(systemName: "magnifyingglass")

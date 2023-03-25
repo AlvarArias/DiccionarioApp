@@ -32,6 +32,7 @@
 		623AD02F29C86C6000216D99 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02E29C86C6000216D99 /* FavoriteView.swift */; };
 		625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091729CF174F0006BAEE /* LanguageSelectionView.swift */; };
 		625B091A29CF1ACA0006BAEE /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091929CF1ACA0006BAEE /* SearchBarView.swift */; };
+		625B091C29CF1DD40006BAEE /* ResultListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091B29CF1DD40006BAEE /* ResultListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		623AD02E29C86C6000216D99 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		625B091729CF174F0006BAEE /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
 		625B091929CF1ACA0006BAEE /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		625B091B29CF1DD40006BAEE /* ResultListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 				62388CF329C4576C006F4005 /* WordView.swift */,
 				625B091729CF174F0006BAEE /* LanguageSelectionView.swift */,
 				625B091929CF1ACA0006BAEE /* SearchBarView.swift */,
+				625B091B29CF1DD40006BAEE /* ResultListView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				623AD02D29C86C2700216D99 /* FavoriteModel.swift in Sources */,
 				622EC00529CDA3F800BED9F4 /* SavedWordView.swift in Sources */,
 				623AD02B29C853D500216D99 /* PlaySound.swift in Sources */,
+				625B091C29CF1DD40006BAEE /* ResultListView.swift in Sources */,
 				62388CF129C45545006F4005 /* WordViewModel.swift in Sources */,
 				623AD02729C852DB00216D99 /* ButtonView.swift in Sources */,
 				623AD02F29C86C6000216D99 /* FavoriteView.swift in Sources */,

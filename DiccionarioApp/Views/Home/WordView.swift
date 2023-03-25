@@ -57,62 +57,12 @@ struct WordView: View {
                             .padding()
                             
                     }
-                    
-
-                    
+                
                     if errorMessage == "OK" {
                         
-        
-                        VStack(alignment: .leading) {
-                            ForEach(myviewModelWord.results, id: \.self) { result in
-                                NavigationLink(destination: DetailView(selectedLang: $selectedLang, result: result)) {
-                                    
-                                    
-                                    VStack (alignment: .leading) {
-                                        HStack {
-                                            Text(result.value ?? "No value")
-                                                .font(.headline)
-                                            Spacer()
-                                            
-                                            Text(result.type ?? "No type")
-                                                .font(.subheadline)
-                                        }
-                                        .padding(5)
-                                        
-                                        if selectedLang {
-                                            
-                                            VStack {
-                                                Text(result.targetLang?.translation ?? "no translation").font(.caption)
-                                                
-                                            }
-                                            
-                                            
-                                        } else {
-                                            VStack {
-                                                Text(result.baseLang?.meaning ?? "No meaning").font(.caption)
-                                            }
-                                        }
-                                        
-                                        
-                                    }
-                                    .padding(15)
-                                    .background(Color(UIColor.white).opacity(0.9))
-                                    .cornerRadius(10)
-                                    .padding(.horizontal)
-                                    .foregroundColor(Color.black)
-                                    .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
-                                    
-                                }
-                            }
-                        }
-                        .opacity(isVStackVisible ? 1.0 : 0.0)  // Set opacity based
-                        .animation(.easeIn(duration: 1.0), value: isVStackVisible) // Add animation based on isVStackVisible state
-                        .onAppear {
-                            withAnimation {
-                                isVStackVisible = true
-                            }
-                            showProgressBarr = false
-                        }
+                        // Reult List
+                        ResultsListView(selectedLang: $selectedLang, isVStackVisible: $isVStackVisible, showProgressBar: $showProgressBarr, myviewModelWord: myviewModelWord)
+                        
                     }
                    
                 }
@@ -136,6 +86,8 @@ struct WordView: View {
             )
             
         }
+        
+        /*
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
                 
@@ -184,6 +136,46 @@ struct WordView: View {
                 
   
             }
+        }
+        */
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                historyButton()
+                Spacer()
+                quizButton()
+                Spacer()
+                savedWordButton()
+            }
+        }
+    }
+    
+    private func historyButton() -> some View {
+        Button(action: { showHistory.toggle() }) {
+            Image(systemName: "list.bullet")
+                .foregroundColor(Color.orange)
+        }
+        .sheet(isPresented: $showHistory) {
+            FavoriteView(searchWors: $searchWords)
+        }
+    }
+
+    private func quizButton() -> some View {
+        Button(action: { showQuiz.toggle() }) {
+            Image(systemName: "star")
+                .foregroundColor(Color.orange)
+        }
+        .sheet(isPresented: $showQuiz) {
+            QuizView()
+        }
+    }
+
+    private func savedWordButton() -> some View {
+        Button(action: { showSavedWord.toggle() }) {
+            Image(systemName: "checklist.checked")
+                .foregroundColor(Color.orange)
+        }
+        .sheet(isPresented: $showSavedWord) {
+            SavedWordView()
         }
     }
 }
