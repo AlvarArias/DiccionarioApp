@@ -24,3 +24,7 @@
 "leng1" = "Sueco -> Español";
 "leng2" = "Español -> Sueco";
 "saving" = "Grabando";
+"wordnotfound" = "Palabra no encontrada";
+"urlsessionerror" = "URL sesion error";
+"invalidresponse" = "Repuesta Invalida";
+"nowordmatch" = "La palabra no disponible";

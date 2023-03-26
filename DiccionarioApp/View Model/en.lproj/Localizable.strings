@@ -24,3 +24,7 @@
 "leng1" = "Swedish -> Spanish";
 "leng2" = "Spanish -> Swedish";
 "saving" = "Saving";
+"wordnotfound" = "Word not found";
+"urlsessionerror" = "URL session error";
+"invalidresponse" = "Invalid response";
+"nowordmatch" = "No word match";

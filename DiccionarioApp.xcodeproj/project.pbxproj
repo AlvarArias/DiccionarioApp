@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		622A12F929C6248A0079F179 /* DiccionarioAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622A12F829C6248A0079F179 /* DiccionarioAppTests.swift */; };
+		622BDF1B29D031D800CC7051 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BDF1A29D031D800CC7051 /* Notifications.swift */; };
 		622EC00129CD9C3700BED9F4 /* WordModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 622EBFFF29CD9C3700BED9F4 /* WordModel.xcdatamodeld */; };
 		622EC00329CD9DDD00BED9F4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00229CD9DDC00BED9F4 /* DataController.swift */; };
 		622EC00529CDA3F800BED9F4 /* SavedWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622EC00429CDA3F800BED9F4 /* SavedWordView.swift */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		622A12F629C6248A0079F179 /* DiccionarioAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiccionarioAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		622A12F829C6248A0079F179 /* DiccionarioAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppTests.swift; sourceTree = "<group>"; };
+		622BDF1A29D031D800CC7051 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		622EC00029CD9C3700BED9F4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		622EC00229CD9DDC00BED9F4 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		622EC00429CDA3F800BED9F4 /* SavedWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWordView.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				625B092D29CF7C690006BAEE /* SplashView.swift */,
+				622BDF1A29D031D800CC7051 /* Notifications.swift */,
 				625B091429CF11910006BAEE /* Home */,
 				625B092529CF5CC30006BAEE /* Detail */,
 				625B092C29CF70050006BAEE /* Tool Bar Views */,
@@ -409,6 +412,7 @@
 				625B092929CF69530006BAEE /* WordInfoView.swift in Sources */,
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,
 				625B092429CF42610006BAEE /* AppEnv.swift in Sources */,
+				622BDF1B29D031D800CC7051 /* Notifications.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */,
 				625B092E29CF7C690006BAEE /* SplashView.swift in Sources */,

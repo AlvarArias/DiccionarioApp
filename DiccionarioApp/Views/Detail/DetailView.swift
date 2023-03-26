@@ -37,13 +37,6 @@ struct DetailView: View {
             
             AudioPlaybackView(player: player, phonetic: result.baseLang?.phonetic)
 
-            if isSavedCData {
-                ZStack {
-                    NotificationCore(text:LocalizedStringKey("saving"))
-                        .transition(.move(edge: .top))
-                }
-            }
-            
         }
         .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
         .padding()
@@ -60,7 +53,14 @@ struct DetailView: View {
                 endPoint: .bottomTrailing
             )
         )
-        
+        .overlay(
+                    Group {
+                        if isSavedCData {
+                            NotificationCore(text:LocalizedStringKey("saving"))
+                                .transition(.move(edge: .top))
+                        }
+                    }
+                )
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
     
@@ -123,27 +123,5 @@ struct DetailView_Previews: PreviewProvider {
     }
 }
 
-struct NotificationCore: View {
-    //let text: String
-    var text: LocalizedStringKey
-    init(text: LocalizedStringKey) {
-            self.text = text
-            
-        }
-    
-    var body: some View {
-        ZStack {
-            Text(text)
-                .foregroundColor(.white)
-                .padding()
-        }
-        
-        .frame(minWidth: 100)
-        .background(Color.blue.opacity(0.35))
-        .cornerRadius(8)
-        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 10)
-        
-    }
-}
 
 

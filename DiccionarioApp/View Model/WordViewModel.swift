@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 // MARK: - Words
 struct Words: Codable {
@@ -135,7 +136,8 @@ class WordViewModel: ObservableObject {
     func fetchPosts(word: String, dir: String) {
 
             guard let url = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON") else {
-                errorMje(mje: "Word not find it")
+                errorMje(mje: "Word not found")
+                //errorMje(mje: LocalizedStringKey("wordnotfound"))
                 //fatalError("Invalid URL")
                 return
         }
@@ -146,6 +148,7 @@ class WordViewModel: ObservableObject {
                 print("Error fetching results: \(error.localizedDescription)")
                 print(String(describing: error))
                 errorMje(mje: "URL session error")
+                //errorMje(mje: LocalizedStringKey("wordnotfound"))
                 
                 return
             }

@@ -23,3 +23,7 @@
 "leng1" = "Svenska -> Spanska";
 "leng2" = "Spanska -> Svenska";
 "saving" = "Sparande";
+"wordnotfound" = "ordet hittades inte";
+"urlsessionerror" = "URL-sessionsfel";
+"invalidresponse" = "Ogiltigt svar";
+"nowordmatch" = "Ordet är inte tillgängligt";
