@@ -66,13 +66,15 @@ struct LanguageSelectionView: View {
         .overlay(
                     Group {
                         if showNotification {
-                            NotificationView(text: errorMessage)
+                            NotificationView(text: LocalizedStringKey("wordnotfound"))
                                 .transition(.move(edge: .top))
                         }
                     }
                 )
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
+    
+    
 }
 
 

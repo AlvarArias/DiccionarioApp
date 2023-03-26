@@ -10,13 +10,12 @@ import SwiftUI
 
 // Problems notification
 struct NotificationView: View {
-    let text: String
-    /*
+ 
     var text: LocalizedStringKey
     init(text: LocalizedStringKey) {
             self.text = text
         }
-    */
+    
     var body: some View {
         HStack {
             Text(text)
