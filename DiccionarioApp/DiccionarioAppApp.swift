@@ -18,8 +18,7 @@ struct DiccionarioAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            //WordView()
-            SplashView()
+            WordView()
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(appEnvironment)
         }

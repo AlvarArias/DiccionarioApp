@@ -14,7 +14,7 @@ struct SplashView: View {
 
     var body: some View {
         NavigationView {
-            ZStack {
+            VStack {
                 if showNextView {
                     // The view you want to show after the splash screen
                    WordView()
@@ -24,7 +24,7 @@ struct SplashView: View {
                     Image("dixio")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .edgesIgnoringSafeArea(.all)
+                        //.edgesIgnoringSafeArea(.all)
                 }
             }
             .onAppear {

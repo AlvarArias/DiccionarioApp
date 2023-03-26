@@ -25,7 +25,7 @@ struct SavedWordView: View {
     
     
     @State private var deletedItems: [myWord] = []
-    
+    @State private var editMode: EditMode = .inactive
     
     private func deleteItems(offsets: IndexSet) {
         offsets.forEach { index in
@@ -83,23 +83,33 @@ struct SavedWordView: View {
                 }
                 .onDelete(perform: deleteItems)
             }
+            .environment(\.editMode, $editMode)
             .scrollContentBackground(.hidden)
             .navigationTitle(LocalizedStringKey("savedwords"))
             .navigationBarTitleDisplayMode(.inline)
-            /*
+            
             .toolbar {
                 Button(action: undeleteLastItem) {
                     Image(systemName: "arrow.uturn.left")
                 }
+                
+                Spacer()
+                                    
+                Button(action: { editMode = editMode == .active ? .inactive : .active }) {
+                    Image(systemName: "pencil.tip.crop.circle.badge.plus")
+                    .foregroundColor(Color.orange)
+                    
+                }
+                
             }
-            */
+            
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button { dismiss() } label: {
                         Image(systemName: "arrow.down")
                             .foregroundColor(Color.orange)
                     }
-                    
+
                 }
             }
             .background(
@@ -117,6 +127,8 @@ struct SavedWordView: View {
             
         }
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
+        //.environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
+           
     }
 }
 

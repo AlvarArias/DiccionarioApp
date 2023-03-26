@@ -24,17 +24,23 @@ struct FavoriteView: View {
                 
                 VStack {
                     
-                    List {
+                    //List {
+                    ScrollView {
                         ForEach(searchWors, id: \.self) { word in
+                            HStack{
+                                Spacer()
+                                Text(word)
+                                Spacer()
+                                }
+                            }
                             
-                            Text(word)
                             
                         }
                         
                         
-                    }
+                    /*}
                     .listStyle(PlainListStyle())
-                    .scrollContentBackground(.hidden)
+                    .scrollContentBackground(.hidden)*/
                     
                 }
                 .scrollContentBackground(.hidden)

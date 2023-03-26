@@ -32,6 +32,7 @@ struct WordView: View {
     @State private var newWord: String = ""
     @State var searchWords: [String] = [String]()
     
+    @State private var selectedTab = 1
     
     var body: some View {
         
@@ -54,17 +55,19 @@ struct WordView: View {
                             .progressViewStyle(CircularProgressViewStyle())
                             .scaleEffect(1.5)
                             .padding()
-                            
+                        
                     }
-                
+                    
                     if errorMessage == "OK" {
                         
                         // Reult List
                         ResultsListView(selectedLang: $selectedLang, isVStackVisible: $isVStackVisible, showProgressBar: $showProgressBarr, myviewModelWord: myviewModelWord)
                         
                     }
-                   
+                    
                 }
+                
+                
                 
             }
 
@@ -96,12 +99,13 @@ struct WordView: View {
                 Spacer()
                 savedWordButton()
             }
+    
         }
         
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
-          
+
     }
-    
+        
     private func historyButton() -> some View {
         Button(action: { showHistory.toggle() }) {
             Image(systemName: "list.bullet")
@@ -148,3 +152,7 @@ struct WordView_Previews: PreviewProvider {
         WordView()
     }
 }
+
+
+
+
