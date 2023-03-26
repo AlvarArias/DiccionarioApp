@@ -89,14 +89,15 @@ struct SavedWordView: View {
             .navigationBarTitleDisplayMode(.inline)
             
             .toolbar {
+                /*
                 Button(action: undeleteLastItem) {
                     Image(systemName: "arrow.uturn.left")
                 }
-                
-                Spacer()
+                */
+            
                                     
                 Button(action: { editMode = editMode == .active ? .inactive : .active }) {
-                    Image(systemName: "pencil.tip.crop.circle.badge.plus")
+                    Image(systemName: "square.and.pencil")
                     .foregroundColor(Color.orange)
                     
                 }

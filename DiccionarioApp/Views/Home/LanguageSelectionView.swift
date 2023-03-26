@@ -84,10 +84,12 @@ struct NotificationView: View {
                 .foregroundColor(.white)
                 .padding()
         }
+        
         .frame(minWidth: 100)
         .background(Color.orange.opacity(0.35))
         .cornerRadius(8)
         .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 10)
+        
     }
 }
 

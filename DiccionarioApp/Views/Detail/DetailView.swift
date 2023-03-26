@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DetailView: View {
+    //MARK: Env
+    @EnvironmentObject var appEnvironment: AppEnvironment
     
     // MARK: ObsObjects
     @ObservedObject var player = PlayerWord()
@@ -17,44 +19,49 @@ struct DetailView: View {
 
     // MARK: State
     @State private var isPlaying : Bool = false
-
+    @State private var isSavedCData : Bool = false
     
     @Binding var selectedLang: Bool
     
     let result : Result
     
     var body: some View {
-
             
-            Form {
+       Form {
             
-                WordInfoView(result: result, saveWordToCoreData: {
-                    saveWordToCoreData()
-                })
+            WordInfoView(result: result, saveWordToCoreData: {
+                saveWordToCoreData()
+            })
+            
+            LanguageInfoView(result: result, selectedLang: selectedLang)
+            
+            AudioPlaybackView(player: player, phonetic: result.baseLang?.phonetic)
 
-                LanguageInfoView(result: result, selectedLang: selectedLang)
-               
-                AudioPlaybackView(player: player, phonetic: result.baseLang?.phonetic)
-
-    
+            if isSavedCData {
+                ZStack {
+                    NotificationCore(text:LocalizedStringKey("saving"))
+                        .transition(.move(edge: .top))
+                }
             }
-            .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
-            .padding()
-            .scrollContentBackground(.hidden)
-            .background(
-                LinearGradient(
-                    gradient: Gradient(
-                        colors: [
-                            Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
-                            Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
-                        ]
-                    ),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
             
-
+        }
+        .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
+        .padding()
+        .scrollContentBackground(.hidden)
+        .background(
+            LinearGradient(
+                gradient: Gradient(
+                    colors: [
+                        Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
+                        Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
+                    ]
+                ),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        
+        .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
     
     func saveWordToCoreData() {
@@ -80,10 +87,32 @@ struct DetailView: View {
                     
             }
 
-            try? myNewWord.save()
+        
+        do {
+               try myNewWord.save()
+            
+                showNotifCoreData()
+               
+           } catch {
+               print("Error saving the word to Core Data: \(error)")
+           }
+        
   
         }
     
+    func showNotifCoreData() {
+        
+        isSavedCData = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+
+            withAnimation {
+                isSavedCData = false
+            }
+        }
+        
+    }
+        
 }
 
 
@@ -94,5 +123,27 @@ struct DetailView_Previews: PreviewProvider {
     }
 }
 
+struct NotificationCore: View {
+    //let text: String
+    var text: LocalizedStringKey
+    init(text: LocalizedStringKey) {
+            self.text = text
+            
+        }
+    
+    var body: some View {
+        ZStack {
+            Text(text)
+                .foregroundColor(.white)
+                .padding()
+        }
+        
+        .frame(minWidth: 100)
+        .background(Color.blue.opacity(0.35))
+        .cornerRadius(8)
+        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 10)
+        
+    }
+}
 
 
