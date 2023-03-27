@@ -128,8 +128,6 @@ struct SavedWordView: View {
             
         }
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
-        //.environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
-           
     }
 }
 

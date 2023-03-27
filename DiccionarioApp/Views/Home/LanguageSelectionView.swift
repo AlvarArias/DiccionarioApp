@@ -74,7 +74,6 @@ struct LanguageSelectionView: View {
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
     
-    
 }
 
 

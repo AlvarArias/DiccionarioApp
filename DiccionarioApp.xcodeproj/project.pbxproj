@@ -26,7 +26,6 @@
 		62388CF729C4B4F0006F4005 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CF629C4B4F0006F4005 /* DetailView.swift */; };
 		62388CFF29C4B9D2006F4005 /* DiccionarioAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388CFE29C4B9D2006F4005 /* DiccionarioAppUITests.swift */; };
 		62388D0129C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62388D0029C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift */; };
-		623AD02729C852DB00216D99 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02629C852DB00216D99 /* ButtonView.swift */; };
 		623AD02B29C853D500216D99 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02A29C853D500216D99 /* PlaySound.swift */; };
 		623AD02D29C86C2700216D99 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02C29C86C2700216D99 /* FavoriteModel.swift */; };
 		623AD02F29C86C6000216D99 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02E29C86C6000216D99 /* FavoriteView.swift */; };
@@ -82,7 +81,6 @@
 		62388CFC29C4B9D2006F4005 /* DiccionarioAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiccionarioAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		62388CFE29C4B9D2006F4005 /* DiccionarioAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppUITests.swift; sourceTree = "<group>"; };
 		62388D0029C4B9D2006F4005 /* DiccionarioAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiccionarioAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		623AD02629C852DB00216D99 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		623AD02A29C853D500216D99 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		623AD02C29C86C2700216D99 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
 		623AD02E29C86C6000216D99 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				62388CF629C4B4F0006F4005 /* DetailView.swift */,
-				623AD02629C852DB00216D99 /* ButtonView.swift */,
 				625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */,
 				625B092829CF69530006BAEE /* WordInfoView.swift */,
 				625B092A29CF6A180006BAEE /* LanguageInfoView.swift */,
@@ -404,7 +401,6 @@
 				623AD02B29C853D500216D99 /* PlaySound.swift in Sources */,
 				625B091C29CF1DD40006BAEE /* ResultListView.swift in Sources */,
 				62388CF129C45545006F4005 /* WordViewModel.swift in Sources */,
-				623AD02729C852DB00216D99 /* ButtonView.swift in Sources */,
 				623AD02F29C86C6000216D99 /* FavoriteView.swift in Sources */,
 				62388CF429C4576C006F4005 /* WordView.swift in Sources */,
 				62388CF729C4B4F0006F4005 /* DetailView.swift in Sources */,
@@ -626,10 +622,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DiccionarioApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DIXO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -655,10 +651,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DiccionarioApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DIXO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

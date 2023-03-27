@@ -114,12 +114,12 @@ class WordViewModel: ObservableObject {
     
     // Errores con Combine
     private var cancellables = Set<AnyCancellable>()
-        private let errorSubject = PassthroughSubject<String, Never>()
-
+    private let errorSubject = PassthroughSubject<String, Never>()
+    
     var errorPublisher: AnyPublisher<String, Never> {
-            errorSubject.eraseToAnyPublisher()
-        }
-        
+        errorSubject.eraseToAnyPublisher()
+    }
+    
     @Published var results = [Result]()
     
     /// Fetches posts from a remote server.
@@ -134,12 +134,12 @@ class WordViewModel: ObservableObject {
     ///
     /// - Returns: An array of `Result` objects representing the search results.
     func fetchPosts(word: String, dir: String) {
-
-            guard let url = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON") else {
-                errorMje(mje: "Word not found")
-                //errorMje(mje: LocalizedStringKey("wordnotfound"))
-                //fatalError("Invalid URL")
-                return
+        
+        guard let url = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON") else {
+            errorMje(mje: "Word not found")
+            //errorMje(mje: LocalizedStringKey("wordnotfound"))
+            //fatalError("Invalid URL")
+            return
         }
         // Send a data task to the API to fetch the data
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -179,7 +179,7 @@ class WordViewModel: ObservableObject {
                 // If there is an error during parsing, emit an error message
                 print("Error decoding results: \(error.localizedDescription)")
                 print(String(describing: error))
-            
+                
                 errorMje(mje: "No word match")
                 
                 
@@ -187,10 +187,10 @@ class WordViewModel: ObservableObject {
         }.resume()
         
         /**
-            Emits an error message on the errorSubject.
-            
-            - Parameter mje: A `String` that represents the error message to be emitted.
-        */
+         Emits an error message on the errorSubject.
+         
+         - Parameter mje: A `String` that represents the error message to be emitted.
+         */
         func errorMje(mje: String) {
             
             DispatchQueue.main.async {
@@ -201,38 +201,4 @@ class WordViewModel: ObservableObject {
         
     }
     
-   /*
-    enum FetchError: Error {
-        case invalidURL
-        case urlSessionError
-        case invalidResponse
-        case decodingError
-        case noWordMatch
-        
-        var errorMessage: String {
-            switch self {
-            case .invalidURL:
-                return "Invalid URL"
-            case .urlSessionError:
-                return "URL session error"
-            case .invalidResponse:
-                return "Invalid response"
-            case .decodingError:
-                return "Error decoding results"
-            case .noWordMatch:
-                return "No word match"
-            }
-        }
-    }
-    
-    func errorMje(error: FetchError) {
-        print("Error message: \(error.errorMessage)")
-    }
-    
-    errorMje(error: .noWordMatch)
-    
-    
-    */
 }
-
-

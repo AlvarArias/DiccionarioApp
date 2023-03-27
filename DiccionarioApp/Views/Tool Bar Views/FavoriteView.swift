@@ -23,8 +23,7 @@ struct FavoriteView: View {
             NavigationView {
                 
                 VStack {
-                    
-                    //List {
+  
                     ScrollView {
                         ForEach(searchWors, id: \.self) { word in
                             HStack{
@@ -32,16 +31,16 @@ struct FavoriteView: View {
                                 Text(word)
                                 Spacer()
                                 }
+                            .padding(15)
+                            .background(Color(UIColor.white).opacity(0.9))
+                            .cornerRadius(10)
+                            .padding(.horizontal)
+                            .foregroundColor(Color.black)
+                            .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
                             }
-                            
-                            
+ 
                         }
-                        
-                        
-                    /*}
-                    .listStyle(PlainListStyle())
-                    .scrollContentBackground(.hidden)*/
-                    
+        
                 }
                 .scrollContentBackground(.hidden)
                 .navigationTitle(LocalizedStringKey("searchhistory"))
