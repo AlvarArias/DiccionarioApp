@@ -16,4 +16,9 @@ DIXIO's Settings View allows the user to change the app's language to Spanish, S
 
 In summary, DIXIO's technical architecture combines several modern technologies to provide users with a seamless and responsive Swedish-Spanish and Spanish-Swedish dictionary experience. The use of MVVM, AVFoundation, Combine, Core Data, and Localization frameworks enables the app to manage data flow, play audio, notify the UI, save user data, and display content in multiple languages.
 
-
+App screens<br>
+![search copy](https://user-images.githubusercontent.com/7523384/228346593-ee0dda12-2a77-4e26-9b0b-04a58db97e00.png)
+![word copy](https://user-images.githubusercontent.com/7523384/228346598-ddbaa92c-3359-4e0d-8cb0-c3e207db3e85.png)
+![savedwords copy](https://user-images.githubusercontent.com/7523384/228346584-6468183a-55e7-49e8-bd9e-e262b2ded99b.png)
+![settings copy](https://user-images.githubusercontent.com/7523384/228346595-3eab6a2f-0de2-4296-bd33-1e34951ef379.png)
+<hr>
