@@ -29,6 +29,8 @@
 		623AD02B29C853D500216D99 /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02A29C853D500216D99 /* PlaySound.swift */; };
 		623AD02D29C86C2700216D99 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02C29C86C2700216D99 /* FavoriteModel.swift */; };
 		623AD02F29C86C6000216D99 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD02E29C86C6000216D99 /* FavoriteView.swift */; };
+		62504A7029E3E986007C098B /* ChatGPTSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 62504A6F29E3E986007C098B /* ChatGPTSwift */; };
+		62504A7229E3EA20007C098B /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62504A7129E3EA20007C098B /* ChatView.swift */; };
 		625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091729CF174F0006BAEE /* LanguageSelectionView.swift */; };
 		625B091A29CF1ACA0006BAEE /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091929CF1ACA0006BAEE /* SearchBarView.swift */; };
 		625B091C29CF1DD40006BAEE /* ResultListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B091B29CF1DD40006BAEE /* ResultListView.swift */; };
@@ -84,6 +86,7 @@
 		623AD02A29C853D500216D99 /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		623AD02C29C86C2700216D99 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
 		623AD02E29C86C6000216D99 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		62504A7129E3EA20007C098B /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		625B091729CF174F0006BAEE /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
 		625B091929CF1ACA0006BAEE /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		625B091B29CF1DD40006BAEE /* ResultListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultListView.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62504A7029E3E986007C098B /* ChatGPTSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +252,7 @@
 				622EC00429CDA3F800BED9F4 /* SavedWordView.swift */,
 				622EC00629CDB3F800BED9F4 /* SettingsView.swift */,
 				622EC00829CDC7A700BED9F4 /* QuizView.swift */,
+				62504A7129E3EA20007C098B /* ChatView.swift */,
 			);
 			path = "Tool Bar Views";
 			sourceTree = "<group>";
@@ -286,6 +291,9 @@
 			dependencies = (
 			);
 			name = DiccionarioApp;
+			packageProductDependencies = (
+				62504A6F29E3E986007C098B /* ChatGPTSwift */,
+			);
 			productName = DiccionarioApp;
 			productReference = 62388CD929C44CB3006F4005 /* DiccionarioApp.app */;
 			productType = "com.apple.product-type.application";
@@ -342,6 +350,9 @@
 				es,
 			);
 			mainGroup = 62388CD029C44CB3006F4005;
+			packageReferences = (
+				62504A6E29E3E985007C098B /* XCRemoteSwiftPackageReference "ChatGPTSwift" */,
+			);
 			productRefGroup = 62388CDA29C44CB3006F4005 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -411,6 +422,7 @@
 				622BDF1B29D031D800CC7051 /* Notifications.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */,
+				62504A7229E3EA20007C098B /* ChatView.swift in Sources */,
 				625B092E29CF7C690006BAEE /* SplashView.swift in Sources */,
 				62388CDD29C44CB3006F4005 /* DiccionarioAppApp.swift in Sources */,
 				622EC00929CDC7A700BED9F4 /* QuizView.swift in Sources */,
@@ -625,7 +637,8 @@
 				INFOPLIST_KEY_CFBundleDisplayName = DIXO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -654,7 +667,8 @@
 				INFOPLIST_KEY_CFBundleDisplayName = DIXO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -742,6 +756,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		62504A6E29E3E985007C098B /* XCRemoteSwiftPackageReference "ChatGPTSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alfianlosari/ChatGPTSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		62504A6F29E3E986007C098B /* ChatGPTSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62504A6E29E3E985007C098B /* XCRemoteSwiftPackageReference "ChatGPTSwift" */;
+			productName = ChatGPTSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		622EBFFF29CD9C3700BED9F4 /* WordModel.xcdatamodeld */ = {

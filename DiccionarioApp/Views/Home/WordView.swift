@@ -92,8 +92,8 @@ struct WordView: View {
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
                 settingsButton()
-                //Spacer()
-                //quizButton()
+                Spacer()
+                quizButton()
                 Spacer()
                 historyButton()
                 Spacer()
@@ -118,11 +118,12 @@ struct WordView: View {
 
     private func quizButton() -> some View {
         Button(action: { showQuiz.toggle() }) {
-            Image(systemName: "star")
+            Image(systemName: "wand.and.stars")
                 .foregroundColor(Color.orange)
         }
         .sheet(isPresented: $showQuiz) {
-            QuizView()
+            //QuizView()
+            ChatView()
         }
     }
     

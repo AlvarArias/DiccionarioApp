@@ -12,6 +12,9 @@ struct SettingsView: View {
     @EnvironmentObject var appEnvironment: AppEnvironment
     
     @Environment(\.dismiss) var dismiss
+    
+    @AppStorage("apiKey") var apiKey: String = ""
+    @AppStorage("hasApiKey") var hasApiKey: Bool = false
 
     var body: some View {
         NavigationView {
@@ -25,13 +28,29 @@ struct SettingsView: View {
                     .pickerStyle(MenuPickerStyle())
                     .padding()
                 }
+                /*
+                HStack {
+                    TextField("OpenAI API key", text: $apiKey)
+                    
+                    //Spacer()
+                    
+                    Button {
+                      if apiKey.isEmpty == false {
+                        hasApiKey = true
+                      }
+                    } label: {
+                      Text("Submit")
+                    }
+                    
+                }.padding()
+                */
+                
                 Text(LocalizedStringKey("about"))
                     
-                Text(LocalizedStringKey("developer")) + Text ("  Alvar Arias" )
-                   
+                Text(LocalizedStringKey("developer:")) + Text ("  Alvar Arias" )
+                    
                 Text(LocalizedStringKey("lexin"))
-                   
-                
+                         
             }
             .scrollContentBackground(.hidden)
             .navigationTitle(LocalizedStringKey("usersettings"))
