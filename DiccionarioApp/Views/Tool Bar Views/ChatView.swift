@@ -16,19 +16,20 @@ struct ChatView: View {
     
     var body: some View {
         VStack {
-            
-            Text("Wwite a word")
-            TextField("palabra", text: $palabra)
-                .padding()
-                .cornerRadius(15)
-                .background(Color.indigo)
-            
-            Button {
-                print("tryChatGPT()")
-                tryChatGPT(wordSelected: palabra)
+            Form {
+                Text("Wwite a word")
                 
-            } label: {
-                Image(systemName: "wand.and.stars")
+                HStack {
+                    TextField("palabra", text: $palabra)
+                    
+                    Button {
+                        print("tryChatGPT()")
+                        tryChatGPT(wordSelected: palabra)
+                        
+                    } label: {
+                        Image(systemName: "wand.and.stars")
+                    }
+                }
             }
             Text("Synonim")
             ScrollView {
