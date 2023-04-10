@@ -10,7 +10,7 @@ import ChatGPTSwift
 
 struct ChatView: View {
     
-    let api = ChatGPTAPI(apiKey: "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")
+    let api = ChatGPTAPI(apiKey: "")
     @State var chatresponse : [String] = [""]
     @State var palabra = ""
     
