@@ -42,15 +42,20 @@ class ViewModel: NSObject, ObservableObject {
               do {
                   
                   guard let openAI = openAI else {
-                      print(openAI as Any)
-                      return print(errorMessage)
+                      DispatchQueue.main.async {
+                          self.chatresponse.append(self.errorMessage)
+                              }
+                      return
                       
                   }
                   let response = try await openAI.sendMessage(text: "give a bullet list with 2 synonym of \(wordSelected) in swedish and write 1 example ho to use it")
-                  print(response)
-                  chatresponse.append(response)
+                  DispatchQueue.main.async {
+                                  self.chatresponse.append(response)
+                              }
               } catch {
-                  print(error.localizedDescription)
+                  DispatchQueue.main.async {
+                                  self.chatresponse.append(error.localizedDescription)
+                              }
               }
           }
      }
