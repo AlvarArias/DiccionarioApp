@@ -28,22 +28,25 @@ struct SettingsView: View {
                     .pickerStyle(MenuPickerStyle())
                     .padding()
                 }
-                /*
+                
                 HStack {
                     TextField("OpenAI API key", text: $apiKey)
                     
-                    //Spacer()
+                    Spacer()
                     
                     Button {
+                        
                       if apiKey.isEmpty == false {
                         hasApiKey = true
+                        print(apiKey)
+                          
                       }
                     } label: {
                       Text("Submit")
                     }
                     
                 }.padding()
-                */
+                
                 
                 Text(LocalizedStringKey("about"))
                     
