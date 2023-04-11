@@ -25,7 +25,7 @@ class ViewModel: NSObject, ObservableObject {
           }
   }
 
-    @Published var chatresponse : [String] = []
+    @Published var chatResponse : [String] = []
   @Published var prompt: String = ""
   @Published var messages: [String] = []
   @Published var isLoading: Bool = false
@@ -35,31 +35,28 @@ class ViewModel: NSObject, ObservableObject {
     // MARK: - Request Open API
 
     func tryChatGPT(wordSelected: String) {
-        print("tryChatGPT(wordSelected: String)")
-        print(apiKey)
-        
+      
         Task {
               do {
                   
                   guard let openAI = openAI else {
                       DispatchQueue.main.async {
-                          self.chatresponse.append(self.errorMessage)
+                          self.chatResponse.append(self.errorMessage)
                               }
                       return
                       
                   }
                   let response = try await openAI.sendMessage(text: "give a bullet list with 2 synonym of \(wordSelected) in swedish and write 1 example ho to use it")
                   DispatchQueue.main.async {
-                                  self.chatresponse.append(response)
+                                  self.chatResponse.append(response)
                               }
               } catch {
                   DispatchQueue.main.async {
-                                  self.chatresponse.append(error.localizedDescription)
+                                  self.chatResponse.append(error.localizedDescription)
                               }
               }
           }
      }
-    
     
     override init() {
         super.init()
