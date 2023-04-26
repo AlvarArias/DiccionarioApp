@@ -30,12 +30,14 @@ struct QuizView: View {
         }
     }
     
+    @State private var flipped = false
+    
     var body: some View {
         NavigationView {
          
-                VStack {
-                    
-                    List {
+            VStack {
+                /*
+                List {
                     
                     if !words.isEmpty {
                         Text(words[randomIndex].value ?? "No value")
@@ -81,7 +83,33 @@ struct QuizView: View {
                         endPoint: .bottomTrailing
                     )
                 )
+                */
+                // Flascards
+                VStack {
+                           if flipped {
+                               BackOfCardView(myTranslation: words[randomIndex].translation ?? "No translation")
+                                   .transition(.scale)
+                                   .rotation3DEffect(.degrees(360), axis: (x: 0, y: 1, z: 0))
+                           } else {
+                               FrontOfCardView(myWord: words[randomIndex].value ?? "No word")
+                                   .transition(.scale)
+                                   .rotation3DEffect(.degrees(360), axis: (x: 0, y: 1, z: 0))
+                           }
+                       }
+                       .onTapGesture {
+                           withAnimation {
+                               flipped.toggle()
+                           }
+                       }
+                
+                Button("Next Question") {
+                    updateRandomIndex()
+                    flipped = false
+                }
+                .padding()
+                
             }
+            
         }
         
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
@@ -94,3 +122,32 @@ struct QuizView_Previews: PreviewProvider {
     }
 }
 
+struct FrontOfCardView: View {
+    
+    @State var myWord : String
+    
+    var body: some View {
+        ZStack {
+            Color.blue
+            Text(myWord)
+                .foregroundColor(.white)
+        }
+        .frame(width: 200, height: 300)
+        .cornerRadius(20)
+    }
+}
+
+struct BackOfCardView: View {
+    
+    @State var myTranslation : String
+    
+    var body: some View {
+        ZStack {
+            Color.red
+            Text(myTranslation)
+                .foregroundColor(.white)
+        }
+        .frame(width: 200, height: 300)
+        .cornerRadius(20)
+    }
+}

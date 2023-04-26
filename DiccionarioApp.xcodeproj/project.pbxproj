@@ -42,6 +42,7 @@
 		625B092929CF69530006BAEE /* WordInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092829CF69530006BAEE /* WordInfoView.swift */; };
 		625B092B29CF6A180006BAEE /* LanguageInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092A29CF6A180006BAEE /* LanguageInfoView.swift */; };
 		625B092E29CF7C690006BAEE /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625B092D29CF7C690006BAEE /* SplashView.swift */; };
+		6260188629F9490800F38B02 /* TriviaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6260188529F9490800F38B02 /* TriviaView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		625B092829CF69530006BAEE /* WordInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordInfoView.swift; sourceTree = "<group>"; };
 		625B092A29CF6A180006BAEE /* LanguageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageInfoView.swift; sourceTree = "<group>"; };
 		625B092D29CF7C690006BAEE /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		6260188529F9490800F38B02 /* TriviaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 				622EC00629CDB3F800BED9F4 /* SettingsView.swift */,
 				622EC00829CDC7A700BED9F4 /* QuizView.swift */,
 				62504A7129E3EA20007C098B /* ChatView.swift */,
+				6260188529F9490800F38B02 /* TriviaView.swift */,
 			);
 			path = "Tool Bar Views";
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,
 				625B092429CF42610006BAEE /* AppEnv.swift in Sources */,
 				622BDF1B29D031D800CC7051 /* Notifications.swift in Sources */,
+				6260188629F9490800F38B02 /* TriviaView.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */,
 				62504A7229E3EA20007C098B /* ChatView.swift in Sources */,
@@ -636,7 +640,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DiccionarioApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 8D7GNS96P8;
 				ENABLE_PREVIEWS = YES;
@@ -654,9 +658,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = se.alvararias.DiccionarioApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -666,7 +673,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"DiccionarioApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 8D7GNS96P8;
 				ENABLE_PREVIEWS = YES;
@@ -684,9 +691,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = se.alvararias.DiccionarioApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

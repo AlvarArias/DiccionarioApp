@@ -28,7 +28,7 @@ struct SettingsView: View {
                     .pickerStyle(MenuPickerStyle())
                     .padding()
                 }
-                
+                /*
                 HStack {
                     TextField("OpenAI API key", text: $apiKey)
                     
@@ -46,6 +46,7 @@ struct SettingsView: View {
                     }
                     
                 }.padding()
+                */
                 
                 
                 Text(LocalizedStringKey("about"))

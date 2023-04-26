@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import AVFoundation
+
 struct DetailView: View {
     //MARK: Env
     @EnvironmentObject var appEnvironment: AppEnvironment
@@ -23,6 +25,9 @@ struct DetailView: View {
     
     @Binding var selectedLang: Bool
     
+    // Create a speech synthesizer.
+    let synthesizer = AVSpeechSynthesizer()
+    
     let result : Result
     
     var body: some View {
@@ -36,6 +41,17 @@ struct DetailView: View {
             LanguageInfoView(result: result, selectedLang: selectedLang)
             
             AudioPlaybackView(player: player, phonetic: result.baseLang?.phonetic)
+           
+           
+
+           Button {
+               print("click paper plane")
+              //textToSpeech(word: result.value ?? "No value")
+               textToSpeech(word: "Hola")
+               
+           } label: {
+               Image(systemName: "paperplane")
+           }
 
         }
         .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
@@ -110,6 +126,30 @@ struct DetailView: View {
                 isSavedCData = false
             }
         }
+        
+    }
+    
+    func textToSpeech(word: String){
+        
+        
+        // Create an utterance.
+        let utterance = AVSpeechUtterance(string: word)
+   
+        // Configure the utterance.
+        utterance.rate = 0.5
+        utterance.volume = 1.0
+        utterance.pitchMultiplier = 1.0
+        utterance.postUtteranceDelay = 0.1
+        
+        // Retrieve the preferred voice.
+        //let voice = AVSpeechSynthesisVoice(language: "en-US")
+        let voice = AVSpeechSynthesisVoice(language: "es-MX")
+        
+        // Assign the voice to the utterance.
+        utterance.voice = voice
+        
+        // Speak the utterance.
+        synthesizer.speak(utterance)
         
     }
         

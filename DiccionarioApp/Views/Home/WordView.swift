@@ -94,7 +94,7 @@ struct WordView: View {
                 settingsButton()
                 Spacer()
                 quizButton()
-                Spacer()
+                //Spacer()
                 historyButton()
                 Spacer()
                 savedWordButton()
@@ -123,7 +123,8 @@ struct WordView: View {
         }
         .sheet(isPresented: $showQuiz) {
             //QuizView()
-            ChatView()
+            //ChatView()
+            TriviaView()
         }
     }
     
