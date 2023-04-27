@@ -53,11 +53,14 @@
 		625EDACB29FA6EE3007E6005 /* ReceiptParser in Frameworks */ = {isa = PBXBuildFile; productRef = 625EDACA29FA6EE3007E6005 /* ReceiptParser */; };
 		625EDACD29FA6EE3007E6005 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 625EDACC29FA6EE3007E6005 /* RevenueCat */; };
 		625EDAD029FA6FEE007E6005 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625EDACF29FA6FEE007E6005 /* StoreKit.framework */; };
-		625EDAD229FA72CC007E6005 /* PayWallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625EDAD129FA72CC007E6005 /* PayWallView.swift */; };
 		625EDAD429FA7598007E6005 /* UserViewModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625EDAD329FA7598007E6005 /* UserViewModell.swift */; };
 		625EDAD729FA7929007E6005 /* PayWallExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625EDAD629FA7929007E6005 /* PayWallExtention.swift */; };
 		625EDAD929FA7D90007E6005 /* PayWallContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625EDAD829FA7D90007E6005 /* PayWallContentView.swift */; };
 		625EDADC29FA83A1007E6005 /* SimplePayWallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625EDADB29FA83A1007E6005 /* SimplePayWallView.swift */; };
+		625EDADE29FA9361007E6005 /* PayWallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625EDADD29FA9361007E6005 /* PayWallView.swift */; };
+		625EDAE029FA984A007E6005 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625EDADF29FA984A007E6005 /* ProfileView.swift */; };
+		625EDAE329FAA944007E6005 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 625EDAE229FAA944007E6005 /* ConfettiSwiftUI */; };
+		625EDAE529FAA9A2007E6005 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625EDAE429FAA9A2007E6005 /* ConfettiView.swift */; };
 		6260188629F9490800F38B02 /* TriviaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6260188529F9490800F38B02 /* TriviaView.swift */; };
 /* End PBXBuildFile section */
 
@@ -150,11 +153,13 @@
 		625B092A29CF6A180006BAEE /* LanguageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageInfoView.swift; sourceTree = "<group>"; };
 		625B092D29CF7C690006BAEE /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		625EDACF29FA6FEE007E6005 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		625EDAD129FA72CC007E6005 /* PayWallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWallView.swift; sourceTree = "<group>"; };
 		625EDAD329FA7598007E6005 /* UserViewModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModell.swift; sourceTree = "<group>"; };
 		625EDAD629FA7929007E6005 /* PayWallExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWallExtention.swift; sourceTree = "<group>"; };
 		625EDAD829FA7D90007E6005 /* PayWallContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWallContentView.swift; sourceTree = "<group>"; };
 		625EDADB29FA83A1007E6005 /* SimplePayWallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePayWallView.swift; sourceTree = "<group>"; };
+		625EDADD29FA9361007E6005 /* PayWallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayWallView.swift; sourceTree = "<group>"; };
+		625EDADF29FA984A007E6005 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		625EDAE429FAA9A2007E6005 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		6260188529F9490800F38B02 /* TriviaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				625EDAE329FAA944007E6005 /* ConfettiSwiftUI in Frameworks */,
 				625EDACB29FA6EE3007E6005 /* ReceiptParser in Frameworks */,
 				62504A7029E3E986007C098B /* ChatGPTSwift in Frameworks */,
 				625EDACD29FA6EE3007E6005 /* RevenueCat in Frameworks */,
@@ -234,6 +240,7 @@
 				62388CDC29C44CB3006F4005 /* DiccionarioAppApp.swift */,
 				62388CDE29C44CB3006F4005 /* ContentView.swift */,
 				623AD02929C8539A00216D99 /* Views */,
+				625EDAE629FAAA61007E6005 /* PremiumViews */,
 				62388CE029C44CB4006F4005 /* Assets.xcassets */,
 				62388CE229C44CB4006F4005 /* Preview Content */,
 				62388CF229C455B6006F4005 /* Test View Model */,
@@ -321,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				624C20DC29F9905500F731BC /* SharedView.swift */,
+				625EDAE429FAA9A2007E6005 /* ConfettiView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -354,9 +362,6 @@
 				623AD02E29C86C6000216D99 /* FavoriteView.swift */,
 				622EC00429CDA3F800BED9F4 /* SavedWordView.swift */,
 				622EC00629CDB3F800BED9F4 /* SettingsView.swift */,
-				622EC00829CDC7A700BED9F4 /* QuizView.swift */,
-				62504A7129E3EA20007C098B /* ChatView.swift */,
-				6260188529F9490800F38B02 /* TriviaView.swift */,
 			);
 			path = "Tool Bar Views";
 			sourceTree = "<group>";
@@ -382,11 +387,22 @@
 		625EDADA29FA8386007E6005 /* Paywall */ = {
 			isa = PBXGroup;
 			children = (
-				625EDAD129FA72CC007E6005 /* PayWallView.swift */,
 				625EDAD829FA7D90007E6005 /* PayWallContentView.swift */,
+				625EDADD29FA9361007E6005 /* PayWallView.swift */,
 				625EDADB29FA83A1007E6005 /* SimplePayWallView.swift */,
+				625EDADF29FA984A007E6005 /* ProfileView.swift */,
 			);
 			path = Paywall;
+			sourceTree = "<group>";
+		};
+		625EDAE629FAAA61007E6005 /* PremiumViews */ = {
+			isa = PBXGroup;
+			children = (
+				622EC00829CDC7A700BED9F4 /* QuizView.swift */,
+				62504A7129E3EA20007C098B /* ChatView.swift */,
+				6260188529F9490800F38B02 /* TriviaView.swift */,
+			);
+			path = PremiumViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +445,7 @@
 				62504A6F29E3E986007C098B /* ChatGPTSwift */,
 				625EDACA29FA6EE3007E6005 /* ReceiptParser */,
 				625EDACC29FA6EE3007E6005 /* RevenueCat */,
+				625EDAE229FAA944007E6005 /* ConfettiSwiftUI */,
 			);
 			productName = DiccionarioApp;
 			productReference = 62388CD929C44CB3006F4005 /* DiccionarioApp.app */;
@@ -509,6 +526,7 @@
 			packageReferences = (
 				62504A6E29E3E985007C098B /* XCRemoteSwiftPackageReference "ChatGPTSwift" */,
 				625EDAC929FA6EE3007E6005 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				625EDAE129FAA944007E6005 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 			);
 			productRefGroup = 62388CDA29C44CB3006F4005 /* Products */;
 			projectDirPath = "";
@@ -576,6 +594,7 @@
 				622EC00729CDB3F800BED9F4 /* SettingsView.swift in Sources */,
 				62561E4C29E58107003893F6 /* Extensions.swift in Sources */,
 				62388CEF29C453FC006F4005 /* PostListView.swift in Sources */,
+				625EDADE29FA9361007E6005 /* PayWallView.swift in Sources */,
 				623AD02D29C86C2700216D99 /* FavoriteModel.swift in Sources */,
 				622EC00529CDA3F800BED9F4 /* SavedWordView.swift in Sources */,
 				623AD02B29C853D500216D99 /* PlaySound.swift in Sources */,
@@ -584,6 +603,7 @@
 				623AD02F29C86C6000216D99 /* FavoriteView.swift in Sources */,
 				625EDADC29FA83A1007E6005 /* SimplePayWallView.swift in Sources */,
 				625EDAD729FA7929007E6005 /* PayWallExtention.swift in Sources */,
+				625EDAE029FA984A007E6005 /* ProfileView.swift in Sources */,
 				62388CF429C4576C006F4005 /* WordView.swift in Sources */,
 				62388CF729C4B4F0006F4005 /* DetailView.swift in Sources */,
 				625B091A29CF1ACA0006BAEE /* SearchBarView.swift in Sources */,
@@ -594,8 +614,8 @@
 				622BDF1B29D031D800CC7051 /* Notifications.swift in Sources */,
 				625EDAD929FA7D90007E6005 /* PayWallContentView.swift in Sources */,
 				625EDAD429FA7598007E6005 /* UserViewModell.swift in Sources */,
-				625EDAD229FA72CC007E6005 /* PayWallView.swift in Sources */,
 				624C20DD29F9905500F731BC /* SharedView.swift in Sources */,
+				625EDAE529FAA9A2007E6005 /* ConfettiView.swift in Sources */,
 				6260188629F9490800F38B02 /* TriviaView.swift in Sources */,
 				62388CED29C450D8006F4005 /* TestModel.swift in Sources */,
 				625B091829CF174F0006BAEE /* LanguageSelectionView.swift in Sources */,
@@ -1047,6 +1067,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		625EDAE129FAA944007E6005 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1064,6 +1092,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 625EDAC929FA6EE3007E6005 /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
+		};
+		625EDAE229FAA944007E6005 /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 625EDAE129FAA944007E6005 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

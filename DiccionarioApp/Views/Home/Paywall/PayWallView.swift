@@ -58,6 +58,7 @@ struct Paywall: View {
                                 // Unlock that great "pro" content
                                 
                                 userViewModel.isSubscriptionActive = true
+                                // Not shaw PayWall
                                 isPaywallPresented = false
                             }
                         }

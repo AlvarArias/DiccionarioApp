@@ -124,8 +124,10 @@ struct WordView: View {
         .sheet(isPresented: $showQuiz) {
             //QuizView()
             //ChatView()
-            //TriviaView()
-           SimplePayWallView()
+            TriviaView()
+            //PayWallContentView()
+            //ConfettiView()
+            
         }
     }
     

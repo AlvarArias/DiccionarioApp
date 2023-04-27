@@ -20,6 +20,7 @@ struct SimplePayWallView: View {
                     print("SimplePayWallView")
             
                     checkIfIsActiv()
+                    //customerInfo()
                      
                 }
             Text(currentOffering?.id ?? "no id")
@@ -44,6 +45,13 @@ struct SimplePayWallView: View {
                 print("suscription is not active")
  
             }
+        }
+    }
+    
+    func customerInfo() {
+        Purchases.shared.getCustomerInfo { (customerInfo, error) in
+            print("Customer info")
+            print(customerInfo ?? "no customer info")
         }
     }
     

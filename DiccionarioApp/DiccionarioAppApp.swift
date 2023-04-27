@@ -28,6 +28,7 @@ struct DiccionarioAppApp: App {
             //PayWallContentView()
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(appEnvironment)
+            .environmentObject(userViewModel)
         }
     }
     

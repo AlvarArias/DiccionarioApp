@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import ConfettiSwiftUI
 
 struct TriviaView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -46,11 +47,14 @@ struct TriviaView: View {
             
             randomIndexResponse = Int.random(in: 0..<2)
             print(randomIndexResponse)
+           
         }
     }
     
-
-    
+    // Confetti
+    @State private var counter: Int = 0
+    @State private var isCorrect : Bool = false
+    @State private var isNotCorrect : Bool = false
 
     var body: some View {
         VStack {
@@ -77,17 +81,28 @@ struct TriviaView: View {
                         Text(words[randomIndexP1].translation ?? "No translation")
                             .onTapGesture {
                                 print("correcto")
+                                isCorrect = true
                                 checkAnswer()
-                                updateRandomIndex()
+                                //updateRandomIndex()
+                                counter += 1
+                                print("counter = \(counter)")
+                                doSomethingAfter30Seconds()
                             }
+                            
                             .padding()
-                        
+                            .background(isCorrect == true ? Color.blue : Color.white)
+                            .cornerRadius(15)
+                            
                         
                         Text(words[randomIndexP2].translation ?? "No translation")
                             .onTapGesture {
                                 print("respuesta errada")
+                                isNotCorrect = true
+                                doSomethingAfter30Seconds()
                             }
                             .padding()
+                            .background(isNotCorrect == true ? Color.red : Color.white)
+                            .cornerRadius(15)
                     }
                  
                     else {
@@ -95,21 +110,31 @@ struct TriviaView: View {
                             Text(words[randomIndexP2].translation ?? "No translation")
                                 .onTapGesture {
                                     print("respuesta errada")
+                                    isNotCorrect = true
+                                    doSomethingAfter30Seconds()
                                 }
                                 .padding()
-                            
+                                .background(isNotCorrect == true ? Color.red : Color.white)
+                                .cornerRadius(15)
+                        
                             
                             Text(words[randomIndexP1].translation ?? "No translation")
                                 .onTapGesture {
                                     print("correcto")
+                                    isCorrect = true
                                     checkAnswer()
-                                    updateRandomIndex()
+                                    counter += 1
+                                    print("counter = \(counter)")
+                                    doSomethingAfter30Seconds()
                                 }
+                                //.confettiCannon(counter: $counter)
                                 .padding()
+                                .background(isCorrect == true ? Color.blue : Color.white)
+                                .cornerRadius(15)
                         
                     }
                 }
-                
+                .confettiCannon(counter: $counter)
                 
                 
                 /*
@@ -205,6 +230,15 @@ struct TriviaView: View {
         return Text(translation)
             .padding()
             .onTapGesture(perform: onTapAction)
+    }
+    
+    func doSomethingAfter30Seconds() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            // Code to be executed after 30 seconds goes here
+            updateRandomIndex()
+            isCorrect = false
+            isNotCorrect = false
+        }
     }
     
 }
