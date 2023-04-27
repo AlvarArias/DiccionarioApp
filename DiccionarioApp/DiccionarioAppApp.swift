@@ -8,6 +8,9 @@
 import SwiftUI
 import CoreData
 import SwiftUI
+import RevenueCat
+
+
 
 @main
 struct DiccionarioAppApp: App {
@@ -16,11 +19,21 @@ struct DiccionarioAppApp: App {
     
     @StateObject private var dataController = DataController()
     
+    @StateObject var userViewModel = UserViewModel()
+    
+    
     var body: some Scene {
         WindowGroup {
             WordView()
+            //PayWallContentView()
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(appEnvironment)
         }
     }
+    
+    init() {
+        Purchases.logLevel = .debug
+        Purchases.configure(withAPIKey: "appl_JIrdAvEzVUZttIBqoWRWAsoHxin")
+    }
+    
 }
