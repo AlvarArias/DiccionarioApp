@@ -18,24 +18,31 @@ struct SimplePayWallView: View {
                 .onTapGesture {
                     
                     print("SimplePayWallView")
-                    /*
-                    if currentOffering != nil {
-                     
-                        print(currentOffering?.availablePackages as Any)
-                        
-                    }*/
+            
                     checkIfIsActiv()
                      
                 }
-
+            Text(currentOffering?.id ?? "no id")
+            Text(currentOffering?.description ?? "no description")
+            
+            
+            if currentOffering == nil {
+                Text("Display the offerts")
+            }
+            
         }
   
     }
     
     func checkIfIsActiv() {
         Purchases.shared.getCustomerInfo { (customerInfo, error) in
+            print("checkIfIsActiv()")
             if customerInfo?.entitlements.all["pro"]?.isActive == true {
                 print("premium")
+            } else {
+                
+                print("suscription is not active")
+ 
             }
         }
     }
