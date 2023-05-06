@@ -8,6 +8,7 @@
 import SwiftUI
 
 import AVFoundation
+import CoreData
 
 struct DetailView: View {
     //MARK: Env
@@ -79,42 +80,44 @@ struct DetailView: View {
                 )
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
+
     
     func saveWordToCoreData() {
-         
-         // Try to save in Core Data
-            let theSelectedWord = myWord(context: myNewWord)
-            // Fix values
-        theSelectedWord.value = result.value ?? "No value"
-        theSelectedWord.type = result.type ?? "No type"
-        
-        theSelectedWord.phonetic = result.baseLang?.phonetic?.content ?? ""
-        theSelectedWord.file = result.baseLang?.phonetic?.file ?? ""
-           
-            // Selected language
-            if selectedLang {
-                
-                theSelectedWord.translation = result.targetLang?.translation ?? "No translation"
-                theSelectedWord.synonym = result.targetLang?.synonym?.first ?? ""
-                
-            } else {
-                
-                theSelectedWord.meaning = result.baseLang?.meaning ?? "No meaning"
-                    
-            }
-
+      
+        // Try to save in Core Data
+        let fetchRequest: NSFetchRequest<myWord> = myWord.fetchRequest()
+           fetchRequest.predicate = NSPredicate(format: "value == %@", result.value ?? "")
         
         do {
-               try myNewWord.save()
+            let existingWords = try myNewWord.fetch(fetchRequest)
             
+            if existingWords.isEmpty {
+                let theSelectedWord = myWord(context: myNewWord)
+                // Fix values
+                theSelectedWord.value = result.value ?? "No value"
+                theSelectedWord.type = result.type ?? "No type"
+                theSelectedWord.phonetic = result.baseLang?.phonetic?.content ?? ""
+                theSelectedWord.file = result.baseLang?.phonetic?.file ?? ""
+                
+                // Selected language
+                if selectedLang {
+                    theSelectedWord.translation = result.targetLang?.translation ?? "No translation"
+                    theSelectedWord.synonym = result.targetLang?.synonym?.first ?? ""
+                } else {
+                    theSelectedWord.meaning = result.baseLang?.meaning ?? "No meaning"
+                }
+                
+                try myNewWord.save()
                 showNotifCoreData()
-               
-           } catch {
-               print("Error saving the word to Core Data: \(error)")
-           }
-        
-  
+            } else {
+                print("Word already exists in Core Data")
+            }
+        } catch {
+            print("Error saving the word to Core Data: \(error)")
         }
+    }
+
+    
     
     func showNotifCoreData() {
         
@@ -165,3 +168,40 @@ struct DetailView_Previews: PreviewProvider {
 
 
 
+/*
+func saveWordToCoreData() {
+     
+     // Try to save in Core Data
+        let theSelectedWord = myWord(context: myNewWord)
+        // Fix values
+    theSelectedWord.value = result.value ?? "No value"
+    theSelectedWord.type = result.type ?? "No type"
+    
+    theSelectedWord.phonetic = result.baseLang?.phonetic?.content ?? ""
+    theSelectedWord.file = result.baseLang?.phonetic?.file ?? ""
+       
+        // Selected language
+        if selectedLang {
+            
+            theSelectedWord.translation = result.targetLang?.translation ?? "No translation"
+            theSelectedWord.synonym = result.targetLang?.synonym?.first ?? ""
+            
+        } else {
+            
+            theSelectedWord.meaning = result.baseLang?.meaning ?? "No meaning"
+                
+        }
+
+    
+    do {
+           try myNewWord.save()
+        
+            showNotifCoreData()
+           
+       } catch {
+           print("Error saving the word to Core Data: \(error)")
+       }
+    
+
+    }
+ */
