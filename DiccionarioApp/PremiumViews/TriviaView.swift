@@ -175,7 +175,7 @@ struct TriviaView: View {
                     .frame(maxWidth: .infinity)
                 
                     
-                    Button("Next question") {
+                    Button("Skip question") {
                         updateRandomIndex()
                         withAnimation(.spring()) {
                             rotationAngle += 360

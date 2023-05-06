@@ -24,13 +24,10 @@ struct QuizView: View {
     
     @State private var randomIndex: Int = 0
     
-    private func updateRandomIndex() {
-        if !words.isEmpty {
-            randomIndex = Int.random(in: 0..<words.count)
-        }
-    }
     
     @State private var flipped = false
+    
+    @State private var rotationAngle: Double = 0.0
     
     var body: some View {
         //NavigationView {
@@ -54,26 +51,35 @@ struct QuizView: View {
                     VStack {
                         if flipped {
                             BackOfCardView(myTranslation: words[randomIndex].translation ?? "No translation")
-                                .transition(.scale)
-                                .rotation3DEffect(.degrees(360), axis: (x: 0, y: 1, z: 0))
+                                .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: 1, z: 0))
                         } else {
                             FrontOfCardView(myWord: words[randomIndex].value ?? "No word")
-                                .transition(.scale)
-                                .rotation3DEffect(.degrees(360), axis: (x: 0, y: 1, z: 0))
+                                .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: 1, z: 0))
                         }
                     }
                     .onTapGesture {
-                        withAnimation {
+                        withAnimation (.easeInOut(duration: 0.5)) {
                             flipped.toggle()
+                            rotationAngle += 360
                         }
                     }
+                    .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: 1, z: 0))
                     .padding()
                     
                 }
                 
                 Button("Next Card") {
                     updateRandomIndex()
-                    flipped = false
+                    print("flipped \(flipped)")
+                    flipped.toggle()
+                        withAnimation (.easeInOut(duration: 0.5)) {
+                            flipped = false
+                            rotationAngle += 360
+                        }
+                    
+                    print("flipped.toggle \(flipped)")
+                    
+                    
                 }
                 .padding()
                 
@@ -95,6 +101,20 @@ struct QuizView: View {
         
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
+    
+    func updateRandomIndex() {
+        
+        print("updateRandomIndex() \(words.count)")
+        print("updateRandomIndex \(randomIndex)")
+        
+        if !words.isEmpty {
+            randomIndex = Int.random(in: 0..<words.count)
+            print("new randomIdex \(randomIndex)")
+            
+        }
+    }
+    
+    
 }
 
 struct QuizView_Previews: PreviewProvider {
