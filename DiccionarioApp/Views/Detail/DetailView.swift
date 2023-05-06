@@ -23,6 +23,7 @@ struct DetailView: View {
     // MARK: State
     @State private var isPlaying : Bool = false
     @State private var isSavedCData : Bool = false
+    @State private var isDuplicateData : Bool = false
     
     @Binding var selectedLang: Bool
     
@@ -39,21 +40,24 @@ struct DetailView: View {
                 saveWordToCoreData()
             })
             
-            LanguageInfoView(result: result, selectedLang: selectedLang)
-            
-            AudioPlaybackView(player: player, phonetic: result.baseLang?.phonetic)
            
+               LanguageInfoView(result: result, selectedLang: selectedLang)
            
-
+           if selectedLang {
+               AudioPlaybackView(player: player, phonetic: result.baseLang?.phonetic)
+           }
+           
+           /*
            Button {
                print("click paper plane")
               //textToSpeech(word: result.value ?? "No value")
-               textToSpeech(word: "Hola")
+               //textToSpeech(word: "Hola")
                
            } label: {
                Image(systemName: "paperplane")
            }
-
+           */
+           
         }
         .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
         .padding()
@@ -76,6 +80,12 @@ struct DetailView: View {
                             NotificationCore(text:LocalizedStringKey("saving"))
                                 .transition(.move(edge: .top))
                         }
+                        
+                        if isDuplicateData {
+                            NotificationCore(text:"The word already saved")
+                                .transition(.move(edge: .top))
+                        }
+  
                     }
                 )
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
@@ -111,6 +121,7 @@ struct DetailView: View {
                 showNotifCoreData()
             } else {
                 print("Word already exists in Core Data")
+                showNotifDuplicateData()
             }
         } catch {
             print("Error saving the word to Core Data: \(error)")
@@ -131,6 +142,21 @@ struct DetailView: View {
         }
         
     }
+    
+    func showNotifDuplicateData() {
+        
+        isDuplicateData = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+
+            withAnimation {
+                isDuplicateData = false
+            }
+        }
+        
+    }
+    
+    
     
     func textToSpeech(word: String){
         

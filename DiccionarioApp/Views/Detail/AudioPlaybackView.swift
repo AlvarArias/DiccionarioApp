@@ -13,6 +13,7 @@ struct AudioPlaybackView: View {
     let phonetic: Phonetic?
 
     var body: some View {
+        
         HStack {
             Text(phonetic?.content ?? "Not file")
             Spacer(minLength: 10)
