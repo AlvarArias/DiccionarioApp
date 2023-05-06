@@ -9,8 +9,23 @@ import SwiftUI
 import CoreData
 import ConfettiSwiftUI
 
+struct ShakeEffect: GeometryEffect {
+    var shakes: Int
+    var animatableData: Int {
+        get { shakes }
+        set { shakes = newValue }
+    }
+    
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        let rotation = CGFloat(Angle.degrees(5 * sin(Double(shakes) * 2 * .pi)).radians)
+        return ProjectionTransform(CGAffineTransform(rotationAngle: rotation))
+    }
+}
+
 struct TriviaView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @Environment(\.dismiss) var dismiss
     
     @FetchRequest(
         entity: myWord.entity(),
@@ -56,67 +71,89 @@ struct TriviaView: View {
     @State private var isCorrect : Bool = false
     @State private var isNotCorrect : Bool = false
 
+    @State private var isAnimated = false
+    @State private var rotationAngle: Double = 0.0
+    
     var body: some View {
-        VStack {
-            Text("Trivia")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding()
+        
+        ZStack {
             
-            if !gameEnded {
-                Text("Question \(currentQuestion) of \(questionsPerGame)")
-                    .font(.title2)
+            Color.teal
+                .opacity(0.5)
+            
+            VStack {
+                Text("Trivia")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
                     .padding()
                 
-                Text("Score: \(score)")
-                
-                Text("Whats means \(words[randomIndexP1].value ?? "No value")")
-                    .font(.title2)
-                    .padding()
-            
-                VStack {
+                if !gameEnded {
+                    Text("Question \(currentQuestion) of \(questionsPerGame)")
+                        .font(.title2)
+                        .padding()
                     
-                    if randomIndexResponse == 0 {
-                     
-                        Text(words[randomIndexP1].translation ?? "No translation")
-                            .onTapGesture {
-                                print("correcto")
-                                isCorrect = true
-                                checkAnswer()
-                                //updateRandomIndex()
-                                counter += 1
-                                print("counter = \(counter)")
-                                doSomethingAfter30Seconds()
-                            }
-                            
-                            .padding()
-                            .background(isCorrect == true ? Color.blue : Color.white)
-                            .cornerRadius(15)
-                            
+                    Text("Score: \(score)")
+                    
+                    Text("Whats means \(words[randomIndexP1].value ?? "No value")")
+                        .font(.title2)
+                        .padding()
+                    
+                    // Presenta las 2 alternativas
+                    VStack {
                         
-                        Text(words[randomIndexP2].translation ?? "No translation")
-                            .onTapGesture {
-                                print("respuesta errada")
-                                isNotCorrect = true
-                                doSomethingAfter30Seconds()
-                            }
-                            .padding()
-                            .background(isNotCorrect == true ? Color.red : Color.white)
-                            .cornerRadius(15)
-                    }
-                 
-                    else {
-                     
-                            Text(words[randomIndexP2].translation ?? "No translation")
+                        if randomIndexResponse == 0 {
+                            
+                            // TODO: agregar animacion al color, mejorar el codigo, crear 2 botones de igual largo con el text, usar sombras
+                            
+                            Text(words[randomIndexP1].translation ?? "No translation")
                                 .onTapGesture {
-                                    print("respuesta errada")
-                                    isNotCorrect = true
+                                    print("correcto")
+                                    isCorrect = true
+                                    checkAnswer()
+                                    //updateRandomIndex()
+                                    counter += 1
+                                    print("counter = \(counter)")
                                     doSomethingAfter30Seconds()
                                 }
                                 .padding()
-                                .background(isNotCorrect == true ? Color.red : Color.white)
+                                .background(isCorrect == true ? Color.blue.opacity(0.7) : Color.white)
+                                .foregroundColor(isCorrect == true ? Color.white : Color.black)
                                 .cornerRadius(15)
+                            
+                            Text(words[randomIndexP2].translation ?? "No translation")
+                                .onTapGesture {
+                                    withAnimation(.interpolatingSpring(stiffness: 100, damping: 10)) {
+                                        print("respuesta errada")
+                                        isNotCorrect = true
+                                        doSomethingAfter30Seconds()
+                                    }
+                                }
+                                .padding()
+                                .background(isNotCorrect == true ? Color.red.opacity(0.7) : Color.white)
+                                .foregroundColor(isCorrect == true ? Color.white : Color.black)
+                                .cornerRadius(15)
+                                .modifier(ShakeEffect(shakes: isNotCorrect ? 3 : 0))
+                            
+                        }
                         
+                        else {
+                            
+                            Text(words[randomIndexP2].translation ?? "No translation")
+                                .onTapGesture {
+                                  
+                                    withAnimation(.interpolatingSpring(stiffness: 100, damping: 10)) {
+                                        
+                                        print("respuesta errada")
+                                        isNotCorrect = true
+                                        doSomethingAfter30Seconds()
+                                    }
+                                        
+                                }
+                                .padding()
+                                .background(isNotCorrect == true ? Color.red.opacity(0.7) : Color.white)
+                                .foregroundColor(isCorrect == true ? Color.white : Color.black)
+                                .cornerRadius(15)
+                                .modifier(ShakeEffect(shakes: isNotCorrect ? 3 : 0))
                             
                             Text(words[randomIndexP1].translation ?? "No translation")
                                 .onTapGesture {
@@ -127,82 +164,60 @@ struct TriviaView: View {
                                     print("counter = \(counter)")
                                     doSomethingAfter30Seconds()
                                 }
-                                //.confettiCannon(counter: $counter)
                                 .padding()
-                                .background(isCorrect == true ? Color.blue : Color.white)
+                                .background(isCorrect == true ? Color.blue.opacity(0.7) : Color.white)
+                                .foregroundColor(isCorrect == true ? Color.white : Color.black)
                                 .cornerRadius(15)
-                        
+                            
+                        }
                     }
-                }
-                .confettiCannon(counter: $counter)
+                    .confettiCannon(counter: $counter)
+                    .frame(maxWidth: .infinity)
                 
-                
-                /*
-                VStack {
-                       Text("What does \(words[randomIndexP1].value ?? "No value") mean?")
-                           .font(.title2)
-                           .padding()
-                       
-                       VStack {
-                           if randomIndexResponse == 0 {
-                               translationView(randomIndexP1) {
-                                   print("correcto")
-                                   checkAnswer()
-                                   updateRandomIndex()
-                               }
-                               
-                               //Spacer()
-                               
-                               translationView(randomIndexP2) {
-                                   print("respuesta errada")
-                               }
-                           } else {
-                               translationView(randomIndexP2) {
-                                   print("respuesta errada")
-                               }
-                               
-                               //Spacer()
-                               
-                               translationView(randomIndexP1) {
-                                   print("correcto")
-                                   checkAnswer()
-                                   updateRandomIndex()
-                               }
-                           }
-                       }
-                   }
-                   .onAppear {
-                       updateRandomIndex()
-                   }
-                */
-                
-                Button("Next question") {
-                   updateRandomIndex()
-                }
-                .padding()
-                
-                
-                
-                
-            } else {
-                Text("Game Over")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    
+                    Button("Next question") {
+                        updateRandomIndex()
+                        withAnimation(.spring()) {
+                            rotationAngle += 360
+                        }
+                    }
                     .padding()
-                
-                Text("Final Score: \(score)")
-                    .font(.title2)
+                    
+                    Button { dismiss() } label: {
+                        Image(systemName: "arrow.down")
+                            .foregroundColor(Color.orange)
+                    }
                     .padding()
+                    
+                    
+                    
+                } else {
+                    Text("Game Over")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding()
+                    
+                    Text("Final Score: \(score)")
+                        .font(.title2)
+                        .padding()
+                }
             }
+            .onAppear {
+                startGame()
+                updateRandomIndex()
+                questionsPerGame = words.count
+                
+            }
+            .background(.thinMaterial)
+            .cornerRadius(15)
+            .shadow(color: Color.gray, radius: 4, x:0, y:2)
+            .padding()
+            .rotationEffect(.degrees(rotationAngle))
+        
         }
-        .onAppear {
-            startGame()
-            updateRandomIndex()
-            questionsPerGame = words.count
-            
-        }
-    }
+        
     
+    }
     private func startGame() {
         currentWords = Array(words.shuffled().prefix(2))
         currentQuestion = 1
@@ -242,3 +257,42 @@ struct TriviaView: View {
     }
     
 }
+
+/*
+ VStack {
+ Text("What does \(words[randomIndexP1].value ?? "No value") mean?")
+ .font(.title2)
+ .padding()
+ 
+ VStack {
+ if randomIndexResponse == 0 {
+ translationView(randomIndexP1) {
+ print("correcto")
+ checkAnswer()
+ updateRandomIndex()
+ }
+ 
+ //Spacer()
+ 
+ translationView(randomIndexP2) {
+ print("respuesta errada")
+ }
+ } else {
+ translationView(randomIndexP2) {
+ print("respuesta errada")
+ }
+ 
+ //Spacer()
+ 
+ translationView(randomIndexP1) {
+ print("correcto")
+ checkAnswer()
+ updateRandomIndex()
+ }
+ }
+ }
+ }
+ .onAppear {
+ updateRandomIndex()
+ }
+ */

@@ -125,6 +125,8 @@ struct WordView: View {
             //QuizView()
             //ChatView()
             TriviaView()
+            //QuizView2()
+                //.background(Color.blue.edgesIgnoringSafeArea(.all))
             //PayWallContentView()
             //ConfettiView()
             
