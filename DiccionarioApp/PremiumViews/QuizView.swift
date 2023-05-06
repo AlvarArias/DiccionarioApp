@@ -54,6 +54,7 @@ struct QuizView: View {
                                 .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: 1, z: 0))
                         } else {
                             FrontOfCardView(myWord: words[randomIndex].value ?? "No word")
+                                .id(words[randomIndex].value)
                                 .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: 1, z: 0))
                         }
                     }
@@ -69,19 +70,18 @@ struct QuizView: View {
                 }
                 
                 Button("Next Card") {
-                    updateRandomIndex()
-                    print("flipped \(flipped)")
-                    flipped.toggle()
-                        withAnimation (.easeInOut(duration: 0.5)) {
-                            flipped = false
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             rotationAngle += 360
                         }
-                    
-                    print("flipped.toggle \(flipped)")
-                    
-                    
-                }
-                .padding()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                updateRandomIndex()
+                                flipped = false
+                            }
+                        }
+                    }
+                   .padding()
+                
                 
                 Spacer()
                 
@@ -129,12 +129,13 @@ struct FrontOfCardView: View {
     
     var body: some View {
         ZStack {
-            Color.blue
+            Color.blue.opacity(0.5)
             Text(myWord)
                 .foregroundColor(.white)
         }
         .frame(width: 200, height: 300)
         .cornerRadius(20)
+        .shadow(color: Color.gray, radius: 1, x:0, y:2)
     }
 }
 
@@ -144,12 +145,13 @@ struct BackOfCardView: View {
     
     var body: some View {
         ZStack {
-            Color.red
+            Color.red.opacity(0.5)
             Text(myTranslation)
                 .foregroundColor(.white)
         }
         .frame(width: 200, height: 300)
         .cornerRadius(20)
+        .shadow(color: Color.gray, radius: 1, x:0, y:2)
     }
 }
 
