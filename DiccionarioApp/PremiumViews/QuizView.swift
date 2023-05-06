@@ -33,83 +33,64 @@ struct QuizView: View {
     @State private var flipped = false
     
     var body: some View {
-        NavigationView {
-         
+        //NavigationView {
+          
+        ZStack {
+                
+                Color.teal
+                    .opacity(0.5)
+            
+            
+            
             VStack {
-                /*
-                List {
-                    
-                    if !words.isEmpty {
-                        Text(words[randomIndex].value ?? "No value")
-                            .font(.headline)
-                        Text(words[randomIndex].type ?? "No type")
-                            .font(.subheadline)
-                        Text(words[randomIndex].translation ?? "no information")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    } else {
-                        Text("No words available.")
-                            .font(.headline)
-                    }
-                    
-                    Button("Next Question") {
-                        updateRandomIndex()
-                    }
-                    .padding()
-                }
-                .scrollContentBackground(.hidden)
-                .navigationTitle(LocalizedStringKey("quiz"))
-                .navigationBarTitleDisplayMode(.inline)
-                .onAppear(perform: updateRandomIndex)
-                .toolbar {
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        Button { dismiss() } label: {
-                            Image(systemName: "arrow.down")
-                                .foregroundColor(Color.orange)
-                        }
-                        
-                    }
-                    
-                }
-                .background(
-                    LinearGradient(
-                        gradient: Gradient(
-                            colors: [
-                                Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
-                                Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
-                            ]
-                        ),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                */
+   
                 // Flascards
                 VStack {
-                           if flipped {
-                               BackOfCardView(myTranslation: words[randomIndex].translation ?? "No translation")
-                                   .transition(.scale)
-                                   .rotation3DEffect(.degrees(360), axis: (x: 0, y: 1, z: 0))
-                           } else {
-                               FrontOfCardView(myWord: words[randomIndex].value ?? "No word")
-                                   .transition(.scale)
-                                   .rotation3DEffect(.degrees(360), axis: (x: 0, y: 1, z: 0))
-                           }
-                       }
-                       .onTapGesture {
-                           withAnimation {
-                               flipped.toggle()
-                           }
-                       }
+                    
+                    Text("Cards").font(.title)
+                        .padding()
+                    
+                    
+                    VStack {
+                        if flipped {
+                            BackOfCardView(myTranslation: words[randomIndex].translation ?? "No translation")
+                                .transition(.scale)
+                                .rotation3DEffect(.degrees(360), axis: (x: 0, y: 1, z: 0))
+                        } else {
+                            FrontOfCardView(myWord: words[randomIndex].value ?? "No word")
+                                .transition(.scale)
+                                .rotation3DEffect(.degrees(360), axis: (x: 0, y: 1, z: 0))
+                        }
+                    }
+                    .onTapGesture {
+                        withAnimation {
+                            flipped.toggle()
+                        }
+                    }
+                    .padding()
+                    
+                }
                 
-                Button("Next Question") {
+                Button("Next Card") {
                     updateRandomIndex()
                     flipped = false
                 }
                 .padding()
                 
+                Spacer()
+                
+                Button { dismiss() } label: {
+                    Image(systemName: "arrow.down")
+                        .foregroundColor(Color.orange)
+                }
+                .padding()
+                
             }
-            
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.thinMaterial)
+            .cornerRadius(15)
+            .shadow(color: Color.gray, radius: 4, x:0, y:2)
+            .padding()
         }
         
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
@@ -151,3 +132,53 @@ struct BackOfCardView: View {
         .cornerRadius(20)
     }
 }
+
+
+/*
+List {
+    
+    if !words.isEmpty {
+        Text(words[randomIndex].value ?? "No value")
+            .font(.headline)
+        Text(words[randomIndex].type ?? "No type")
+            .font(.subheadline)
+        Text(words[randomIndex].translation ?? "no information")
+            .font(.caption)
+            .foregroundColor(.secondary)
+    } else {
+        Text("No words available.")
+            .font(.headline)
+    }
+    
+    Button("Next Question") {
+        updateRandomIndex()
+    }
+    .padding()
+}
+.scrollContentBackground(.hidden)
+.navigationTitle(LocalizedStringKey("quiz"))
+.navigationBarTitleDisplayMode(.inline)
+.onAppear(perform: updateRandomIndex)
+.toolbar {
+    ToolbarItemGroup(placement: .bottomBar) {
+        Button { dismiss() } label: {
+            Image(systemName: "arrow.down")
+                .foregroundColor(Color.orange)
+        }
+        
+    }
+    
+}
+.background(
+    LinearGradient(
+        gradient: Gradient(
+            colors: [
+                Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
+                Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
+            ]
+        ),
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+)
+*/

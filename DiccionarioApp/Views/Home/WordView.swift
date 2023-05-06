@@ -94,8 +94,8 @@ struct WordView: View {
                 settingsButton()
                 Spacer()
                 quizButton()
-                //Spacer()
-                historyButton()
+                Spacer()
+                cardButton()
                 Spacer()
                 savedWordButton()
             }
@@ -105,7 +105,8 @@ struct WordView: View {
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
 
     }
-        
+    
+    /*
     private func historyButton() -> some View {
         Button(action: { showHistory.toggle() }) {
             Image(systemName: "list.bullet")
@@ -113,23 +114,32 @@ struct WordView: View {
         }
         .sheet(isPresented: $showHistory) {
             FavoriteView(searchWors: $searchWords)
+            
         }
     }
+    */
+    
+    private func cardButton() -> some View {
+        Button(action: { showHistory.toggle() }) {
+            Image(systemName: "menucard")
+                .foregroundColor(Color.orange)
+        }
+        .sheet(isPresented: $showHistory) {
+            // Cards
+            QuizView()
+            
+        }
+    }
+    
 
     private func quizButton() -> some View {
         Button(action: { showQuiz.toggle() }) {
-            Image(systemName: "wand.and.stars")
+            //Image(systemName: "wand.and.stars")
+            Image(systemName: "questionmark.bubble")
                 .foregroundColor(Color.orange)
         }
         .sheet(isPresented: $showQuiz) {
-            //QuizView()
-            //ChatView()
             TriviaView()
-            //QuizView2()
-                //.background(Color.blue.edgesIgnoringSafeArea(.all))
-            //PayWallContentView()
-            //ConfettiView()
-            
         }
     }
     
