@@ -54,7 +54,7 @@ struct SearchBarView: View {
             
             showProgressBar = true
             
-            text = ""
+            text = newWord
         }
     }
 }
