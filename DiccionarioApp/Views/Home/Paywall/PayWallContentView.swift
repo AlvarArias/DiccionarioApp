@@ -52,6 +52,7 @@ struct PayWallContentView: View {
                         .padding([.top, .bottom], 20)
                         
                         }
+                        
                         /*
                         ForEach(Meditation.getSampleMeditations()) { meditation in
                          */
@@ -60,6 +61,7 @@ struct PayWallContentView: View {
                                 if userViewModel.isSubscriptionActive {
                                     // TODO: Show  meditation
                                 }
+                                
                                 else {
                                 isPaywallPresented = true
                                 }

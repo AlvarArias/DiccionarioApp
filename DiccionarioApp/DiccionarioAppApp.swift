@@ -19,7 +19,7 @@ struct DiccionarioAppApp: App {
     
     @StateObject private var dataController = DataController()
     
-    @StateObject var userViewModel = UserViewModel()
+    @StateObject var userViewModel = UserViewModel(isSubscriptionActive: false)
     
     
     var body: some Scene {
