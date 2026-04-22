@@ -9,66 +9,199 @@ import XCTest
 import Combine
 @testable import DiccionarioApp
 
+@MainActor
 final class DiccionarioAppTests: XCTestCase {
-        
-    var viewModel: WordViewModel!
-    var cancellables: Set<AnyCancellable> = []
 
-    override func setUp() {
-        super.setUp()
-        viewModel = WordViewModel()
-    }
+    var cancellables: Set<AnyCancellable> = []
 
     override func tearDown() {
         cancellables.removeAll()
+        UserDefaults.standard.removeObject(forKey: "FavoriteWords")
         super.tearDown()
     }
 
-    func testFetchPosts() {
-        let expectation = XCTestExpectation(description: "Fetching posts from API")
-        let word = "katt"
-        let dir = "to"
-        _ = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON")!
+    // MARK: - WordViewModel
+
+    func testFetchPostsReturnsResults() async throws {
+        let viewModel = WordViewModel()
+        let expectation = XCTestExpectation(description: "API returns results for 'katt'")
 
         viewModel.$results
             .dropFirst()
-            .sink(receiveValue: { results in
-                // Assert that at least one result was returned
+            .sink { results in
                 XCTAssertGreaterThan(results.count, 0)
                 expectation.fulfill()
-            })
+            }
             .store(in: &cancellables)
 
-        viewModel.fetchPosts(word: word, dir: dir)
+        viewModel.fetchPosts(word: "katt", dir: "to")
 
-        wait(for: [expectation], timeout: 5.0)
+        await fulfillment(of: [expectation], timeout: 10.0)
     }
 
-     
-}
+    func testFetchPostsPublishesErrorForUnknownWord() async throws {
+        let viewModel = WordViewModel()
+        let expectation = XCTestExpectation(description: "Error publisher fires for unknown word")
 
+        viewModel.errorPublisher
+            .sink { message in
+                XCTAssertFalse(message.isEmpty)
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
 
-/*
-override func setUpWithError() throws {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
+        viewModel.fetchPosts(word: "zzzznotaword99999", dir: "to")
 
-override func tearDownWithError() throws {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-}
+        await fulfillment(of: [expectation], timeout: 10.0)
+    }
 
-func testExample() throws {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-    // Any test you write for XCTest can be annotated as throws and async.
-    // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-    // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-}
+    func testFetchPostsFromDirection() async throws {
+        let viewModel = WordViewModel()
+        let expectation = XCTestExpectation(description: "API returns results for 'gato' in 'from' direction")
 
-func testPerformanceExample() throws {
-    // This is an example of a performance test case.
-    measure {
-        // Put the code you want to measure the time of here.
+        viewModel.$results
+            .dropFirst()
+            .sink { results in
+                XCTAssertGreaterThan(results.count, 0)
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+
+        viewModel.fetchPosts(word: "gato", dir: "from")
+
+        await fulfillment(of: [expectation], timeout: 10.0)
+    }
+
+    // MARK: - Model Decoding
+
+    func testResultDecodingFromJSON() throws {
+        let json = """
+        {
+            "Status": "OK",
+            "Wordbase": "swe_spa",
+            "Result": [
+                {
+                    "Value": "katt",
+                    "Type": "subst.",
+                    "VariantID": "1",
+                    "BaseLang": {
+                        "Phonetic": { "File": "katt.mp3", "Content": "kat" },
+                        "Inflection": [{ "Content": "katten" }],
+                        "Meaning": "husdjuret Felis ocreata domestica",
+                        "Illustration": [],
+                        "Comment": null
+                    },
+                    "TargetLang": {
+                        "Translation": "gato",
+                        "Synonym": ["michi"],
+                        "Comment": null
+                    }
+                }
+            ]
+        }
+        """.data(using: .utf8)!
+
+        let words = try JSONDecoder().decode(Words.self, from: json)
+
+        XCTAssertEqual(words.status, "OK")
+        XCTAssertEqual(words.result.count, 1)
+        let result = words.result[0]
+        XCTAssertEqual(result.value, "katt")
+        XCTAssertEqual(result.type, "subst.")
+        XCTAssertEqual(result.baseLang?.meaning, "husdjuret Felis ocreata domestica")
+        XCTAssertEqual(result.baseLang?.phonetic?.content, "kat")
+        XCTAssertEqual(result.baseLang?.phonetic?.file, "katt.mp3")
+        XCTAssertEqual(result.baseLang?.inflection?.first?.content, "katten")
+        XCTAssertEqual(result.targetLang?.translation, "gato")
+        XCTAssertEqual(result.targetLang?.synonym?.first, "michi")
+    }
+
+    func testResultDecodingWithMissingOptionalFields() throws {
+        let json = """
+        {
+            "Status": "OK",
+            "Wordbase": "swe_spa",
+            "Result": [
+                {
+                    "Value": "hund",
+                    "Type": "subst.",
+                    "VariantID": null,
+                    "BaseLang": null,
+                    "TargetLang": null
+                }
+            ]
+        }
+        """.data(using: .utf8)!
+
+        let words = try JSONDecoder().decode(Words.self, from: json)
+        let result = words.result[0]
+
+        XCTAssertEqual(result.value, "hund")
+        XCTAssertNil(result.baseLang)
+        XCTAssertNil(result.targetLang)
+        XCTAssertNil(result.variantID)
+    }
+
+    // MARK: - WordListViewModel
+
+    func testAddWordAppendsToList() {
+        let vm = WordListViewModel()
+        vm.favoriteWords = []
+
+        vm.addWord("katt")
+        vm.addWord("hund")
+
+        XCTAssertEqual(vm.favoriteWords, ["katt", "hund"])
+    }
+
+    func testRemoveWordDeletesAtOffset() {
+        let vm = WordListViewModel()
+        vm.favoriteWords = ["katt", "hund", "fisk"]
+
+        vm.removeWord(at: IndexSet(integer: 1))
+
+        XCTAssertEqual(vm.favoriteWords, ["katt", "fisk"])
+    }
+
+    func testWordListPersistsToUserDefaults() {
+        let vm = WordListViewModel()
+        vm.favoriteWords = []
+        vm.addWord("katt")
+
+        let stored = UserDefaults.standard.stringArray(forKey: "FavoriteWords")
+        XCTAssertEqual(stored, ["katt"])
+    }
+
+    func testWordListLoadsFromUserDefaults() {
+        UserDefaults.standard.set(["hund", "katt"], forKey: "FavoriteWords")
+
+        let vm = WordListViewModel()
+
+        XCTAssertEqual(vm.favoriteWords, ["hund", "katt"])
+    }
+
+    // MARK: - AppEnvironment
+
+    func testDefaultLanguageIsEnglish() {
+        let env = AppEnvironment()
+        XCTAssertEqual(env.currentLanguage, "en")
+    }
+
+    func testLanguageChangeUpdatesPublishedValue() {
+        let env = AppEnvironment()
+        env.currentLanguage = "sv"
+        XCTAssertEqual(env.currentLanguage, "sv")
+    }
+
+    // MARK: - UserViewModel
+
+    func testUserViewModelInactiveByDefault() {
+        let vm = UserViewModel(isSubscriptionActive: false)
+        XCTAssertFalse(vm.isSubscriptionActive)
+    }
+
+    func testUserViewModelActiveState() {
+        let vm = UserViewModel(isSubscriptionActive: true)
+        XCTAssertTrue(vm.isSubscriptionActive)
     }
 }
-*/
