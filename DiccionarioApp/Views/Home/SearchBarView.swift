@@ -38,7 +38,7 @@ struct SearchBarView: View {
         }
         .padding(15)
         .background(Color(UIColor.orange).opacity(0.4))
-        .cornerRadius(10)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding(.horizontal)
         .shadow(color: .orange, radius: 0.5, x: 0.5, y: -0.5)
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))

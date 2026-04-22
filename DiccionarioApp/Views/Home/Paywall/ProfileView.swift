@@ -43,7 +43,7 @@ struct ProfileView: View {
                 Text("Restore Purchases")
                     .padding()
                     .background(.blue)
-                    .cornerRadius(10)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
                     .foregroundColor(.white)
                 
             }
@@ -55,10 +55,8 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
+#Preview {
+    ProfileView()
 }
 
 

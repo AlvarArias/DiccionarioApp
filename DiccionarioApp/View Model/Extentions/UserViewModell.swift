@@ -8,6 +8,7 @@
 import Foundation
 
 
+@MainActor
 class UserViewModel: ObservableObject {
     
     var isSubscriptionActive : Bool

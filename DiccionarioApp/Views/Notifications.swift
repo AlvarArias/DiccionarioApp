@@ -25,7 +25,7 @@ struct NotificationView: View {
         
         .frame(minWidth: 100)
         .background(Color.orange.opacity(0.35))
-        .cornerRadius(8)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
         .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 10)
         
     }
@@ -48,7 +48,7 @@ struct NotificationCore: View {
         
         .frame(minWidth: 100)
         .background(Color.blue.opacity(0.35))
-        .cornerRadius(8)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
         .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 10)
         
     }

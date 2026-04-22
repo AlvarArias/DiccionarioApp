@@ -60,7 +60,7 @@ struct SavedWordView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(words) { word in
                     VStack(alignment: .leading) {
@@ -131,10 +131,8 @@ struct SavedWordView: View {
     }
 }
 
-struct SavedWordView_Previews: PreviewProvider {
-    static var previews: some View {
-        SavedWordView()
-    }
+#Preview {
+    SavedWordView()
 }
 
 

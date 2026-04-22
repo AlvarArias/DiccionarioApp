@@ -8,72 +8,62 @@
 import SwiftUI
 
 struct FavoriteView: View {
-    
+
     //MARK: Env
     @EnvironmentObject var appEnvironment: AppEnvironment
     @Environment(\.dismiss) var dismiss
-    @Environment(\.presentationMode) var presentationMode
-    
+
     @StateObject private var wordListViewModel = WordListViewModel()
 
     @Binding var searchWors: [String]
-    
+
     var body: some View {
-      
-            NavigationView {
-                
-                VStack {
-  
-                    ScrollView {
-                        ForEach(searchWors, id: \.self) { word in
-                            HStack{
-                                Spacer()
-                                Text(word)
-                                Spacer()
-                                }
-                            .padding(15)
-                            .background(Color(UIColor.white).opacity(0.9))
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                            .foregroundColor(Color.black)
-                            .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
-                            }
- 
+        NavigationStack {
+            VStack {
+                ScrollView {
+                    ForEach(searchWors, id: \.self) { word in
+                        HStack {
+                            Spacer()
+                            Text(word)
+                            Spacer()
                         }
-        
-                }
-                .scrollContentBackground(.hidden)
-                .navigationTitle(LocalizedStringKey("searchhistory"))
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        Button { dismiss() } label: {
-                            Image(systemName: "arrow.down")
-                                .foregroundColor(Color.orange)
-                        }
-                        
+                        .padding(15)
+                        .background(Color(UIColor.white).opacity(0.9))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .padding(.horizontal)
+                        .foregroundColor(Color.black)
+                        .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
                     }
                 }
-                .background(
-                    LinearGradient(
-                        gradient: Gradient(
-                            colors: [
-                                Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
-                                Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
-                            ]
-                        ),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-               
             }
-            .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
+            .scrollContentBackground(.hidden)
+            .navigationTitle(LocalizedStringKey("searchhistory"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button { dismiss() } label: {
+                        Image(systemName: "arrow.down")
+                            .foregroundColor(Color.orange)
+                    }
+                }
+            }
+            .background(
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [
+                            Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
+                            Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
+                        ]
+                    ),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
         }
+        .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }
+}
 
-struct FavoriteView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoriteView( searchWors: .constant([""]))
-    }
+#Preview {
+    FavoriteView(searchWors: .constant([""]))
 }

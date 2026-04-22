@@ -36,13 +36,10 @@ struct ChatView: View {
             ScrollView {
                 LazyVStack(alignment: .leading) {
                     
-                    ForEach (openAPIviewModel.chatResponse, id:\.self) { response in
-                        VStack {
-                            Text(response).font(.caption)
-                                .cornerRadius(15)
-                                .padding()
-                        }
-
+                    ForEach(openAPIviewModel.chatResponse, id: \.self) { response in
+                        Text(response)
+                            .font(.caption)
+                            .padding()
                     }
                 }
             }
@@ -51,8 +48,6 @@ struct ChatView: View {
         
 }
 
-struct ChatView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatView()
-    }
+#Preview {
+    ChatView()
 }

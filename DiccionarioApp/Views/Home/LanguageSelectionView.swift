@@ -46,7 +46,8 @@ struct LanguageSelectionView: View {
                             if errorMessage != "OK" {
                                 showNotification = true
                                                             
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                Task {
+                                    try? await Task.sleep(for: .seconds(2))
                                     withAnimation {
                                         showNotification = false
                                     }
@@ -61,7 +62,7 @@ struct LanguageSelectionView: View {
             }
         }
         .padding(10)
-        .cornerRadius(10)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .padding()
         .overlay(
                     Group {

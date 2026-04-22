@@ -57,8 +57,6 @@ struct SimplePayWallView: View {
     
 }
 
-struct SimplePayWallView_Previews: PreviewProvider {
-    static var previews: some View {
-        SimplePayWallView()
-    }
+#Preview {
+    SimplePayWallView()
 }

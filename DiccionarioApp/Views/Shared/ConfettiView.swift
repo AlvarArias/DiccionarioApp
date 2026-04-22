@@ -21,8 +21,6 @@ struct ConfettiView: View {
     }
 }
 
-struct ConfettiView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConfettiView()
-    }
+#Preview {
+    ConfettiView()
 }

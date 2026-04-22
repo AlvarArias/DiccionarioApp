@@ -118,7 +118,7 @@ struct TriviaView: View {
                                 .padding()
                                 .background(isCorrect == true ? Color.blue.opacity(0.7) : Color.white)
                                 .foregroundColor(isCorrect == true ? Color.white : Color.black)
-                                .cornerRadius(15)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
                             
                             Text(words[randomIndexP2].translation ?? "No translation")
                                 .onTapGesture {
@@ -131,7 +131,7 @@ struct TriviaView: View {
                                 .padding()
                                 .background(isNotCorrect == true ? Color.red.opacity(0.7) : Color.white)
                                 .foregroundColor(isCorrect == true ? Color.white : Color.black)
-                                .cornerRadius(15)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
                                 .modifier(ShakeEffect(shakes: isNotCorrect ? 3 : 0))
                             
                         }
@@ -152,7 +152,7 @@ struct TriviaView: View {
                                 .padding()
                                 .background(isNotCorrect == true ? Color.red.opacity(0.7) : Color.white)
                                 .foregroundColor(isCorrect == true ? Color.white : Color.black)
-                                .cornerRadius(15)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
                                 .modifier(ShakeEffect(shakes: isNotCorrect ? 3 : 0))
                             
                             Text(words[randomIndexP1].translation ?? "No translation")
@@ -167,7 +167,7 @@ struct TriviaView: View {
                                 .padding()
                                 .background(isCorrect == true ? Color.blue.opacity(0.7) : Color.white)
                                 .foregroundColor(isCorrect == true ? Color.white : Color.black)
-                                .cornerRadius(15)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
                             
                         }
                     }
@@ -209,7 +209,7 @@ struct TriviaView: View {
                 
             }
             .background(.thinMaterial)
-            .cornerRadius(15)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
             .shadow(color: Color.gray, radius: 4, x:0, y:2)
             .padding()
             .rotationEffect(.degrees(rotationAngle))
@@ -248,8 +248,8 @@ struct TriviaView: View {
     }
     
     func doSomethingAfter30Seconds() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            // Code to be executed after 30 seconds goes here
+        Task {
+            try? await Task.sleep(for: .seconds(2.5))
             updateRandomIndex()
             isCorrect = false
             isNotCorrect = false

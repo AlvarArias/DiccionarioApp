@@ -131,29 +131,23 @@ struct DetailView: View {
     
     
     func showNotifCoreData() {
-        
         isSavedCData = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-
+        Task {
+            try? await Task.sleep(for: .seconds(0.25))
             withAnimation {
                 isSavedCData = false
             }
         }
-        
     }
-    
-    func showNotifDuplicateData() {
-        
-        isDuplicateData = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
 
+    func showNotifDuplicateData() {
+        isDuplicateData = true
+        Task {
+            try? await Task.sleep(for: .seconds(0.25))
             withAnimation {
                 isDuplicateData = false
             }
         }
-        
     }
     
     
@@ -186,10 +180,16 @@ struct DetailView: View {
 
 
 
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailView(player: PlayerWord(), selectedLang: .constant(false), result: .init(variantID: "variantID", value: "value", type: "type", baseLang: BaseLang(phonetic: Phonetic(file: "file", content: "content"), inflection: [Inflection(content: "content")], meaning: "meaning", illustration: [Illustration(type: "type", value: "value")], comment: "comment"), targetLang: TargetLang(translation: "translation", synonym: ["synonym"], comment: "comment")))
-    }
+#Preview {
+    DetailView(
+        player: PlayerWord(),
+        selectedLang: .constant(false),
+        result: .init(
+            variantID: "variantID", value: "value", type: "type",
+            baseLang: BaseLang(phonetic: Phonetic(file: "file", content: "content"), inflection: [Inflection(content: "content")], meaning: "meaning", illustration: [Illustration(type: "type", value: "value")], comment: "comment"),
+            targetLang: TargetLang(translation: "translation", synonym: ["synonym"], comment: "comment")
+        )
+    )
 }
 
 

@@ -9,6 +9,7 @@
 import Combine
 import SwiftUI
 
+@MainActor
 class AppEnvironment: ObservableObject {
     @Published var currentLanguage: String = "en" {
         didSet {

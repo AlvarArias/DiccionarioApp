@@ -17,7 +17,7 @@ struct SettingsView: View {
     @AppStorage("hasApiKey") var hasApiKey: Bool = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 VStack {
                     Picker(LocalizedStringKey("language"), selection: $appEnvironment.currentLanguage) {

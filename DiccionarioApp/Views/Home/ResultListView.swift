@@ -41,7 +41,7 @@ struct ResultsListView: View {
                     }
                     .padding(15)
                     .background(Color(UIColor.white).opacity(0.9))
-                    .cornerRadius(10)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
                     .padding(.horizontal)
                     .foregroundColor(Color.black)
                     .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)

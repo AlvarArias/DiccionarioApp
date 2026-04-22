@@ -29,7 +29,7 @@ struct QuizView2: View {
                     .font(.title)
                     .padding()
                     .background(.thinMaterial) // Set your desired 
-                    .cornerRadius(10)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
                 
                 Button("Close") {
                     dismiss()
@@ -40,8 +40,6 @@ struct QuizView2: View {
     }
 }
 
-struct QuizView2_Previews: PreviewProvider {
-    static var previews: some View {
-        QuizView2()
-    }
+#Preview {
+    QuizView2()
 }

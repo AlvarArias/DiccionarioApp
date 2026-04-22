@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 
+@MainActor
 class WordListViewModel: ObservableObject {
     @Published var favoriteWords: [String] {
         didSet {

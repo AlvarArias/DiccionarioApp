@@ -66,10 +66,9 @@ struct Paywall: View {
                     } label: {
                         
                         ZStack {
-                            Rectangle()
+                            RoundedRectangle(cornerRadius: 10)
                                 .frame(height: 55)
                                 .foregroundColor(.blue)
-                                .cornerRadius(10)
                             
                             
                             Text("\(pkg.storeProduct.subscriptionPeriod!.periodTitle) \(pkg.storeProduct.localizedPriceString)")
@@ -101,8 +100,6 @@ struct Paywall: View {
     }
 }
 
-struct Paywall_Previews: PreviewProvider {
-    static var previews: some View {
-        Paywall(isPaywallPresented: .constant(false))
-    }
+#Preview {
+    Paywall(isPaywallPresented: .constant(false))
 }

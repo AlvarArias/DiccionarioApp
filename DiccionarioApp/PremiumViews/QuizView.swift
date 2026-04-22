@@ -73,7 +73,8 @@ struct QuizView: View {
                         withAnimation(.easeInOut(duration: 0.5)) {
                             rotationAngle += 360
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        Task {
+                            try? await Task.sleep(for: .seconds(0.15))
                             withAnimation(.easeInOut(duration: 0.5)) {
                                 updateRandomIndex()
                                 flipped = false
@@ -94,7 +95,7 @@ struct QuizView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.thinMaterial)
-            .cornerRadius(15)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
             .shadow(color: Color.gray, radius: 4, x:0, y:2)
             .padding()
         }
@@ -117,10 +118,8 @@ struct QuizView: View {
     
 }
 
-struct QuizView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuizView()
-    }
+#Preview {
+    QuizView()
 }
 
 struct FrontOfCardView: View {
@@ -134,7 +133,7 @@ struct FrontOfCardView: View {
                 .foregroundColor(.white)
         }
         .frame(width: 200, height: 300)
-        .cornerRadius(20)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: Color.gray, radius: 1, x:0, y:2)
     }
 }
@@ -150,7 +149,7 @@ struct BackOfCardView: View {
                 .foregroundColor(.white)
         }
         .frame(width: 200, height: 300)
-        .cornerRadius(20)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: Color.gray, radius: 1, x:0, y:2)
     }
 }

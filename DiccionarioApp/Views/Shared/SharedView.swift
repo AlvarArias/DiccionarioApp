@@ -16,8 +16,6 @@ struct SharedView: View {
     }
 }
 
-struct SharedView_Previews: PreviewProvider {
-    static var previews: some View {
-        SharedView()
-    }
+#Preview {
+    SharedView()
 }

@@ -24,6 +24,7 @@ public class Word: NSManagedObject, Identifiable {
 }
 
 
+@MainActor
 class DataController: ObservableObject {
     let container = NSPersistentContainer(name: "WordModel")
     

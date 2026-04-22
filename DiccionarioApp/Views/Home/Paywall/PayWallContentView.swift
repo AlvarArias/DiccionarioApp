@@ -17,7 +17,7 @@ struct PayWallContentView: View {
         
         TabView {
             
-            NavigationView {
+            NavigationStack {
                 
                 ScrollView (showsIndicators: false) {
                     
@@ -44,7 +44,7 @@ struct PayWallContentView: View {
                                 }
                                 .padding(10)
                                 .background(Color.blue)
-                                .cornerRadius(10)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .foregroundColor(Color.white)
                             }
                             .padding(20)
@@ -109,8 +109,6 @@ struct PayWallContentView: View {
     }
 }
 
-struct PayWallContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    PayWallContentView()
 }
