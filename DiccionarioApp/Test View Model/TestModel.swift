@@ -16,36 +16,28 @@ struct Post: Identifiable, Codable {
     let body: String
 }
 
+@MainActor
 class PostViewModel: ObservableObject {
     @Published var posts = [Post]()
-    
+
     func fetchPosts() {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/posts") else {
             fatalError("Invalid URL")
         }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error fetching posts: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200,
-                  let data = data else {
-                print("Invalid response")
-                return
-            }
-            
+
+        Task {
             do {
-                let posts = try JSONDecoder().decode([Post].self, from: data)
-                DispatchQueue.main.async {
-                    self.posts = posts
+                let (data, response) = try await URLSession.shared.data(from: url)
+                guard let httpResponse = response as? HTTPURLResponse,
+                      httpResponse.statusCode == 200 else {
+                    print("Invalid response")
+                    return
                 }
+                posts = try JSONDecoder().decode([Post].self, from: data)
             } catch {
-                print("Error decoding posts: \(error.localizedDescription)")
+                print("Error fetching posts: \(error.localizedDescription)")
             }
-        }.resume()
+        }
     }
 }
 
