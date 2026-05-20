@@ -68,6 +68,7 @@
 		62B820972FBE2E190023B064 /* WordSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B820962FBE2E190023B064 /* WordSearchViewModel.swift */; };
 		62B820992FBE38140023B064 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B820982FBE38140023B064 /* DetailViewModel.swift */; };
 		62B8209B2FBE3B600023B064 /* TriviaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8209A2FBE3B600023B064 /* TriviaViewModel.swift */; };
+		62B8209D2FBE3C010023B064 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8209C2FBE3C010023B064 /* QuizViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +174,7 @@
 		62B820962FBE2E190023B064 /* WordSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchViewModel.swift; sourceTree = "<group>"; };
 		62B820982FBE38140023B064 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		62B8209A2FBE3B600023B064 /* TriviaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaViewModel.swift; sourceTree = "<group>"; };
+		62B8209C2FBE3C010023B064 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +291,7 @@
 		623AD02829C8537B00216D99 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				62B8209C2FBE3C010023B064 /* QuizViewModel.swift */,
 				62B8209A2FBE3B600023B064 /* TriviaViewModel.swift */,
 				62B820982FBE38140023B064 /* DetailViewModel.swift */,
 				62B820962FBE2E190023B064 /* WordSearchViewModel.swift */,
@@ -614,6 +617,7 @@
 				62388CEF29C453FC006F4005 /* PostListView.swift in Sources */,
 				625EDADE29FA9361007E6005 /* PayWallView.swift in Sources */,
 				623AD02D29C86C2700216D99 /* FavoriteModel.swift in Sources */,
+				62B8209D2FBE3C010023B064 /* QuizViewModel.swift in Sources */,
 				622EC00529CDA3F800BED9F4 /* SavedWordView.swift in Sources */,
 				623AD02B29C853D500216D99 /* PlaySound.swift in Sources */,
 				625B091C29CF1DD40006BAEE /* ResultListView.swift in Sources */,
