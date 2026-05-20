@@ -112,12 +112,17 @@ class WordViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
     private let errorSubject = PassthroughSubject<String, Never>()
+    private let session: URLSession
 
     var errorPublisher: AnyPublisher<String, Never> {
         errorSubject.eraseToAnyPublisher()
     }
 
     @Published var results = [Result]()
+
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
 
     func fetchPosts(word: String, dir: String) {
         guard let url = URL(string: "http://lexin.nada.kth.se/lexin/service?searchinfo=\(dir),swe_spa,\(word)&output=JSON") else {
@@ -127,7 +132,7 @@ class WordViewModel: ObservableObject {
 
         Task {
             do {
-                let (data, response) = try await URLSession.shared.data(from: url)
+                let (data, response) = try await session.data(from: url)
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     errorSubject.send("Invalid response")
