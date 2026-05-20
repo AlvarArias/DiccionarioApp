@@ -23,11 +23,16 @@ Lexin API (JSON) → `WordViewModel` (async/await) → SwiftUI Views
 ### View Model Layer (`View Model/`)
 | File | Class | Responsibility |
 |------|-------|----------------|
-| `WordViewModel.swift` | `WordViewModel: ObservableObject` | Fetches words from Lexin API via `URLSession`, publishes `[Result]` |
+| `WordViewModel.swift` | `WordViewModel: ObservableObject` | Fetches words from Lexin API via `URLSession` (injectable), publishes `[Result]` |
+| `WordSearchViewModel.swift` | `WordSearchViewModel: ObservableObject` | Search logic: `performSearch`, `suggestions`, `voiceLocale`, language detection, UITextChecker |
+| `DetailViewModel.swift` | `DetailViewModel: ObservableObject` | CoreData save, duplicate detection, AVSpeechSynthesizer, `isSaved`/`isDuplicate` state |
+| `TriviaViewModel.swift` | `TriviaViewModel: ObservableObject` | Trivia game logic: `startGame`, `checkAnswer`, `updateRandomIndex`, score, game-end |
+| `QuizViewModel.swift` | `QuizViewModel: ObservableObject` | Flashcard random index: `updateRandomIndex` |
+| `SpeechRecognizer.swift` | `SpeechRecognizer: ObservableObject` | Voice search via `SFSpeechRecognizer`; publishes `transcript`, `isRecording`, `permissionDenied` |
 | `AppEnv.swift` | `AppEnvironment: ObservableObject` | Holds `currentLanguage` string, drives locale switching |
 | `DataController.swift` | `DataController: ObservableObject` | CoreData stack (`NSPersistentContainer` — model: `WordModel`) |
 | `FavoriteModel.swift` | `WordListViewModel: ObservableObject` | `UserDefaults`-backed list of saved words |
-| `OpenAPIViewModel.swift` | `ViewModel: ObservableObject` | ChatGPT integration via `ChatGPTSwift` for synonyms/examples |
+| `OpenAPIViewModel.swift` | `ViewModel: ObservableObject` | **PENDING DELETION** — ChatGPT/OpenAI (replaced by Apple Intelligence) |
 | `PlaySound.swift` | — | Audio playback for phonetic files |
 | `Extentions/UserViewModell.swift` | `UserViewModel: ObservableObject` | Subscription state (`isSubscriptionActive: Bool`) |
 | `Extentions/Extensions.swift` | — | General SwiftUI/Foundation helpers |
@@ -66,10 +71,10 @@ Views/
 ### Premium Views (`PremiumViews/`)
 | File | Purpose |
 |------|---------|
-| `ChatView.swift` | AI chat for word queries (uses `ViewModel`) |
-| `QuizView.swift` | Flashcard quiz with saved words (has empty-state guard) |
-| `QuizView2.swift` | Alternative quiz layout |
-| `TriviaView.swift` | Trivia game with saved words (requires ≥2 words, has empty-state guard) |
+| `ChatView.swift` | **PENDING DELETION** — AI chat using OpenAI (to be removed) |
+| `QuizView.swift` | Flashcard quiz — uses `QuizViewModel`; empty-state guard |
+| `QuizView2.swift` | Alternative quiz layout (placeholder) |
+| `TriviaView.swift` | Trivia game — uses `TriviaViewModel`; requires ≥2 words, empty-state guard |
 
 ---
 
@@ -237,15 +242,39 @@ Push to both independently. The user handles all commits and pushes manually.
 
 All `ObservableObject` classes are annotated `@MainActor`:
 - `AppEnvironment`, `WordViewModel`, `DataController`, `WordListViewModel`
-- `UserViewModel`, `PlayerWord`, `ViewModel` (OpenAPI)
+- `UserViewModel`, `PlayerWord`, `SpeechRecognizer`
+- `WordSearchViewModel`, `DetailViewModel`, `TriviaViewModel`, `QuizViewModel`
 
 `DispatchQueue` replaced throughout:
+
 - `URLSession.dataTask` → `async/await` + `Task { }` in `WordViewModel`
-- `DispatchQueue.main.async` in `OpenAPIViewModel` → removed (class is `@MainActor`)
-- `DispatchQueue.main.asyncAfter` → `Task { try? await Task.sleep(for:) ... }` in `DetailView`, `TriviaView`, `QuizView`
+- `DispatchQueue.main.asyncAfter` → `Task { try? await Task.sleep(for:) ... }` in `DetailViewModel`, `TriviaViewModel`
 - `.receive(on: DispatchQueue.main)` → `.receive(on: RunLoop.main)` in `PlaySound`
 
 `NavigationView` → `NavigationStack` in `WordView`, `SettingsView`.
+
+---
+
+## Testing
+
+**Test target:** `DiccionarioAppTests` — 43 unit tests, `@testable import DiccionarioApp`
+
+**`MockURLProtocol`** — `URLProtocol` subclass registered on an ephemeral `URLSession`. Injected via `WordViewModel(session: .mock)`. Intercepts all requests and returns controlled responses without hitting the network.
+
+| Area | Tests | What's covered |
+| --- | --- | --- |
+| API errors | 9 | `notConnectedToInternet`, HTTP 500, HTTP 404, malformed JSON, corrections-only, empty results, valid response, `dir="swe"`, `dir="spa"` |
+| Lexin quote bug | 1 | `\"` → `\"` transformation |
+| Model decoding | 3 | Full decode, missing optionals, corrections-only response |
+| `WordSearchViewModel` | 9 | `performSearch`, suggestions, `voiceLocale` |
+| `WordListViewModel` | 4 | add, remove, persist, load |
+| `AppEnvironment` | 2 | default language, change language |
+| `UserViewModel` | 2 | inactive/active state |
+| `TriviaViewModel` | 6 | `startGame`, index bounds, index uniqueness, `checkAnswer`, game-end |
+| `QuizViewModel` | 2 | valid index, empty list no-crash |
+| `DetailViewModel` | 2 | save new word → `isSaved`, duplicate → `isDuplicate` |
+
+**CoreData in tests:** `makeInMemoryContext()` creates an `NSPersistentContainer` with `NSInMemoryStoreType`. Uses `DiccionarioApp.myWord` (fully qualified) to avoid conflict if `WordModel.xcdatamodeld` is also added to the test target.
 
 ---
 
@@ -257,7 +286,10 @@ All `ObservableObject` classes are annotated `@MainActor`:
 | `Test View Model/` | `TestModel.swift`, `PostListView.swift` — test/scratch files, not shipped |
 | `DetailView.swift` | `myWord` CoreData entity name inconsistency with `Word` in `DataController` |
 | `ExampleSentenceView.swift` | Requires Apple Intelligence (iOS 26, device-side model) — degrades gracefully if unavailable |
+| `OpenAPIViewModel.swift` | Pending deletion in Xcode — right-click → Delete |
+| `ChatView.swift` | Pending deletion in Xcode — right-click → Delete |
+| Package Dependencies | `ChatGPTSwift` pending removal — Xcode → Project → Package Dependencies |
 
 ## Next Planned Features
 
-- **Speech framework** — voice search using `SFSpeechRecognizer` to transcribe audio and trigger `performSearch()` automatically
+- **Translation framework (iOS 17.4+)** — on-device Apple fallback when `errorMessage == "No word match"`. Show result in `WordView` with "Translated by Apple" label.

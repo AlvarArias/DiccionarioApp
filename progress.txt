@@ -4,57 +4,81 @@ Last updated: 2026-05-20
 
 ---
 
-COMPLETED FEATURES (natural-language branch)
----------------------------------------------
+COMPLETED FEATURES
+------------------
 
 1. NaturalLanguage — Auto language detection
-   - Added NLLanguageRecognizer in WordView.swift
-   - detectLanguage() returns true (Swedish) / false (Spanish) / nil (ambiguous)
-   - Ambiguous words default to Swedish (dir="swe")
-   - Files: WordView.swift
+   - NLLanguageRecognizer in WordSearchViewModel.detectLanguage()
+   - Returns true (Swedish) / false (Spanish) / nil (ambiguous → default swe)
+   - Files: View Model/WordSearchViewModel.swift
 
-2. Search suggestions with history
-   - Replaced SearchBarView with native SwiftUI .searchable
-   - Placement: .navigationBarDrawer(displayMode: .always) — keeps bar at top on iOS 26
-   - Suggestions combine session history + UserDefaults favorites (WordListViewModel)
-   - Filtered case-insensitively, sorted alphabetically
-   - Files: WordView.swift
+2. Search suggestions with history + UITextChecker
+   - Native SwiftUI .searchable — placement: .navigationBarDrawer(displayMode: .always)
+   - Suggestions = session history + UserDefaults favorites + UITextChecker system completions
+   - Filtered case-insensitively, sorted, capped at 8 results
+   - Files: View Model/WordSearchViewModel.swift, Views/Home/WordView.swift
 
 3. Word normalization before API call
    - Search input lowercased before calling fetchPosts(word:dir:)
-   - Files: WordView.swift (performSearch)
+   - Files: View Model/WordSearchViewModel.swift
 
 4. Lexin API fixes
    - Fixed wrong dir values ("to"/"from" → "swe"/"spa")
-   - Fixed JSON malformation bug: API sends \" instead of \" for quoted idioms
-     → Preprocessing rawString before JSONDecoder
-   - Made Words.result optional ([Result]?) — API omits Result key when no match found
+   - Fixed JSON malformation bug: API sends \" as \" — preprocessed before JSONDecoder
+   - Made Words.result optional ([Result]?) — API omits Result key when no match
    - Added Words.corrections ([String]?) — API returns this instead of Result on no match
-   - Files: WordViewModel.swift
+   - Files: View Model/WordViewModel.swift
 
 5. Foundation Models — AI example sentences (iOS 26)
-   - New ExampleSentenceView.swift using on-device Apple Intelligence
+   - ExampleSentenceView.swift using on-device Apple Intelligence
    - Uses SystemLanguageModel.default + LanguageModelSession
    - Streams response progressively with streamResponse(to:)
    - Graceful degradation if Apple Intelligence not available
-   - Shown in DetailView after AudioPlaybackView
-   - Files: Views/Detail/ExampleSentenceView.swift, DetailView.swift
-   - NOTE: Must be manually added to Xcode target if created outside Xcode
+   - Files: Views/Detail/ExampleSentenceView.swift
 
 6. QuizView empty-state guard
-   - Prevents crash when CoreData has no saved words
-   - Shows "Save words first to use flashcards." message
+   - Shows "Save words first to use flashcards." when CoreData has no words
    - Files: PremiumViews/QuizView.swift
 
-7. TriviaView empty-state guard + dismiss button
-   - Requires at least 2 saved words to play
-   - Shows "Save at least 2 words to play Trivia." message with dismiss arrow
+7. TriviaView empty-state guard
+   - Requires ≥2 saved words to play; shows message + dismiss button
    - Files: PremiumViews/TriviaView.swift
 
-8. Git multi-remote setup
-   - origin  → public GitHub repo (portfolio)
-   - private → private GitHub repo "DiccionarioApp-Private" (App Store version)
-   - Push independently; user manages all commits
+8. Speech framework — voice search
+   - SpeechRecognizer.swift: SFSpeechRecognizer, publishes transcript in real time
+   - toggle(locale:) starts/stops recording; stops automatically on isFinal
+   - WordView fires performSearch() automatically when speech ends
+   - Locale follows selectedLang: sv-SE (Swedish) or es-MX (Spanish)
+   - Does NOT work in simulator — requires physical device (AVAudioEngine)
+   - Permissions: NSSpeechRecognitionUsageDescription + NSMicrophoneUsageDescription in Info.plist
+   - Files: View Model/SpeechRecognizer.swift, Views/Home/WordView.swift
+
+9. ViewModel-per-View refactor (branch: refactorizacion)
+   - WordView → WordSearchViewModel (performSearch, suggestions, voiceLocale, detectLanguage, UITextChecker)
+   - DetailView → DetailViewModel (saveWord, speak, isSaved, isDuplicate)
+   - TriviaView → TriviaViewModel (startGame, checkAnswer, updateRandomIndex, doSomethingAfter30Seconds)
+   - QuizView → QuizViewModel (updateRandomIndex, randomIndex)
+   - Views now have zero business logic; FetchRequest/animation state stays in views
+   - NSManagedObjectContext passed as parameter to ViewModel methods (cannot live in ViewModel)
+   - Files: View Model/WordSearchViewModel.swift, DetailViewModel.swift, TriviaViewModel.swift, QuizViewModel.swift
+
+10. ChatGPT/OpenAI removal (partial)
+    - Removed @AppStorage("apiKey") and @AppStorage("hasApiKey") from SettingsView
+    - Removed commented-out OpenAI TextField from SettingsView
+    - PENDING in Xcode: delete OpenAPIViewModel.swift, ChatView.swift, remove ChatGPTSwift package
+
+11. Test suite — 43 unit tests
+    - MockURLProtocol: URLProtocol subclass for network mocking, no real API calls
+    - URLSession injection in WordViewModel: init(session: URLSession = .shared)
+    - API error tests: network error, HTTP 500, HTTP 404, malformed JSON,
+      corrections-only, empty results, valid response, dir="swe", dir="spa"
+    - Lexin quote bug fix test
+    - Fixed existing tests that used wrong dir values ("to"/"from")
+    - WordSearchViewModel: performSearch, suggestions, voiceLocale
+    - TriviaViewModel: startGame, index bounds/uniqueness, checkAnswer, game-end
+    - QuizViewModel: valid index, empty list no-crash
+    - DetailViewModel: save new word, duplicate detection (in-memory CoreData)
+    - Files: DiccionarioAppTests/DiccionarioAppTests.swift
 
 ---
 
@@ -67,34 +91,28 @@ None.
 NEXT UP
 -------
 
-1. Remove ChatGPT / OpenAI integration — replace with Apple Intelligence only
-   - [DONE] Remove @AppStorage("apiKey") and @AppStorage("hasApiKey") from SettingsView
-   - [DONE] Remove commented-out OpenAI TextField from SettingsView
-   - [PENDING] Delete OpenAPIViewModel.swift — do in Xcode (right-click → Delete)
-   - [PENDING] Delete ChatView.swift — do in Xcode (right-click → Delete)
-   - [PENDING] Remove ChatGPTSwift package — Xcode → Project → Package Dependencies → remove
-   - Goal: app uses only on-device Foundation Models (ExampleSentenceView)
-
-3. Translation framework (iOS 17.4+) — fallback cuando Lexin no encuentra la palabra
+1. Translation framework (iOS 17.4+) — fallback cuando Lexin no encuentra la palabra
    - Usar Apple on-device Translation como segunda opción
    - Activar solo cuando errorMessage == "No word match"
    - Mostrar resultado en WordView con indicación "Translated by Apple"
    - Útil para palabras nuevas o coloquiales que Lexin no tiene
 
-2. Speech framework — voice search
-   - Use SFSpeechRecognizer to transcribe audio
-   - Feed transcript into performSearch() automatically
-   - Adds microphone button to search bar area in WordView
-   - Completes the input loop (text-to-speech already exists in DetailView via AVSpeechSynthesizer)
+2. Remove ChatGPT / OpenAI (Xcode steps pending)
+   - Delete OpenAPIViewModel.swift — right-click → Delete in Xcode
+   - Delete ChatView.swift — right-click → Delete in Xcode
+   - Remove ChatGPTSwift package — Xcode → Project → Package Dependencies
 
 ---
 
 KNOWN ISSUES
 ------------
 
-- ExampleSentenceView requires Apple Intelligence (iOS 26 device with the model downloaded)
+- ExampleSentenceView requires Apple Intelligence (iOS 26 device with model downloaded)
   → Degrades gracefully with error message if unavailable
+- Speech framework does not work in simulator — test on physical device only
 - DixioClip/ContentView.swift is a placeholder — not implemented
 - myWord CoreData entity name inconsistent with "Word" in DataController
-- SourceKit sometimes reports false "Cannot find type in scope" warnings for
-  AppEnvironment, WordViewModel, UIColor — project compiles correctly in Xcode
+- SourceKit reports false "Cannot find type in scope" warnings for CoreData types
+  and test-target types — project compiles correctly in Xcode
+- If WordModel.xcdatamodeld is added to DiccionarioAppTests target, use
+  DiccionarioApp.myWord (fully qualified) in test helpers to avoid type conflict
