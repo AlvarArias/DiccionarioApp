@@ -63,6 +63,7 @@
 		625EDAE529FAA9A2007E6005 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625EDAE429FAA9A2007E6005 /* ConfettiView.swift */; };
 		6260188629F9490800F38B02 /* TriviaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6260188529F9490800F38B02 /* TriviaView.swift */; };
 		626FAA772B3C9DC1002387F9 /* UserViewModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FAA762B3C9DC1002387F9 /* UserViewModell.swift */; };
+		62B820932FBE0F310023B064 /* ExampleSentenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B820922FBE0F310023B064 /* ExampleSentenceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +164,7 @@
 		625EDAE429FAA9A2007E6005 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		6260188529F9490800F38B02 /* TriviaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaView.swift; sourceTree = "<group>"; };
 		626FAA762B3C9DC1002387F9 /* UserViewModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModell.swift; sourceTree = "<group>"; };
+		62B820922FBE0F310023B064 /* ExampleSentenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSentenceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +352,7 @@
 		625B092529CF5CC30006BAEE /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				62B820922FBE0F310023B064 /* ExampleSentenceView.swift */,
 				62388CF629C4B4F0006F4005 /* DetailView.swift */,
 				625B092629CF5CFE0006BAEE /* AudioPlaybackView.swift */,
 				625B092829CF69530006BAEE /* WordInfoView.swift */,
@@ -614,6 +617,7 @@
 				625B092929CF69530006BAEE /* WordInfoView.swift in Sources */,
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,
 				625B092429CF42610006BAEE /* AppEnv.swift in Sources */,
+				62B820932FBE0F310023B064 /* ExampleSentenceView.swift in Sources */,
 				622BDF1B29D031D800CC7051 /* Notifications.swift in Sources */,
 				625EDAD929FA7D90007E6005 /* PayWallContentView.swift in Sources */,
 				624C20DD29F9905500F731BC /* SharedView.swift in Sources */,
