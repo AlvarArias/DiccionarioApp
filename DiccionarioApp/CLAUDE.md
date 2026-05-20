@@ -9,7 +9,7 @@
 | `DiccionarioApp/` | Xcode App | Main dictionary app |
 | `DixioClip/` | App Clip | Lightweight clip entry point |
 
-**Frameworks:** SwiftUI, CoreData, Combine, NaturalLanguage, FoundationModels, RevenueCat, ChatGPTSwift  
+**Frameworks:** SwiftUI, CoreData, Combine, NaturalLanguage, FoundationModels, Speech, RevenueCat  
 **iOS Target:** 26.0  
 **Swift version:** 6.0 (strict concurrency enabled)
 
@@ -150,6 +150,35 @@ private func detectLanguage(for input: String) -> Bool? {
 - Check `SystemLanguageModel.default.isAvailable` before using
 - Stream the response with `session.streamResponse(to:)` for progressive display
 - Must be added to the Xcode target manually if created outside Xcode (right-click → "Add Files to DiccionarioApp...")
+
+---
+
+## Speech Framework
+
+`SpeechRecognizer.swift` (`View Model/`) — `@MainActor ObservableObject` that handles voice search:
+- `toggle(locale:)` — starts or stops recording
+- Requests microphone + speech recognition permissions automatically on first use
+- Publishes `transcript` in real time (text appears in search bar while speaking)
+- When speech ends (`isFinal == true`), stops recording and `WordView` fires `performSearch()` automatically
+- Locale follows `selectedLang`: `sv-SE` (Swedish) or `es-MX` (Spanish)
+- Permissions declared in `Info.plist`: `NSSpeechRecognitionUsageDescription` + `NSMicrophoneUsageDescription`
+- **Does not work in simulator** — test on physical device only (`AVAudioEngine` requires real microphone hardware)
+
+---
+
+## Apple AI Frameworks — Decision Log
+
+| Framework | Status | Reason |
+|-----------|--------|--------|
+| `NaturalLanguage` | Implemented | Language auto-detection |
+| `FoundationModels` | Implemented | On-device example sentences |
+| `Speech` | Implemented | Voice search |
+| `Translation` | Pending | Fallback when Lexin finds no match |
+| `NLTagger` | Considered | Part-of-speech tagging — not prioritized |
+| `Vision` | Rejected | Image analysis — not relevant for dictionary |
+| `Core ML` | Rejected | Requires custom trained model |
+| `SoundAnalysis` | Rejected | Classifies ambient sounds (birds, rain, alarms) — not relevant. Different from Speech which transcribes spoken words |
+| `Create ML` | Rejected | Only for training models, not runtime use |
 
 ---
 
