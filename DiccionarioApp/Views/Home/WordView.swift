@@ -17,6 +17,7 @@ struct WordView: View {
     // MARK: ObsObjects
     @ObservedObject var myviewModelWord = WordViewModel()
     @StateObject private var wordListViewModel = WordListViewModel()
+    @StateObject private var speech = SpeechRecognizer()
 
     // MARK: State
     @State private var text = ""
@@ -116,6 +117,25 @@ struct WordView: View {
             .onSubmit(of: .search) {
                 performSearch()
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    micButton()
+                }
+            }
+            .onChange(of: speech.transcript) { _, newValue in
+                text = newValue
+            }
+            .onChange(of: speech.isRecording) { _, isRecording in
+                if !isRecording && !speech.transcript.isEmpty {
+                    text = speech.transcript
+                    performSearch()
+                }
+            }
+            .alert("Microphone Access", isPresented: $speech.permissionDenied) {
+                Button("OK") { }
+            } message: {
+                Text("Enable microphone access in Settings to use voice search.")
+            }
 
         }
 
@@ -169,6 +189,16 @@ struct WordView: View {
         case .swedish: return true
         case .spanish: return false
         default:       return nil
+        }
+    }
+
+    private func micButton() -> some View {
+        Button {
+            let locale = selectedLang ? Locale(identifier: "sv-SE") : Locale(identifier: "es-MX")
+            speech.toggle(locale: locale)
+        } label: {
+            Image(systemName: speech.isRecording ? "mic.fill" : "mic")
+                .foregroundColor(speech.isRecording ? .red : .orange)
         }
     }
 

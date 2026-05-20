@@ -64,6 +64,7 @@
 		6260188629F9490800F38B02 /* TriviaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6260188529F9490800F38B02 /* TriviaView.swift */; };
 		626FAA772B3C9DC1002387F9 /* UserViewModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FAA762B3C9DC1002387F9 /* UserViewModell.swift */; };
 		62B820932FBE0F310023B064 /* ExampleSentenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B820922FBE0F310023B064 /* ExampleSentenceView.swift */; };
+		62B820952FBE29300023B064 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B820942FBE29300023B064 /* SpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +166,7 @@
 		6260188529F9490800F38B02 /* TriviaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaView.swift; sourceTree = "<group>"; };
 		626FAA762B3C9DC1002387F9 /* UserViewModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModell.swift; sourceTree = "<group>"; };
 		62B820922FBE0F310023B064 /* ExampleSentenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSentenceView.swift; sourceTree = "<group>"; };
+		62B820942FBE29300023B064 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +283,7 @@
 		623AD02829C8537B00216D99 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				62B820942FBE29300023B064 /* SpeechRecognizer.swift */,
 				625EDAD529FA77CD007E6005 /* Extentions */,
 				625B091F29CF3DFC0006BAEE /* Localizable.strings */,
 				622EBFFF29CD9C3700BED9F4 /* WordModel.xcdatamodeld */,
@@ -620,6 +623,7 @@
 				62B820932FBE0F310023B064 /* ExampleSentenceView.swift in Sources */,
 				622BDF1B29D031D800CC7051 /* Notifications.swift in Sources */,
 				625EDAD929FA7D90007E6005 /* PayWallContentView.swift in Sources */,
+				62B820952FBE29300023B064 /* SpeechRecognizer.swift in Sources */,
 				624C20DD29F9905500F731BC /* SharedView.swift in Sources */,
 				625EDAE529FAA9A2007E6005 /* ConfettiView.swift in Sources */,
 				6260188629F9490800F38B02 /* TriviaView.swift in Sources */,
