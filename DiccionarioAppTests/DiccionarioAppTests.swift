@@ -57,9 +57,9 @@ private func makeInMemoryContext() -> NSManagedObjectContext {
     return container.viewContext
 }
 
-private func makeWords(count: Int, in context: NSManagedObjectContext) -> [myWord] {
+private func makeWords(count: Int, in context: NSManagedObjectContext) -> [DiccionarioApp.myWord] {
     (0..<count).map { i in
-        let word = myWord(context: context)
+        let word = DiccionarioApp.myWord(context: context)
         word.value = "word\(i)"
         word.translation = "translation\(i)"
         word.type = "noun"
@@ -539,7 +539,7 @@ final class DiccionarioAppTests: XCTestCase {
         let vm = DetailViewModel()
         let context = makeInMemoryContext()
 
-        let existing = myWord(context: context)
+        let existing = DiccionarioApp.myWord(context: context)
         existing.value = "katt"
         try context.save()
 
