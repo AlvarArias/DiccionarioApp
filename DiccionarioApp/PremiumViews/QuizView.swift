@@ -40,14 +40,19 @@ struct QuizView: View {
             
             
             VStack {
-   
-                // Flascards
-                VStack {
-                    
-                    Text("Cards").font(.title)
+
+                Text("Cards").font(.title)
+                    .padding()
+
+                if words.isEmpty {
+                    Spacer()
+                    Text("Save words first to use flashcards.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
                         .padding()
-                    
-                    
+                    Spacer()
+                } else {
                     VStack {
                         if flipped {
                             BackOfCardView(myTranslation: words[randomIndex].translation ?? "No translation")
@@ -59,17 +64,15 @@ struct QuizView: View {
                         }
                     }
                     .onTapGesture {
-                        withAnimation (.easeInOut(duration: 0.5)) {
+                        withAnimation(.easeInOut(duration: 0.5)) {
                             flipped.toggle()
                             rotationAngle += 360
                         }
                     }
                     .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: 1, z: 0))
                     .padding()
-                    
-                }
-                
-                Button("Next Card") {
+
+                    Button("Next Card") {
                         withAnimation(.easeInOut(duration: 0.5)) {
                             rotationAngle += 360
                         }
@@ -81,17 +84,17 @@ struct QuizView: View {
                             }
                         }
                     }
-                   .padding()
-                
-                
+                    .padding()
+                }
+
                 Spacer()
-                
+
                 Button { dismiss() } label: {
                     Image(systemName: "arrow.down")
                         .foregroundColor(Color.orange)
                 }
                 .padding()
-                
+
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.thinMaterial)

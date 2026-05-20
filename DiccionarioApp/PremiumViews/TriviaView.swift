@@ -87,13 +87,26 @@ struct TriviaView: View {
                     .fontWeight(.bold)
                     .padding()
                 
-                if !gameEnded {
+                if words.count < 2 {
+                    Spacer()
+                    Text("Save at least 2 words to play Trivia.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    Spacer()
+                    Button { dismiss() } label: {
+                        Image(systemName: "arrow.down")
+                            .foregroundColor(Color.orange)
+                    }
+                    .padding()
+                } else if !gameEnded {
                     Text("Question \(currentQuestion) of \(questionsPerGame)")
                         .font(.title2)
                         .padding()
-                    
+
                     Text("Score: \(score)")
-                    
+
                     Text("Whats means \(words[randomIndexP1].value ?? "No value")")
                         .font(.title2)
                         .padding()
