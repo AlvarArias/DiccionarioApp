@@ -69,6 +69,7 @@
 		62B820992FBE38140023B064 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B820982FBE38140023B064 /* DetailViewModel.swift */; };
 		62B8209B2FBE3B600023B064 /* TriviaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8209A2FBE3B600023B064 /* TriviaViewModel.swift */; };
 		62B8209D2FBE3C010023B064 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B8209C2FBE3C010023B064 /* QuizViewModel.swift */; };
+		62B8209E2FBE40110023B064 /* WordModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 622EBFFF29CD9C3700BED9F4 /* WordModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -605,6 +606,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				622A12F929C6248A0079F179 /* DiccionarioAppTests.swift in Sources */,
+				62B8209E2FBE40110023B064 /* WordModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
