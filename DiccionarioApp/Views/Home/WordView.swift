@@ -44,7 +44,7 @@ struct WordView: View {
                 LanguageSelectionView(selectedLang: $selectedLang, errorMessage: $errorMessage, showProgressBar: $showProgressBarr, myviewModelWord: myviewModelWord)
                 
                 // Search Bar
-                SearchBarView(text: $text, searchWords: $searchWords, showProgressBar: $showProgressBarr, myviewModelWord: myviewModelWord, selectedLang: selectedLang)
+                SearchBarView(text: $text, searchWords: $searchWords, showProgressBar: $showProgressBarr, myviewModelWord: myviewModelWord, selectedLang: $selectedLang)
                 
                 // New List Search
                 ScrollView {

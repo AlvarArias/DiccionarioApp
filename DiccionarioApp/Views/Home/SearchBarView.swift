@@ -6,17 +6,18 @@
 //
 
 import SwiftUI
+import NaturalLanguage
 
 struct SearchBarView: View {
-    
+
     //MARK: Env
     @EnvironmentObject var appEnvironment: AppEnvironment
-    
+
     @Binding var text: String
     @Binding var searchWords: [String]
     @Binding var showProgressBar: Bool
     var myviewModelWord: WordViewModel
-    var selectedLang: Bool
+    @Binding var selectedLang: Bool
     
     var body: some View {
         HStack {
@@ -45,16 +46,25 @@ struct SearchBarView: View {
     }
     
     private func performSearch() {
-        if text != "" {
-            print(text)
-            myviewModelWord.fetchPosts(word: text, dir: selectedLang == true ? "to" : "from")
-            
-            let newWord = text
-            searchWords.append(newWord)
-            
-            showProgressBar = true
-            
-            text = newWord
+        guard text != "" else { return }
+
+        if let detected = detectLanguage(for: text) {
+            selectedLang = detected
+        }
+
+        myviewModelWord.fetchPosts(word: text, dir: selectedLang ? "to" : "from")
+        searchWords.append(text)
+        showProgressBar = true
+    }
+
+    // Returns true (spa→swe) or false (swe→spa), nil if language is uncertain
+    private func detectLanguage(for input: String) -> Bool? {
+        let recognizer = NLLanguageRecognizer()
+        recognizer.processString(input)
+        switch recognizer.dominantLanguage {
+        case .swedish: return false
+        case .spanish: return true
+        default:       return nil
         }
     }
 }
