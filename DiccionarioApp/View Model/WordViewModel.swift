@@ -133,7 +133,11 @@ class WordViewModel: ObservableObject {
                     errorSubject.send("Invalid response")
                     return
                 }
-                let myresults = try JSONDecoder().decode(Words.self, from: data)
+                // Lexin API bug: encodes quotes as \" instead of \" — fix before decoding.
+                let rawString = String(data: data, encoding: .utf8) ?? ""
+                let fixedString = rawString.replacingOccurrences(of: "\\u005c\"", with: "\\\"")
+                let fixedData = Data(fixedString.utf8)
+                let myresults = try JSONDecoder().decode(Words.self, from: fixedData)
                 results = myresults.result ?? []
                 errorSubject.send(results.isEmpty ? "No word match" : "OK")
             } catch {

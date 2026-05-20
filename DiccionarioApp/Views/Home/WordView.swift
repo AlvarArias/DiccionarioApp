@@ -133,11 +133,11 @@ struct WordView: View {
 
         if let detected = detectLanguage(for: normalizedText) {
             selectedLang = detected
-            dir = detected ? "to" : "from"
+            dir = detected ? "swe" : "spa"
         } else {
             // Word too short or ambiguous — default to Swedish→Spanish
-            selectedLang = false
-            dir = "from"
+            selectedLang = true
+            dir = "swe"
         }
 
         myviewModelWord.fetchPosts(word: normalizedText, dir: dir)
@@ -149,13 +149,15 @@ struct WordView: View {
         showProgressBarr = true
     }
 
-    // Returns true (spa→swe) or false (swe→spa), nil if language is uncertain
+    // Returns true if Swedish (selectedLang=true → show Spanish translation, dir="swe")
+    // Returns false if Spanish (selectedLang=false → show Swedish meaning, dir="spa")
+    // Returns nil if uncertain
     private func detectLanguage(for input: String) -> Bool? {
         let recognizer = NLLanguageRecognizer()
         recognizer.processString(input)
         switch recognizer.dominantLanguage {
-        case .swedish: return false
-        case .spanish: return true
+        case .swedish: return true
+        case .spanish: return false
         default:       return nil
         }
     }
