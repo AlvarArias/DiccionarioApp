@@ -9,7 +9,7 @@
 | `DiccionarioApp/` | Xcode App | Main dictionary app |
 | `DixioClip/` | App Clip | Lightweight clip entry point |
 
-**Frameworks:** SwiftUI, CoreData, Combine, RevenueCat, ChatGPTSwift  
+**Frameworks:** SwiftUI, CoreData, Combine, NaturalLanguage, FoundationModels, RevenueCat, ChatGPTSwift  
 **iOS Target:** 26.0  
 **Swift version:** 6.0 (strict concurrency enabled)
 
@@ -18,7 +18,7 @@
 ## Architecture
 
 ### Data Flow
-Lexin API (JSON) → `WordViewModel` (Combine) → SwiftUI Views
+Lexin API (JSON) → `WordViewModel` (async/await) → SwiftUI Views
 
 ### View Model Layer (`View Model/`)
 | File | Class | Responsibility |
@@ -38,7 +38,7 @@ Lexin API (JSON) → `WordViewModel` (Combine) → SwiftUI Views
 Views/
 ├── Home/
 │   ├── WordView.swift              ← Root view: search + results + toolbar buttons
-│   ├── SearchBarView.swift         ← Search input, triggers WordViewModel.fetchPosts()
+│   ├── SearchBarView.swift         ← Replaced by .searchable in WordView (kept for reference)
 │   ├── LanguageSelectionView.swift ← Toggles swe→spa / spa→swe direction
 │   ├── ResultListView.swift        ← List of Result cards
 │   └── Paywall/
@@ -50,7 +50,8 @@ Views/
 │   ├── DetailView.swift            ← Full word detail
 │   ├── WordInfoView.swift          ← Phonetics, meaning, inflections
 │   ├── LanguageInfoView.swift      ← Translation + synonyms
-│   └── AudioPlaybackView.swift     ← Plays phonetic audio file
+│   ├── AudioPlaybackView.swift     ← Plays phonetic audio file
+│   └── ExampleSentenceView.swift   ← AI-generated example sentences (FoundationModels)
 ├── Tool Bar Views/
 │   ├── SettingsView.swift          ← Language, API key, app info
 │   ├── FavoriteView.swift          ← Search history list
@@ -66,16 +67,16 @@ Views/
 | File | Purpose |
 |------|---------|
 | `ChatView.swift` | AI chat for word queries (uses `ViewModel`) |
-| `QuizView.swift` | Flashcard quiz with saved words |
+| `QuizView.swift` | Flashcard quiz with saved words (has empty-state guard) |
 | `QuizView2.swift` | Alternative quiz layout |
-| `TriviaView.swift` | Trivia game with Swedish words |
+| `TriviaView.swift` | Trivia game with saved words (requires ≥2 words, has empty-state guard) |
 
 ---
 
 ## Key Models (`WordViewModel.swift`)
 
 ```swift
-Words           // Top-level API response: status, wordbase, [Result]
+Words           // Top-level API response: status, wordbase, result (optional), corrections (optional)
 Result          // Single dictionary entry: value, type, variantID, baseLang, targetLang
 BaseLang        // Swedish side: phonetic, inflections, meaning, illustrations
 TargetLang      // Spanish side: translation, synonyms, comment
@@ -83,6 +84,8 @@ Phonetic        // file (audio URL), content (IPA string)
 Inflection      // content string (e.g., "springer, sprang, sprungit")
 Illustration    // type + value (example sentence)
 ```
+
+`Words.result` is `[Result]?` (optional) — the API omits the `Result` key and returns `Corrections` instead when no exact match is found.
 
 CoreData entity (`WordModel`): `Word` with fields `value`, `type`, `translation`, `phonetic`, `file`, `synonym`, `meaning`.
 
@@ -94,8 +97,68 @@ CoreData entity (`WordModel`): `Word` with fields `value`, `type`, `translation`
 ```
 GET http://lexin.nada.kth.se/lexin/service?searchinfo={dir},swe_spa,{word}&output=JSON
 ```
-- `dir` examples: `"both"`, `"swe"`, `"spa"`
-- Language direction controlled by `AppEnvironment.currentLanguage` and `selectedLang` toggle
+
+### Correct `dir` values
+| Value | Meaning |
+|-------|---------|
+| `"swe"` | Search Swedish → show Spanish translation |
+| `"spa"` | Search Spanish → show Swedish meaning |
+
+**Do NOT use `"both"`, `"to"`, or `"from"` — they produce invalid JSON or wrong results.**
+
+### Lexin API JSON bug
+The API encodes `\"` (escaped quote) as `\"` (literal backslash from `\` + `"` that terminates the JSON string). This causes `JSONDecoder` to fail on words with quoted idioms/examples.
+
+Fix applied in `WordViewModel.fetchPosts()` before decoding:
+```swift
+let rawString = String(data: data, encoding: .utf8) ?? ""
+let fixedString = rawString.replacingOccurrences(of: "\\u005c\"", with: "\\\"")
+let fixedData = Data(fixedString.utf8)
+let myresults = try JSONDecoder().decode(Words.self, from: fixedData)
+```
+
+### Language direction in `WordView.performSearch()`
+- Words are lowercased before the API call
+- `NLLanguageRecognizer` auto-detects Swedish vs Spanish
+- `selectedLang = true` → Swedish input, `dir = "swe"`, show Spanish translation
+- `selectedLang = false` → Spanish input, `dir = "spa"`, show Swedish meaning
+- Ambiguous/short words default to `selectedLang = true` / `dir = "swe"`
+
+---
+
+## NaturalLanguage Framework
+
+`WordView` imports `NaturalLanguage` and uses `NLLanguageRecognizer` to auto-detect the search language:
+
+```swift
+private func detectLanguage(for input: String) -> Bool? {
+    let recognizer = NLLanguageRecognizer()
+    recognizer.processString(input)
+    switch recognizer.dominantLanguage {
+    case .swedish: return true   // → dir="swe"
+    case .spanish: return false  // → dir="spa"
+    default:       return nil    // → default to swe
+    }
+}
+```
+
+---
+
+## Foundation Models Framework (iOS 26)
+
+`ExampleSentenceView.swift` uses on-device Apple Intelligence to generate one example sentence per word. Key points:
+- Check `SystemLanguageModel.default.isAvailable` before using
+- Stream the response with `session.streamResponse(to:)` for progressive display
+- Must be added to the Xcode target manually if created outside Xcode (right-click → "Add Files to DiccionarioApp...")
+
+---
+
+## Search (`.searchable`)
+
+`WordView` uses SwiftUI `.searchable` instead of the old `SearchBarView`:
+- Placement: `.navigationBarDrawer(displayMode: .always)` (required for iOS 26 to keep bar at top)
+- Suggestions combine session history (`searchWords`) + `WordListViewModel.favoriteWords`
+- Suggestions are filtered by current text, case-insensitive, sorted alphabetically
 
 ---
 
@@ -117,14 +180,27 @@ GET http://lexin.nada.kth.se/lexin/service?searchinfo={dir},swe_spa,{word}&outpu
 
 ---
 
+## Git — Multi-Remote Setup
+
+| Remote | Repo | Purpose |
+|--------|------|---------|
+| `origin` | Public GitHub repo | Portfolio / open source |
+| `private` | Private GitHub repo (`DiccionarioApp-Private`) | App Store version with AI features |
+
+Push to both independently. The user handles all commits and pushes manually.
+
+**IMPORTANT: Never commit or push on the user's behalf.**
+
+---
+
 ## Development Guidelines
 
 - Keep views dumb: no business logic inside View structs — use ViewModels
-- Prefer `async/await` over `DispatchQueue.main.async` (currently mixed — migrate gradually)
-- `WordViewModel` uses `URLSession` + `Combine`-style error publishing — keep this pattern
+- Prefer `async/await` over `DispatchQueue.main.async`
 - CoreData context is passed via `.environment(\.managedObjectContext, ...)`; never access it directly from views
 - Language direction string must be URL-safe before appending to Lexin query
 - `UserDefaults` key for saved words: `"FavoriteWords"`
+- Always lowercase search input before calling `fetchPosts(word:dir:)`
 
 ---
 
@@ -142,6 +218,8 @@ All `ObservableObject` classes are annotated `@MainActor`:
 
 `NavigationView` → `NavigationStack` in `WordView`, `SettingsView`.
 
+---
+
 ## Known Issues / TODOs
 
 | Location | Issue |
@@ -149,3 +227,8 @@ All `ObservableObject` classes are annotated `@MainActor`:
 | `DixioClip/ContentView.swift` | Placeholder content — not implemented |
 | `Test View Model/` | `TestModel.swift`, `PostListView.swift` — test/scratch files, not shipped |
 | `DetailView.swift` | `myWord` CoreData entity name inconsistency with `Word` in `DataController` |
+| `ExampleSentenceView.swift` | Requires Apple Intelligence (iOS 26, device-side model) — degrades gracefully if unavailable |
+
+## Next Planned Features
+
+- **Speech framework** — voice search using `SFSpeechRecognizer` to transcribe audio and trigger `performSearch()` automatically

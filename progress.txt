@@ -1,0 +1,86 @@
+DIXIO — PROGRESS LOG
+====================
+Last updated: 2026-05-20
+
+---
+
+COMPLETED FEATURES (natural-language branch)
+---------------------------------------------
+
+1. NaturalLanguage — Auto language detection
+   - Added NLLanguageRecognizer in WordView.swift
+   - detectLanguage() returns true (Swedish) / false (Spanish) / nil (ambiguous)
+   - Ambiguous words default to Swedish (dir="swe")
+   - Files: WordView.swift
+
+2. Search suggestions with history
+   - Replaced SearchBarView with native SwiftUI .searchable
+   - Placement: .navigationBarDrawer(displayMode: .always) — keeps bar at top on iOS 26
+   - Suggestions combine session history + UserDefaults favorites (WordListViewModel)
+   - Filtered case-insensitively, sorted alphabetically
+   - Files: WordView.swift
+
+3. Word normalization before API call
+   - Search input lowercased before calling fetchPosts(word:dir:)
+   - Files: WordView.swift (performSearch)
+
+4. Lexin API fixes
+   - Fixed wrong dir values ("to"/"from" → "swe"/"spa")
+   - Fixed JSON malformation bug: API sends \" instead of \" for quoted idioms
+     → Preprocessing rawString before JSONDecoder
+   - Made Words.result optional ([Result]?) — API omits Result key when no match found
+   - Added Words.corrections ([String]?) — API returns this instead of Result on no match
+   - Files: WordViewModel.swift
+
+5. Foundation Models — AI example sentences (iOS 26)
+   - New ExampleSentenceView.swift using on-device Apple Intelligence
+   - Uses SystemLanguageModel.default + LanguageModelSession
+   - Streams response progressively with streamResponse(to:)
+   - Graceful degradation if Apple Intelligence not available
+   - Shown in DetailView after AudioPlaybackView
+   - Files: Views/Detail/ExampleSentenceView.swift, DetailView.swift
+   - NOTE: Must be manually added to Xcode target if created outside Xcode
+
+6. QuizView empty-state guard
+   - Prevents crash when CoreData has no saved words
+   - Shows "Save words first to use flashcards." message
+   - Files: PremiumViews/QuizView.swift
+
+7. TriviaView empty-state guard + dismiss button
+   - Requires at least 2 saved words to play
+   - Shows "Save at least 2 words to play Trivia." message with dismiss arrow
+   - Files: PremiumViews/TriviaView.swift
+
+8. Git multi-remote setup
+   - origin  → public GitHub repo (portfolio)
+   - private → private GitHub repo "DiccionarioApp-Private" (App Store version)
+   - Push independently; user manages all commits
+
+---
+
+IN PROGRESS
+-----------
+None.
+
+---
+
+NEXT UP
+-------
+
+1. Speech framework — voice search
+   - Use SFSpeechRecognizer to transcribe audio
+   - Feed transcript into performSearch() automatically
+   - Adds microphone button to search bar area in WordView
+   - Completes the input loop (text-to-speech already exists in DetailView via AVSpeechSynthesizer)
+
+---
+
+KNOWN ISSUES
+------------
+
+- ExampleSentenceView requires Apple Intelligence (iOS 26 device with the model downloaded)
+  → Degrades gracefully with error message if unavailable
+- DixioClip/ContentView.swift is a placeholder — not implemented
+- myWord CoreData entity name inconsistent with "Word" in DataController
+- SourceKit sometimes reports false "Cannot find type in scope" warnings for
+  AppEnvironment, WordViewModel, UIColor — project compiles correctly in Xcode
