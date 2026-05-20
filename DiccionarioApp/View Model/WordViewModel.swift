@@ -13,12 +13,14 @@ import SwiftUI
 struct Words: Codable {
 
     let status, wordbase: String
-    let result: [Result]
+    let result: [Result]?
+    let corrections: [String]?
 
     enum CodingKeys: String, CodingKey {
         case status = "Status"
         case wordbase = "Wordbase"
         case result = "Result"
+        case corrections = "Corrections"
     }
 }
 
@@ -132,8 +134,8 @@ class WordViewModel: ObservableObject {
                     return
                 }
                 let myresults = try JSONDecoder().decode(Words.self, from: data)
-                results = myresults.result
-                errorSubject.send("OK")
+                results = myresults.result ?? []
+                errorSubject.send(results.isEmpty ? "No word match" : "OK")
             } catch {
                 print("Error fetching results: \(error.localizedDescription)")
                 errorSubject.send("No word match")

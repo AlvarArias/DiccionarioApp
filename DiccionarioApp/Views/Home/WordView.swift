@@ -135,8 +135,9 @@ struct WordView: View {
             selectedLang = detected
             dir = detected ? "to" : "from"
         } else {
-            // Word too short or ambiguous — search both directions
-            dir = "both"
+            // Word too short or ambiguous — default to Swedish→Spanish
+            selectedLang = false
+            dir = "from"
         }
 
         myviewModelWord.fetchPosts(word: normalizedText, dir: dir)
