@@ -75,6 +75,12 @@ NEXT UP
    - [PENDING] Remove ChatGPTSwift package — Xcode → Project → Package Dependencies → remove
    - Goal: app uses only on-device Foundation Models (ExampleSentenceView)
 
+3. Translation framework (iOS 17.4+) — fallback cuando Lexin no encuentra la palabra
+   - Usar Apple on-device Translation como segunda opción
+   - Activar solo cuando errorMessage == "No word match"
+   - Mostrar resultado en WordView con indicación "Translated by Apple"
+   - Útil para palabras nuevas o coloquiales que Lexin no tiene
+
 2. Speech framework — voice search
    - Use SFSpeechRecognizer to transcribe audio
    - Feed transcript into performSearch() automatically
