@@ -65,6 +65,7 @@
 		626FAA772B3C9DC1002387F9 /* UserViewModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626FAA762B3C9DC1002387F9 /* UserViewModell.swift */; };
 		62B820932FBE0F310023B064 /* ExampleSentenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B820922FBE0F310023B064 /* ExampleSentenceView.swift */; };
 		62B820952FBE29300023B064 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B820942FBE29300023B064 /* SpeechRecognizer.swift */; };
+		62B820972FBE2E190023B064 /* WordSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B820962FBE2E190023B064 /* WordSearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		626FAA762B3C9DC1002387F9 /* UserViewModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModell.swift; sourceTree = "<group>"; };
 		62B820922FBE0F310023B064 /* ExampleSentenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSentenceView.swift; sourceTree = "<group>"; };
 		62B820942FBE29300023B064 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
+		62B820962FBE2E190023B064 /* WordSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSearchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +285,7 @@
 		623AD02829C8537B00216D99 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				62B820962FBE2E190023B064 /* WordSearchViewModel.swift */,
 				62B820942FBE29300023B064 /* SpeechRecognizer.swift */,
 				625EDAD529FA77CD007E6005 /* Extentions */,
 				625B091F29CF3DFC0006BAEE /* Localizable.strings */,
@@ -618,6 +621,7 @@
 				625B091A29CF1ACA0006BAEE /* SearchBarView.swift in Sources */,
 				62504A7529E53811007C098B /* OpenAPIViewModel.swift in Sources */,
 				625B092929CF69530006BAEE /* WordInfoView.swift in Sources */,
+				62B820972FBE2E190023B064 /* WordSearchViewModel.swift in Sources */,
 				62388CDF29C44CB3006F4005 /* ContentView.swift in Sources */,
 				625B092429CF42610006BAEE /* AppEnv.swift in Sources */,
 				62B820932FBE0F310023B064 /* ExampleSentenceView.swift in Sources */,
