@@ -46,6 +46,8 @@ struct DetailView: View {
            if selectedLang {
                AudioPlaybackView(player: player, phonetic: result.baseLang?.phonetic)
            }
+
+           ExampleSentenceView(word: result.value ?? "", selectedLang: selectedLang)
            
            /*
            Button {
