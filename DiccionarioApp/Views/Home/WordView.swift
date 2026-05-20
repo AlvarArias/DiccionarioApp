@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NaturalLanguage
+import UIKit
 
 struct WordView: View {
 
@@ -33,13 +34,22 @@ struct WordView: View {
     @State var searchWords: [String] = []
     @State private var selectedTab = 1
 
-    // Combines session history + UserDefaults favorites, filtered by current text
+    // Combines session history + UserDefaults favorites + system dictionary, filtered by current text
     var filteredSuggestions: [String] {
         guard !text.isEmpty else { return [] }
-        let combined = Array(Set(searchWords + wordListViewModel.favoriteWords))
-        return combined
+        let personal = Array(Set(searchWords + wordListViewModel.favoriteWords))
             .filter { $0.localizedCaseInsensitiveContains(text) }
-            .sorted()
+        let system = systemCompletions(for: text)
+            .filter { !personal.contains($0) }
+        return Array((personal + system).prefix(8)).sorted()
+    }
+
+    private func systemCompletions(for input: String) -> [String] {
+        guard input.count >= 2 else { return [] }
+        let lang = detectLanguage(for: input) == false ? "es" : "sv"
+        let checker = UITextChecker()
+        let range = NSRange(location: 0, length: input.utf16.count)
+        return checker.completions(forPartialWordRange: range, in: input, language: lang) ?? []
     }
 
     var body: some View {
