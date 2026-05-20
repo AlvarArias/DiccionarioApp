@@ -13,9 +13,6 @@ struct SettingsView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @AppStorage("apiKey") var apiKey: String = ""
-    @AppStorage("hasApiKey") var hasApiKey: Bool = false
-
     var body: some View {
         NavigationStack {
             Form {
@@ -28,27 +25,6 @@ struct SettingsView: View {
                     .pickerStyle(MenuPickerStyle())
                     .padding()
                 }
-                /*
-                HStack {
-                    TextField("OpenAI API key", text: $apiKey)
-                    
-                    Spacer()
-                    
-                    Button {
-                        
-                      if apiKey.isEmpty == false {
-                        hasApiKey = true
-                        print(apiKey)
-                          
-                      }
-                    } label: {
-                      Text("Submit")
-                    }
-                    
-                }.padding()
-                */
-                
-                
                 Text(LocalizedStringKey("about"))
                     
                 Text(LocalizedStringKey("developer:")) + Text ("  Alvar Arias" )
