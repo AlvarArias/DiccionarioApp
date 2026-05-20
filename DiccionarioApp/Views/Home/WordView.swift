@@ -92,7 +92,7 @@ struct WordView: View {
                     endPoint: .bottomTrailing
                 )
             )
-            .searchable(text: $text, prompt: LocalizedStringKey("search"))
+            .searchable(text: $text, placement: .navigationBarDrawer(displayMode: .always), prompt: LocalizedStringKey("search"))
             .searchSuggestions {
                 ForEach(filteredSuggestions, id: \.self) { suggestion in
                     Button {
@@ -128,14 +128,21 @@ struct WordView: View {
     private func performSearch() {
         guard !text.isEmpty else { return }
 
-        if let detected = detectLanguage(for: text) {
+        let normalizedText = text.lowercased()
+        let dir: String
+
+        if let detected = detectLanguage(for: normalizedText) {
             selectedLang = detected
+            dir = detected ? "to" : "from"
+        } else {
+            // Word too short or ambiguous — search both directions
+            dir = "both"
         }
 
-        myviewModelWord.fetchPosts(word: text, dir: selectedLang ? "to" : "from")
+        myviewModelWord.fetchPosts(word: normalizedText, dir: dir)
 
-        if !searchWords.contains(text) {
-            searchWords.append(text)
+        if !searchWords.contains(normalizedText) {
+            searchWords.append(normalizedText)
         }
 
         showProgressBarr = true
