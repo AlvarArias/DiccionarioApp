@@ -68,11 +68,11 @@ NEXT UP
 -------
 
 1. Remove ChatGPT / OpenAI integration — replace with Apple Intelligence only
-   - Delete OpenAPIViewModel.swift (ChatGPTSwift, ChatGPTAPI)
-   - Delete ChatView.swift (PremiumViews)
-   - Remove ChatGPTSwift package dependency from project
-   - Remove API key field from SettingsView
-   - Remove @AppStorage("apiKey") references
+   - [DONE] Remove @AppStorage("apiKey") and @AppStorage("hasApiKey") from SettingsView
+   - [DONE] Remove commented-out OpenAI TextField from SettingsView
+   - [PENDING] Delete OpenAPIViewModel.swift — do in Xcode (right-click → Delete)
+   - [PENDING] Delete ChatView.swift — do in Xcode (right-click → Delete)
+   - [PENDING] Remove ChatGPTSwift package — Xcode → Project → Package Dependencies → remove
    - Goal: app uses only on-device Foundation Models (ExampleSentenceView)
 
 2. Speech framework — voice search
