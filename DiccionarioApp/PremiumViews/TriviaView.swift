@@ -42,8 +42,7 @@ struct TriviaView: View {
 
         ZStack {
 
-            Color.teal
-                .opacity(0.5)
+            Color.appBackground
 
             VStack {
                 Text("Trivia")
@@ -61,7 +60,7 @@ struct TriviaView: View {
                     Spacer()
                     Button { dismiss() } label: {
                         Image(systemName: "arrow.down")
-                            .foregroundColor(Color.orange)
+                            .foregroundColor(Color.appPrimary)
                     }
                     .padding()
 
@@ -87,8 +86,8 @@ struct TriviaView: View {
                                     viewModel.doSomethingAfter30Seconds(words: Array(words))
                                 }
                                 .padding()
-                                .background(viewModel.isCorrect ? Color.blue.opacity(0.7) : Color.white)
-                                .foregroundColor(viewModel.isCorrect ? Color.white : Color.black)
+                                .background(viewModel.isCorrect ? Color.appPrimary.opacity(0.7) : Color.appSurface)
+                                .foregroundColor(viewModel.isCorrect ? Color.onPrimary : Color.onBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
 
                             Text(words[viewModel.randomIndexP2].translation ?? "No translation")
@@ -99,8 +98,8 @@ struct TriviaView: View {
                                     }
                                 }
                                 .padding()
-                                .background(viewModel.isNotCorrect ? Color.red.opacity(0.7) : Color.white)
-                                .foregroundColor(viewModel.isCorrect ? Color.white : Color.black)
+                                .background(viewModel.isNotCorrect ? Color.red.opacity(0.7) : Color.appSurface)
+                                .foregroundColor(viewModel.isCorrect ? Color.onPrimary : Color.onBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                                 .modifier(ShakeEffect(shakes: viewModel.isNotCorrect ? 3 : 0))
 
@@ -114,8 +113,8 @@ struct TriviaView: View {
                                     }
                                 }
                                 .padding()
-                                .background(viewModel.isNotCorrect ? Color.red.opacity(0.7) : Color.white)
-                                .foregroundColor(viewModel.isCorrect ? Color.white : Color.black)
+                                .background(viewModel.isNotCorrect ? Color.red.opacity(0.7) : Color.appSurface)
+                                .foregroundColor(viewModel.isCorrect ? Color.onPrimary : Color.onBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                                 .modifier(ShakeEffect(shakes: viewModel.isNotCorrect ? 3 : 0))
 
@@ -127,8 +126,8 @@ struct TriviaView: View {
                                     viewModel.doSomethingAfter30Seconds(words: Array(words))
                                 }
                                 .padding()
-                                .background(viewModel.isCorrect ? Color.blue.opacity(0.7) : Color.white)
-                                .foregroundColor(viewModel.isCorrect ? Color.white : Color.black)
+                                .background(viewModel.isCorrect ? Color.appPrimary.opacity(0.7) : Color.appSurface)
+                                .foregroundColor(viewModel.isCorrect ? Color.onPrimary : Color.onBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                         }
                     }
@@ -145,7 +144,7 @@ struct TriviaView: View {
 
                     Button { dismiss() } label: {
                         Image(systemName: "arrow.down")
-                            .foregroundColor(Color.orange)
+                            .foregroundColor(Color.appPrimary)
                     }
                     .padding()
 

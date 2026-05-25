@@ -30,8 +30,7 @@ struct QuizView: View {
 
         ZStack {
 
-            Color.teal
-                .opacity(0.5)
+            Color.appBackground
 
             VStack {
 
@@ -85,7 +84,7 @@ struct QuizView: View {
 
                 Button { dismiss() } label: {
                     Image(systemName: "arrow.down")
-                        .foregroundColor(Color.orange)
+                        .foregroundColor(Color.appPrimary)
                 }
                 .padding()
             }
@@ -109,9 +108,9 @@ struct FrontOfCardView: View {
 
     var body: some View {
         ZStack {
-            Color.blue.opacity(0.5)
+            Color.appSurface
             Text(myWord)
-                .foregroundColor(.white)
+                .foregroundColor(Color.onBackground)
         }
         .frame(width: 200, height: 300)
         .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -125,9 +124,9 @@ struct BackOfCardView: View {
 
     var body: some View {
         ZStack {
-            Color.red.opacity(0.5)
+            Color.appPrimary.opacity(0.7)
             Text(myTranslation)
-                .foregroundColor(.white)
+                .foregroundColor(Color.onPrimary)
         }
         .frame(width: 200, height: 300)
         .clipShape(RoundedRectangle(cornerRadius: 20))

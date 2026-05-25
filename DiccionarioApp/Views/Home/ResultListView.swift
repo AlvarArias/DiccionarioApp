@@ -40,10 +40,10 @@ struct ResultsListView: View {
                         }
                     }
                     .padding(15)
-                    .background(Color(UIColor.white).opacity(0.9))
+                    .background(Color.appSurface)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .padding(.horizontal)
-                    .foregroundColor(Color.black)
+                    .foregroundColor(Color.onBackground)
                     .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
                 }
             }

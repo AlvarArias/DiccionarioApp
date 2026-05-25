@@ -227,6 +227,28 @@ Push to both independently. The user handles all commits and pushes manually.
 
 ---
 
+## Color System & Dark Mode
+
+Dark mode follows the system appearance automatically via Asset Catalog color sets.
+
+**Semantic colors** (defined in `View Model/Extentions/Extensions.swift`, assets in `Assets.xcassets/Colors/`):
+
+| Token | Light | Dark | Use |
+|-------|-------|------|-----|
+| `Color.appPrimary` | `#EC7F30` | `#E27D60` | Buttons, icons, CTAs |
+| `Color.appBackground` | `#F5F8FF` | `#1E2530` | Screen backgrounds |
+| `Color.appSurface` | `#FFFFFF` | `#2A3342` | Cards, list rows |
+| `Color.onPrimary` | `#FFFFFF` | `#FFFFFF` | Text/icons on primary |
+| `Color.onBackground` | `#353E5A` | `#FFFFFF` | Primary text on background |
+| `Color.onSurface` | `#888E9F` | `#B0C4DE` | Secondary text on surface |
+
+**Rules:**
+- Never use `Color.orange`, `Color.black`, `Color.white`, or hardcoded `UIColor` values in views
+- Never use the old colors (`myOrange`, `myLightBlue`, `myGrey`, `myDarkBlue`) — they are removed
+- Test dark mode in Simulator with **Shift+Cmd+A**
+
+---
+
 ## Development Guidelines
 
 - Keep views dumb: no business logic inside View structs — use ViewModels

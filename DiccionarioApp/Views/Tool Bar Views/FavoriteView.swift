@@ -28,10 +28,10 @@ struct FavoriteView: View {
                             Spacer()
                         }
                         .padding(15)
-                        .background(Color(UIColor.white).opacity(0.9))
+                        .background(Color.appSurface)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .padding(.horizontal)
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.onBackground)
                         .shadow(color: .gray, radius: 0.5, x: 0.5, y: -0.5)
                     }
                 }
@@ -43,22 +43,11 @@ struct FavoriteView: View {
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button { dismiss() } label: {
                         Image(systemName: "arrow.down")
-                            .foregroundColor(Color.orange)
+                            .foregroundColor(Color.appPrimary)
                     }
                 }
             }
-            .background(
-                LinearGradient(
-                    gradient: Gradient(
-                        colors: [
-                            Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
-                            Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
-                        ]
-                    ),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
+            .background(Color.appBackground)
         }
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))
     }

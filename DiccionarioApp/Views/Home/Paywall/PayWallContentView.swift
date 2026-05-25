@@ -43,9 +43,9 @@ struct PayWallContentView: View {
                                     Text("Let's do it")
                                 }
                                 .padding(10)
-                                .background(Color.blue)
+                                .background(Color.appPrimary)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .foregroundColor(Color.white)
+                                .foregroundColor(Color.onPrimary)
                             }
                             .padding(20)
                         }

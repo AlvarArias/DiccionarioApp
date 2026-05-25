@@ -23,7 +23,7 @@ struct AudioPlaybackView: View {
             } label: {
                 Image(systemName: player.player.timeControlStatus == .playing ? "pause.fill" : "play.fill")
             }
-            .foregroundColor(Color.orange)
+            .foregroundColor(Color.appPrimary)
             .onReceive(NotificationCenter.default.publisher(for: .playerStopped)) { _ in
                 isPlaying = false
             }

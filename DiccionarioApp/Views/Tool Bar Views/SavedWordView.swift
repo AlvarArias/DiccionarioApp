@@ -98,7 +98,7 @@ struct SavedWordView: View {
                                     
                 Button(action: { editMode = editMode == .active ? .inactive : .active }) {
                     Image(systemName: "square.and.pencil")
-                    .foregroundColor(Color.orange)
+                    .foregroundColor(Color.appPrimary)
                     
                 }
                 
@@ -108,23 +108,12 @@ struct SavedWordView: View {
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button { dismiss() } label: {
                         Image(systemName: "arrow.down")
-                            .foregroundColor(Color.orange)
+                            .foregroundColor(Color.appPrimary)
                     }
 
                 }
             }
-            .background(
-                LinearGradient(
-                    gradient: Gradient(
-                        colors: [
-                            Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
-                            Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
-                        ]
-                    ),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
+            .background(Color.appBackground)
             
         }
         .environment(\.locale, .init(identifier: appEnvironment.currentLanguage))

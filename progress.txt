@@ -1,6 +1,6 @@
 DIXIO — PROGRESS LOG
 ====================
-Last updated: 2026-05-20
+Last updated: 2026-05-25
 
 ---
 
@@ -62,7 +62,23 @@ COMPLETED FEATURES
    - NSManagedObjectContext passed as parameter to ViewModel methods (cannot live in ViewModel)
    - Files: View Model/WordSearchViewModel.swift, DetailViewModel.swift, TriviaViewModel.swift, QuizViewModel.swift
 
-10. ChatGPT/OpenAI removal (partial)
+10. Dark mode — adaptive color system
+    - 6 semantic color assets with light/dark variants in Assets.xcassets/Colors/
+      appPrimary (#EC7F30 / #E27D60), appBackground (#F5F8FF / #1E2530),
+      appSurface (#FFFFFF / #2A3342), onPrimary (#FFF / #FFF),
+      onBackground (#353E5A / #FFFFFF), onSurface (#888E9F / #B0C4DE)
+    - Follows system appearance automatically (no toggle needed)
+    - Replaced old myOrange/myLightBlue/myGrey/myDarkBlue with semantic tokens
+    - Removed duplicated LinearGradient hardcoded in 5 views → Color.appBackground
+    - Replaced all Color.orange, Color.black, Color.white, UIColor hardcodes
+    - Files: View Model/Extentions/Extensions.swift, Assets.xcassets/Colors/,
+      Views/Home/WordView.swift, ResultListView.swift, Detail/DetailView.swift,
+      Detail/AudioPlaybackView.swift, Tool Bar Views/FavoriteView.swift,
+      SavedWordView.swift, SettingsView.swift, Notifications.swift,
+      Home/Paywall/PayWallContentView.swift, PremiumViews/QuizView.swift,
+      PremiumViews/TriviaView.swift
+
+11. ChatGPT/OpenAI removal (partial)
     - Removed @AppStorage("apiKey") and @AppStorage("hasApiKey") from SettingsView
     - Removed commented-out OpenAI TextField from SettingsView
     - PENDING in Xcode: delete OpenAPIViewModel.swift, ChatView.swift, remove ChatGPTSwift package

@@ -61,18 +61,7 @@ struct WordView: View {
             .navigationTitle(LocalizedStringKey("home"))
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
-            .background(
-                LinearGradient(
-                    gradient: Gradient(
-                        colors: [
-                            Color(UIColor(red: 0.45, green: 0.92, blue: 0.84, alpha: 0.5)),
-                            Color(UIColor(red: 0.67, green: 0.71, blue: 0.90, alpha: 0.5))
-                        ]
-                    ),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
+            .background(Color.appBackground)
             .searchable(text: $text, placement: .navigationBarDrawer(displayMode: .always), prompt: LocalizedStringKey("search"))
             .searchSuggestions {
                 ForEach(viewModel.suggestions(for: text), id: \.self) { suggestion in
@@ -132,14 +121,14 @@ struct WordView: View {
             speech.toggle(locale: viewModel.voiceLocale())
         } label: {
             Image(systemName: speech.isRecording ? "mic.fill" : "mic")
-                .foregroundColor(speech.isRecording ? .red : .orange)
+                .foregroundColor(speech.isRecording ? .red : .appPrimary)
         }
     }
 
     private func cardButton() -> some View {
         Button(action: { showHistory.toggle() }) {
             Image(systemName: "menucard")
-                .foregroundColor(Color.orange)
+                .foregroundColor(Color.appPrimary)
         }
         .sheet(isPresented: $showHistory) {
             QuizView()
@@ -149,7 +138,7 @@ struct WordView: View {
     private func quizButton() -> some View {
         Button(action: { showQuiz.toggle() }) {
             Image(systemName: "questionmark.bubble")
-                .foregroundColor(Color.orange)
+                .foregroundColor(Color.appPrimary)
         }
         .sheet(isPresented: $showQuiz) {
             TriviaView()
@@ -159,7 +148,7 @@ struct WordView: View {
     private func settingsButton() -> some View {
         Button(action: { showSettings.toggle() }) {
             Image(systemName: "gear")
-                .foregroundColor(Color.orange)
+                .foregroundColor(Color.appPrimary)
         }
         .sheet(isPresented: $showSettings) {
             SettingsView()
@@ -169,7 +158,7 @@ struct WordView: View {
     private func savedWordButton() -> some View {
         Button(action: { showSavedWord.toggle() }) {
             Image(systemName: "checklist.checked")
-                .foregroundColor(Color.orange)
+                .foregroundColor(Color.appPrimary)
         }
         .sheet(isPresented: $showSavedWord) {
             SavedWordView()
