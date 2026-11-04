@@ -131,7 +131,7 @@ cd DiccionarioApp
 open DiccionarioApp.xcodeproj
 ```
 
-> Requires Xcode 16+ and an iOS 26 simulator or physical device.  
+> Requires Xcode 26+ and an iOS 26 simulator or physical device.  
 > RevenueCat and ChatGPT API keys are needed to test premium features — configure them in the app settings.
 
 ---
