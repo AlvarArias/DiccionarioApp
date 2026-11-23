@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+*.xcarchive
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.moved-aside
+*.hmap
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# CocoaPods / Carthage
+Pods/
+Carthage/Build/
+
+# Secrets and credentials — never commit
+.env
+.env.*
+!.env.example
+GoogleService-Info*.plist
+*.p8
+*.p12
+*.pem
+*.mobileprovision
+.netrc
+
+# Claude Code — personal/local settings
+.claude/settings.local.json
+
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+.DS_Store
